@@ -1,0 +1,661 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>node学习 | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="node学习 | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="@(js学习笔记)
+node学习（1）
+[toc]
+Node.js简介
+中文官网
+简介
+Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境;
+V8引擎本身就是用于Chrome浏览器的JS解释部分
+特点
+单..." />
+    <meta name="keywords" content="node" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              node学习
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                13 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/node/" class="post-tag">
+                  # node
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>@(js学习笔记)</p>
+<h2 id="node学习1">node学习（1）</h2>
+<p>[toc]</p>
+<h3 id="nodejs简介">Node.js简介</h3>
+<p><a href="http://nodejs.cn/">中文官网</a></p>
+<h4 id="简介">简介</h4>
+<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境;<br>
+V8引擎本身就是用于Chrome浏览器的JS解释部分</p>
+<h4 id="特点">特点</h4>
+<p><strong><code>单线程</code></strong><br>
+在Java、PHP或者.net等服务器端语言中，会为每一个客户端连接创建一个新的线程。<br>
+Node.js不为每个客户连接创建一个新的线程，而仅仅使用一个线程。</p>
+<p><strong><code>非阻塞I/O</code></strong><br>
+Node.js中采用了非阻塞型I/O机制，在执行了访问数据库的代码之后，将立即转而执行其后面的代码，把数据库返回结果的处理代码放在回调函数中，从而提高了程序的执行效率。</p>
+<p><strong><code>事件驱动</code></strong><br>
+在Node中，客户端请求建立连接，提交数据等行为，会触发相应的事件。在Node中，在一个时刻，只能执行一个事件回调函数，但是在执行一个事件回调函数的中途，可以转而处理其他事件，然后返回继续执行原事件的回调函数，这种处理机制，称为“事件环”机制</p>
+<p><strong><code>模块</code></strong><br>
+Node.js中，将很多的功能，划分为了一个个mudule，使用 require 指令来载入模块</p>
+<h4 id="开始">开始</h4>
+<h5 id="hello-world">Hello World</h5>
+<p>创建HelloWorld.js文件</p>
+<blockquote>
+<p>使用 http.createServer() 方法创建服务器，并使用 listen 方法绑定 8080 端口。 函数通过 request, response 参数来接收和响应数据</p>
+</blockquote>
+<pre><code class="language-javascript">//载入 http 模块，赋值给变量 http
+var http = require(&quot;http&quot;);
+//创建服务器，参数是一个回调函数，表示如果有请求进来，要做什么
+var server = http.createServer(function(request,response){
+	//设置HTTP头部，状态码是200，文件类型是html，字符集是utf8
+	response.writeHead(200,{&quot;Content-type&quot;:&quot;text/html;charset=UTF-8&quot;});
+	response.end(&quot;Hello World&quot;);
+});
+
+//运行服务器，监听8080端口
+server.listen(8080,&quot;localhost&quot;);
+</code></pre>
+<p>使用 node 命令执行<br>
+<code>node HelloWorld.js</code></p>
+<p>使用浏览器访问<code>http://localhost:8080/</code><br>
+<img src="https://doupo.coding.me/note_img/node/node_01.png" alt="enter image description here" loading="lazy"></p>
+<h3 id="模块">模块</h3>
+<h4 id="node内置模块">node内置模块</h4>
+<h5 id="requrl">req.url</h5>
+<p>可以用来做判断，处理顶层路由</p>
+<h5 id="url">url</h5>
+<p>可以用来获取地址后查询字符串等<br>
+<code>url.parse()</code>可以将一个完整的URL地址，分为很多部分：host、port、pathname、path、query</p>
+<p><strong>语法：</strong><br>
+<code>url.parse(req.url,true)</code><br>
+获取一个对象</p>
+<h5 id="fs">fs</h5>
+<p>文件系统<br>
+<strong>读取文件</strong></p>
+<pre><code class="language-javascript">fs.readFile(&quot;文件地址&quot;,function(err,data){
+	if(err){
+			throw err;
+		}
+});
+</code></pre>
+<p><strong>创建</strong></p>
+<pre><code class="language-javascript">fs.mkdir(&quot;文件夹名&quot;);
+</code></pre>
+<p><strong>读取路径下所有文件</strong><br>
+<code>readdir</code> 返回数组格式文件信息</p>
+<p><strong>检测</strong><br>
+<code>fs.stat</code>检测状态<br>
+<code>data.isDirectory()</code>检测是否是一个文件夹，返回true和false</p>
+<p>例：</p>
+<pre><code class="language-javascript">fs.stat(&quot;./abc&quot;,function(err,data){
+		//检测这个路径，是不是一个文件夹
+		console.log(data.isDirectory());
+	});
+</code></pre>
+<h5 id="path">path</h5>
+<p>获取文件扩展名</p>
+<pre><code class="language-javascript">	var extname = path.extname(pathname);
+	//假设pathname为index.html
+	//extname='.html'
+</code></pre>
+<h4 id="书写模块">书写模块</h4>
+<p>● 在Node.js中，以模块为单位划分所有功能，并且提供了一个完整的模块加载机制，这时的我们可以将应用程序划分为各个不同的部分。<br>
+不可能用一个js文件去写全部的业务。肯定要有MVC。<br>
+● Node.js中，一个JavaScript文件中定义的变量、函数，都只在这个文件内部有效。当需要从此JS文件外部引用这些变量、函数时，必须使用exports对象进行暴露。使用者要用require()命令引用这个JS文件</p>
+<h5 id="普通对象">普通对象</h5>
+<p><strong>例：</strong><br>
+<strong>模块</strong></p>
+<pre><code class="language-javascript">var a = &quot;hello&quot;;
+exports.a = a;
+</code></pre>
+<p>A这个变量，是一个js文件内部才有作用域的变量。<br>
+如果别人想用这个变量，那么就要用exports进行暴露。</p>
+<p><strong>使用者：</strong></p>
+<pre><code class="language-javascript">var newA = require(&quot;./test/a.js&quot;);
+console.log(newA.a);
+
+//输出  hello
+</code></pre>
+<h5 id="类对象">类对象</h5>
+<blockquote>
+<p>用<code>module.export = 构造函数名;</code>的方式向外暴露一个类</p>
+</blockquote>
+<p><strong>模块</strong></p>
+<pre><code class="language-javascript">function People(name, sex, age) {
+    this.name = name;
+    this.sex = sex;
+    this.age = age;
+}
+
+People.prototype.sayHello = function () {
+    console.log(this.name + this.sex + this.age);
+}
+
+//此时，People就被视为构造函数，可以用new来实例化了。
+module.exports = People;
+</code></pre>
+<p><strong>使用者：</strong></p>
+<pre><code class="language-javascript">var People = require(&quot;./模块.js&quot;);
+var xiaoming = new People(&quot;小明&quot;,&quot;男&quot;,&quot;12&quot;);
+xiaoming.sayHello();
+
+//输出  小明男12
+</code></pre>
+<h5 id="模块规范">模块规范</h5>
+<p>每一个模块文件夹中，推荐都写一个package.json文件，这个文件的名字不能改。node将自动读取里面的配置。有一个main项，就是入口文件：</p>
+<pre><code class="language-javascript">{
+  &quot;name&quot;: &quot;app&quot;,
+  &quot;version&quot;: &quot;1.0.1&quot;,
+  &quot;main&quot; : &quot;app.js&quot;  //定义，可以使用非index的名字
+}
+</code></pre>
+<p>package.json文件，要放在模块文件夹的根目录</p>
+<hr>
+<h4 id="require写法">require写法</h4>
+<h5 id="require模块js">require(&quot;./模块.js&quot;)</h5>
+<p>当前目录寻找文件</p>
+<h5 id="require模块js-2">require(&quot;模块.js&quot;)</h5>
+<p>没有写路径，所以是一个特殊的路径，<br>
+那么Node.js将该文件视为node_modules目录下的一个文件</p>
+<p>**注：**node_modules文件夹并不一定在同级目录里面，在任何直接祖先级目录</p>
+<h5 id="requirea">require(&quot;a&quot;)</h5>
+<p>没有路径，没有<code>.js</code>扩展名。所以读取<code>node_modules</code>下文件夹a里面的<code>index.js</code>文件</p>
+<hr>
+<h4 id="npm使用">NPM使用</h4>
+<p><a href="https://www.npmjs.com">官网</a><br>
+可以下载和上传自己的模块<br>
+我们用package.json来管理依赖</p>
+<blockquote>
+<p>可以使用npm init可以初始化一个package.json文件</p>
+</blockquote>
+<p><a href="https://docs.npmjs.com/files/package.json">package文档</a></p>
+<hr>
+<h3 id="构建本地服务器实例">构建本地服务器实例</h3>
+<pre><code class="language-javascript">var http = require(&quot;http&quot;);
+var url = require(&quot;url&quot;);
+var fs = require(&quot;fs&quot;);
+var path = require(&quot;path&quot;);
+
+http.createServer(function (req, res) {
+	//得到用户的路径
+	var pathname = url.parse(req.url).pathname;
+
+	var	mimeData;
+
+	//默认首页
+	if (pathname == &quot;/&quot;) {
+		pathname = &quot;index.html&quot;;
+	}
+
+	//读数据类型文件
+	(function () {
+		fs.readFile(&quot;./mime.json&quot;, function (err, data) {
+			if (err) {
+				throw err;
+			};
+			res.writeHead(200, { &quot;Content-type&quot;: &quot;application/json&quot; });
+			mimeData = JSON.parse(data);
+		});
+	})();
+
+	//拓展名
+	var extname = path.extname(pathname);
+
+	//读取这个文件
+	fs.readFile(&quot;./test/&quot; + pathname, function (err, data) {
+		if (err) {
+			//如果此文件不存在，就应该用404返回
+			fs.readFile(&quot;./static/404.html&quot;, function (err, data) {
+				res.writeHead(404, { &quot;Content-type&quot;: &quot;text/html;charset=UTF8&quot; });
+				res.end(data);
+			});
+			return;
+		};
+	
+		//MIME类型
+		//网页文件：  text/html
+		//jpg文件 :   image/jpg
+		var mime = getMime(extname,mimeData);
+		res.writeHead(200, { &quot;Content-type&quot;: mime });
+		res.end(data);
+	});
+
+}).listen(8888, &quot;localhost&quot;);
+
+function getMime(extname,mimeData) {
+	if(mimeData[extname]){
+		return mimeData[extname];
+	}
+}
+</code></pre>
+<h3 id="post请求">post请求</h3>
+<p>node为了追求极致，它是一个小段一个小段接收的。<br>
+防止一个过大的表单阻塞了整个进程</p>
+<pre><code class="language-javascript"> var alldata = &quot;&quot;;
+req.addListener(&quot;data&quot;, function (chunk) {
+    alldata += chunk;
+});
+//全部传输完毕
+req.addListener(&quot;end&quot;, function () {
+    console.log(alldata.toString());
+    res.end(&quot;success&quot;);
+});
+</code></pre>
+<p>原生写POST处理，比较复杂，要写两个监听。文件上传业务比较难写。<br>
+所以，用第三方模块。<code>formidable</code>。</p>
+<p>只要涉及文件上传，那么form标签要加一个属性：<br>
+<code>&lt;form action=&quot;&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</code></p>
+<h3 id="express框架">Express框架</h3>
+<h5 id="官网"><a href="http://www.expressjs.com.cn/">官网</a></h5>
+<h4 id="模板引擎">模板引擎</h4>
+<p>ejs和jade</p>
+<h5 id="ejs使用">ejs使用</h5>
+<p><strong>模板部分</strong><br>
+模板默认需要放置在<code>views</code>文件夹；<br>
+如果需要自定义设置文件夹名字，使用<code>app.set(&quot;views&quot;,&quot;aaaa&quot;);</code><br>
+文件名<code>hh.ejs</code><br>
+插入通用模块<code>&lt;% include header.ejs %&gt;</code></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul&gt;
+    &lt;% for (var i = 0;i &lt; news.length;i++){ %&gt;
+    &lt;li&gt;&lt;%= news[i] %&gt;&lt;/li&gt;
+    &lt;% } %&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>js部分</strong></p>
+<pre><code class="language-javascript">var express = require('express');
+var app = express();
+
+app.set('view engine', 'ejs');
+
+app.get('/', function (req, res) {
+    res.render('hh', {
+        news: ['1', '2', '3']
+    })
+}).listen(8080, 'localhost');
+</code></pre>
+<h4 id="路由">路由</h4>
+<h5 id="用get请求访问"><strong>用get请求访问</strong></h5>
+<pre><code>app.get(&quot;/&quot;,function(req,res){
+});
+</code></pre>
+<h5 id="用post访问"><strong>用post访问</strong></h5>
+<pre><code>app.post(&quot;/&quot;,function(req,res){
+});
+</code></pre>
+<h5 id="处理所有请求">处理所有请求</h5>
+<p><strong>如果想处理这个网址的任何method的请求，那么写all</strong></p>
+<pre><code>app.all(&quot;/&quot;,function(){
+});
+</code></pre>
+<h5 id="地址信息">地址信息</h5>
+<p><strong>地址信息不分大小写</strong></p>
+<pre><code>app.get(&quot;/ABc&quot;,function(req,res){
+    res.send(&quot;你好&quot;);
+});
+</code></pre>
+<p>访问 <code>/abc</code>也可以</p>
+<h5 id="get参数"><strong>GET参数</strong></h5>
+<p>● GET请求的参数在URL中，在原生Node中，需要使用<code>url</code>模块来识别参数字符串。在Express中，可以直接使用<code>req.query</code>对象。</p>
+<p>● POST请求在express中不能直接获得，必须使用<code>body-parser</code>模块。使用后，将可以用<code>req.body</code>得到参数。但是如果表单中含有文件上传，那么还是需要使用<code>formidable</code>模块。`</p>
+<pre><code class="language-javascript">var bodyParser = require('body-parser')
+//bodyParser API
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.post(&quot;/&quot;,function(req,res){
+    console.log(req.body);
+});
+</code></pre>
+<h5 id="正则表达式"><strong>正则表达式</strong></h5>
+<p>正则表达式可以被使用。正则表达式中，未知部分用圆括号分组，然后可以用req.params[0]、[1]得到。<br>
+req.params类数组对象。</p>
+<pre><code>app.get(/^\/student\/([\d]{10})$/,function(req,res){
+    res.send(&quot;学生信息，学号&quot; + req.params[0]);
+});
+</code></pre>
+<p><strong>推荐使用冒号写法</strong></p>
+<pre><code>app.get(&quot;/student/:id&quot;,function(req,res){
+    var id = req.params[&quot;id&quot;];
+    var reg= /^[\d]{6}$/;   //正则验证
+    if(reg.test(id)){
+        res.send(id);
+    }else{
+        res.send(&quot;请检查格式&quot;);
+    }
+});
+</code></pre>
+<h5 id="表单可以提交到自己上">表单可以提交到自己上</h5>
+<p>app.get(&quot;/&quot;,function(req,res){<br>
+res.render(&quot;form&quot;);<br>
+});</p>
+<p>app.post(&quot;/&quot;,function(req,res){<br>
+//将数据添加进入数据库<br>
+res.send(&quot;成功&quot;);<br>
+});</p>
+<h4 id="静态文件服务">静态文件服务</h4>
+<p><code>app.use(express.static(&quot;./路径&quot;));</code></p>
+<h4 id="中间件">中间件</h4>
+<p>Express的中间件，用来实现各种功能。对于同一个网络请求，可能同时有多个匹配的中间件，一般顺序执行。而 next() 则是把执行控制权，从上一个中间件，转移到下一个中间件的函数</p>
+<p>下面例子中如果我的的get回调函数中，没有next参数，那么只会匹配上第一个符合条件的路由</p>
+<h5 id="next">next()</h5>
+<pre><code class="language-javascript">如果想往下匹配的话，那么需要写next()
+app.get(&quot;/&quot;,function(req,res,next){
+    console.log(&quot;1&quot;);
+    next();
+    res.send();
+});
+
+app.get(&quot;/&quot;,function(req,res){
+    console.log(&quot;2&quot;);
+    res.send();
+});
+
+//如果没有设置next参数，那么这个文件执行，只只会打印出1
+</code></pre>
+<blockquote>
+<p>express中所有的路由（中间件）的顺序至关重要。<br>
+具体的往上写，抽象的往下写<br>
+中间件讲究顺序，匹配上第一个之后，就不会往后匹配了。next函数才能够继续往后匹配</p>
+</blockquote>
+<h5 id="appuse">app.use()</h5>
+<p>app.use()也是一个中间件。与get、post不同的是，他的网址不是精确匹配的，而是能够有小文件夹拓展的。<br>
+比如访问网址：  <code>http://locakhost:8080/admin/id/123</code></p>
+<pre><code class="language-javascript">app.use(&quot;/admin&quot;,function(req,res){ 
+    res.write(req.originalUrl + &quot;\n&quot;);   //原始网址   /admin/id/123
+    res.write(req.baseUrl + &quot;\n&quot;);  // 顶层地址  /admin
+    res.write(req.path + &quot;\n&quot;);   //   /id/123
+    res.end(&quot;over&quot;);
+});
+</code></pre>
+<p>admin之下全部可以访问</p>
+<h4 id="express-session">express-session</h4>
+<p><a href="https://www.npmjs.com/package/express-session">文档</a></p>
+<blockquote>
+<p>HTTP是无状态的协议，Session就是利用cookie，实现的“会话”。就是第一次访问的时候，可以在服务器上为这个用户缓存一些信息。服务器会下发一个秘钥（cookie），客户端每次访问都携带这个秘钥，那么服务器如果发现这个秘钥吻合，就能够显示这个用户曾经保存的信息。</p>
+</blockquote>
+<p>使用需要下载<br>
+<strong>引入</strong></p>
+<pre><code class="language-javascript">var session = require(&quot;express-session&quot;);
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+</code></pre>
+<p><strong>设置</strong></p>
+<pre><code class="language-javascript">app.get(&quot;/login&quot;,function(req,res){
+	req.session.login = &quot;1&quot;;	//设置这个session
+	res.send(&quot;你已经成功登陆&quot;);
+});
+</code></pre>
+<p><strong>获取</strong></p>
+<pre><code class="language-javascript">app.get(&quot;/&quot;,function(req,res){
+	console.log(req.sission.login);
+});
+</code></pre>
+<hr>
+<h5 id="md5">MD5</h5>
+<p>node中crypto模块<br>
+<a href="http://nodejs.cn/api/crypto.html">文档</a></p>
+<blockquote>
+<p>MD5加密是函数型加密<br>
+特点：</p>
+</blockquote>
+<ul>
+<li>任意长度的数据，算出的MD5值长度都是固定的</li>
+<li>对原数据进行任何改动，哪怕只修改1个字节，所得到的MD5值都有很大区别</li>
+<li>MD5没有反函数破解的可能</li>
+</ul>
+<pre><code class="language-javascript">var crypto = require(&quot;crypto&quot;);
+var md5 = crypto.createHash('md5');
+var password = md5.update(password).digest('base64');
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#node%E5%AD%A6%E4%B9%A01">node学习（1）</a>
+<ul>
+<li><a href="#nodejs%E7%AE%80%E4%BB%8B">Node.js简介</a>
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E7%89%B9%E7%82%B9">特点</a></li>
+<li><a href="#%E5%BC%80%E5%A7%8B">开始</a>
+<ul>
+<li><a href="#hello-world">Hello World</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%9D%97">模块</a>
+<ul>
+<li><a href="#node%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97">node内置模块</a>
+<ul>
+<li><a href="#requrl">req.url</a></li>
+<li><a href="#url">url</a></li>
+<li><a href="#fs">fs</a></li>
+<li><a href="#path">path</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B9%A6%E5%86%99%E6%A8%A1%E5%9D%97">书写模块</a>
+<ul>
+<li><a href="#%E6%99%AE%E9%80%9A%E5%AF%B9%E8%B1%A1">普通对象</a></li>
+<li><a href="#%E7%B1%BB%E5%AF%B9%E8%B1%A1">类对象</a></li>
+<li><a href="#%E6%A8%A1%E5%9D%97%E8%A7%84%E8%8C%83">模块规范</a></li>
+</ul>
+</li>
+<li><a href="#require%E5%86%99%E6%B3%95">require写法</a>
+<ul>
+<li><a href="#require%E6%A8%A1%E5%9D%97js">require(&quot;./模块.js&quot;)</a></li>
+<li><a href="#require%E6%A8%A1%E5%9D%97js-2">require(&quot;模块.js&quot;)</a></li>
+<li><a href="#requirea">require(&quot;a&quot;)</a></li>
+</ul>
+</li>
+<li><a href="#npm%E4%BD%BF%E7%94%A8">NPM使用</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9E%84%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E4%BE%8B">构建本地服务器实例</a></li>
+<li><a href="#post%E8%AF%B7%E6%B1%82">post请求</a></li>
+<li><a href="#express%E6%A1%86%E6%9E%B6">Express框架</a><br>
+*
+<ul>
+<li><a href="#%E5%AE%98%E7%BD%91">官网</a></li>
+<li><a href="#%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E">模板引擎</a>
+<ul>
+<li><a href="#ejs%E4%BD%BF%E7%94%A8">ejs使用</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B7%AF%E7%94%B1">路由</a>
+<ul>
+<li><a href="#%E7%94%A8get%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE"><strong>用get请求访问</strong></a></li>
+<li><a href="#%E7%94%A8post%E8%AE%BF%E9%97%AE"><strong>用post访问</strong></a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82">处理所有请求</a></li>
+<li><a href="#%E5%9C%B0%E5%9D%80%E4%BF%A1%E6%81%AF">地址信息</a></li>
+<li><a href="#get%E5%8F%82%E6%95%B0"><strong>GET参数</strong></a></li>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><strong>正则表达式</strong></a></li>
+<li><a href="#%E8%A1%A8%E5%8D%95%E5%8F%AF%E4%BB%A5%E6%8F%90%E4%BA%A4%E5%88%B0%E8%87%AA%E5%B7%B1%E4%B8%8A">表单可以提交到自己上</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1">静态文件服务</a></li>
+<li><a href="#%E4%B8%AD%E9%97%B4%E4%BB%B6">中间件</a>
+<ul>
+<li><a href="#next">next()</a></li>
+<li><a href="#appuse">app.use()</a></li>
+</ul>
+</li>
+<li><a href="#express-session">express-session</a>
+<ul>
+<li><a href="#md5">MD5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/node-zhong-shi-yong-mongodb/">
+              <h3 class="post-title">
+                 node中使用MongoDB
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,351 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MongoDB | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="MongoDB | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="@(js学习笔记)
+MongoDB
+
+MongoDB 是一个高性能，开源，无模式的文档型数据库。
+
+
+[toc]
+安装
+
+安装方式分为**Homebrew安装和手动安装**
+
+下载地址
+在mac下安装mongodb
+1. 将下载好的解压后文..." />
+    <meta name="keywords" content="node" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              MongoDB
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/node/" class="post-tag">
+                  # node
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>@(js学习笔记)</p>
+<h2 id="mongodb">MongoDB</h2>
+<blockquote>
+<p>MongoDB 是一个高性能，开源，无模式的文档型数据库。</p>
+</blockquote>
+<hr>
+<p>[toc]</p>
+<h3 id="安装">安装</h3>
+<blockquote>
+<p>安装方式分为**<code>Homebrew安装</code><strong>和</strong><code>手动安装</code>**</p>
+</blockquote>
+<p><a href="https://www.mongodb.com/download-center?jmp=nav#community">下载地址</a></p>
+<h4 id="在mac下安装mongodb">在mac下安装mongodb</h4>
+<p><strong>1.</strong> 将下载好的解压后文件放到 <code>/usr/local</code> 文件夹下。<br>
+<strong>2.</strong> 默认情况下， mongod进程使用该<code>/data/db</code>目录。</p>
+<ul>
+<li>在根目录<code>/</code> 新建 <code>data/db</code></li>
+</ul>
+<p><strong>3.</strong>  运行</p>
+<ul>
+<li>打开终端，切换到<code>/usr/local/mongodb/bin</code> 安装目录</li>
+<li>运行 <code>./mongod</code> 启动服务端</li>
+<li>新开一个终端窗口，同样切换至安装目录，运行<code>./mongo</code></li>
+</ul>
+<p><strong>4.</strong> 如下图所示，说明执行成功了<br>
+<img src="https://doupo.coding.me/note_img/node/mongo1.png" alt="enter image description here" loading="lazy"></p>
+<p><strong>5.</strong>  将mongod二进制文件的位置添加至系统PATH变量<br>
+<code>echo 'export PATH=/usr/local/mongodb/bin:$PATH'&gt;&gt;~/.bash_profile</code></p>
+<ul>
+<li>之后就可以直接使用 <code>mongod</code> ， <code>mongo</code></li>
+</ul>
+<p><strong>6.</strong> 自定义数据库路径<br>
+如果不使用默认数据目录<code>/data/db</code>，请使用<code>--dbpath</code>自定义数据库路径</p>
+<p><code>mongod --dbpath &lt;数据库完整路径&gt;</code></p>
+<h3 id="数据库使用">数据库使用</h3>
+<p><a href="https://docs.mongodb.com/manual/tutorial/query-documents/">文档地址</a></p>
+<h4 id="基础命令">基础命令</h4>
+<ul>
+<li>
+<p>查看所有数据库<br>
+<code>show dbs</code></p>
+</li>
+<li>
+<p>使用数据库、创建数据库<br>
+<code>use test</code></p>
+</li>
+<li>
+<p>插入一条数据<br>
+<code>db.test.insert({'name':'yue'});</code></p>
+</li>
+<li>
+<p>查找刚才插入的数据<br>
+<code>db.test.find()</code></p>
+</li>
+<li>
+<p>删除数据库<br>
+<code>db.dropDatabase()</code></p>
+</li>
+</ul>
+<h3 id="常用的增删改查">常用的增删改查</h3>
+<h4 id="增">增</h4>
+<p>创建集合<br>
+<code>db.createColletion('cs')</code><br>
+创建一个cs的集合</p>
+<p>插入一条数据<br>
+<code>db.test.insert({'name':'yue'});</code></p>
+<p>导入数据<br>
+<code>mongoimport --db test --collection cs --drop --file primer-dataset.json</code><br>
+在test数据库下的cs集合里面导入数据，清空之前的数据</p>
+<h4 id="删">删</h4>
+<p>删除数据库<br>
+<code>db.dropDatabase()</code></p>
+<p>删除集合<br>
+<code>db.test.drop()</code></p>
+<p>删除所有集合<br>
+<code>db.test.remove({})</code></p>
+<p>删除所有num为11的数据<br>
+<code>db.test.remove({'age':11})</code></p>
+<p>如果只想删除找到的第一条<br>
+<code>db.test.remove({'age':11}, { justOne: true } )</code></p>
+<h4 id="改">改</h4>
+<p>修改数据，有前置条件，查询</p>
+<p><code>db.test.update({'age':11},{$set:{'age':22}})</code><br>
+注：test集合下寻找到第一个符合条件（age为11）的数据，将它改成age:22</p>
+<p>修改所有符合条件的数据<br>
+<code>db.test.update({'age':11},{$set:{'age':22}},{multi:true})</code></p>
+<p>完整替换<br>
+<code>db.test.update({'age':22},{'age':11})</code></p>
+<h4 id="查">查</h4>
+<p>寻找所有数据<br>
+<code>db.test.find()</code></p>
+<p>精确查找<br>
+<code>db.test.find({'age':11})</code><br>
+注：查找所有age等于11的数据</p>
+<p>多个条件查找<br>
+<code>db.test.find({'name':'3','age':112})</code></p>
+<p>带运算的查找<br>
+<code>db.test.find({'age':{$gt:11}})</code><br>
+注：寻找所有age大于11的数据</p>
+<ul>
+<li>排列方式-升序排列<br>
+<code>db.test.find({'age':{$gt:11}}).sort({&quot;age&quot;:1})</code></li>
+<li><code>-1</code>将序排列</li>
+</ul>
+<p>Limit与Skip方法<br>
+<code>limit(num)</code>读取指定数量(num)的数据记录<br>
+<code>skip(num)</code>跳过指定数量(num)的数据<br>
+结合在一起可以处理分页数据<br>
+<code>db.cs.find({},{&quot;age&quot;:1}).limit(10).skip(10)</code><br>
+注：读取cs集合下，11-20条数据</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符号</th>
+<th style="text-align:right">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$lt</td>
+<td style="text-align:right">小于号</td>
+</tr>
+<tr>
+<td style="text-align:left">$gt</td>
+<td style="text-align:right">大于号</td>
+</tr>
+<tr>
+<td style="text-align:left">$gte</td>
+<td style="text-align:right">大于等于</td>
+</tr>
+<tr>
+<td style="text-align:left">$lte</td>
+<td style="text-align:right">小于等于</td>
+</tr>
+</tbody>
+</table>
+<h3 id="图形化工具">图形化工具</h3>
+<blockquote>
+<p>mongobooster<br>
+<img src="https://doupo.coding.me/note_img/node/mongobooster.png" alt="mongobooster" loading="lazy"></p>
+</blockquote>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#mongodb">MongoDB</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a>
+<ul>
+<li><a href="#%E5%9C%A8mac%E4%B8%8B%E5%AE%89%E8%A3%85mongodb">在mac下安装mongodb</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8">数据库使用</a>
+<ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4">基础命令</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5">常用的增删改查</a>
+<ul>
+<li><a href="#%E5%A2%9E">增</a></li>
+<li><a href="#%E5%88%A0">删</a></li>
+<li><a href="#%E6%94%B9">改</a></li>
+<li><a href="#%E6%9F%A5">查</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%B7%A5%E5%85%B7">图形化工具</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/css3/">
+              <h3 class="post-title">
+                css3
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

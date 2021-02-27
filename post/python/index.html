@@ -1,0 +1,923 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>python | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="python | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="@(python)
+python - IDLE
+[TOC]
+内置函数
+
+dir( _ _ builtins_ _) 获取所有内置函数
+help(内置函数名) 返回说明
+
+import random as r 随机函数
+
+trueNub=r...." />
+    <meta name="keywords" content="python" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              python
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                19 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/python/" class="post-tag">
+                  # python
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>@(python)</p>
+<h1 id="python-idle">python - IDLE</h1>
+<p>[TOC]</p>
+<h3 id="内置函数">内置函数</h3>
+<blockquote>
+<h5 id="dir-_-_-builtins_-_-获取所有内置函数">dir( _ _ builtins_ _) 获取所有内置函数</h5>
+<p>help(内置函数名) 返回说明</p>
+</blockquote>
+<h5 id="import-random-as-r-随机函数">import random as r 随机函数</h5>
+<blockquote>
+<p>trueNub=r.randint(1,30)</p>
+</blockquote>
+<h3 id="数据类型">数据类型</h3>
+<h4 id="数据类型的判断">数据类型的判断</h4>
+<ol>
+<li>type( 对象 )  <strong>注</strong>：相当于js中typeof</li>
+<li>isinstance(a,int)  <strong>两个</strong>参数，<strong>第一个</strong>为需要判断的对象，<strong>第二个</strong>位数据类型<br>
+返回值为 true 或者 false<br>
+整数 <strong>int</strong>  字符串 <strong>str</strong>  浮点数 <strong>float</strong>  布尔值 <strong>bool</strong></li>
+</ol>
+<h4 id="布尔值">布尔值</h4>
+<blockquote>
+<p>布尔值可以用and、or和not运算。</p>
+</blockquote>
+<ul>
+<li>and运算是与运算，只有所有都为True，and运算结果才是True：<strong>相当于JS中&amp;&amp;</strong></li>
+<li>or运算是或运算，只要其中有一个为True，or运算结果就是True：<strong>相当于js中 ||</strong></li>
+<li>not运算是非运算，它是一个单目运算符，把True变成False，False变成True：<strong>相当于js中 ！</strong></li>
+</ul>
+<h4 id="空值">空值</h4>
+<p>空值是Python里一个特殊的值，用None表示。None不能理解为0，因为0是有意义的，而None是一个特殊的空值。</p>
+<h4 id="常量">常量</h4>
+<p>所谓常量就是不能变的变量，比如常用的数学常数π就是一个常量。在Python中，通常用全部大写的变量名表示常量：</p>
+<pre><code>	PI = 3.14159265359
+</code></pre>
+<h4 id="除法">除法</h4>
+<p>在Python中，有两种除法，一种除法是/：</p>
+<p><strong>10 / 3</strong><br>
+3.3333333333333335<br>
+/除法计算结果是浮点数，即使是两个整数恰好整除，结果也是浮点数：</p>
+<p><strong>9 / 3</strong><br>
+3.0<br>
+还有一种除法是//，称为地板除，两个整数的除法仍然是整数：</p>
+<p><strong>10 // 3</strong><br>
+3<br>
+你没有看错，整数的地板除//永远是整数，即使除不尽。要做精确的除法，使用/就可以。</p>
+<p>因为//除法只取结果的整数部分，所以Python还提供一个余数运算，可以得到两个整数相除的余数：</p>
+<p><strong>10 % 3</strong><br>
+1<br>
+无论整数做//除法还是取余数，结果永远是整数，所以，整数运算结果永远是精确的。</p>
+<h4 id="数值和字符转换">数值和字符转换</h4>
+<h5 id="int-取整数-可以将字符串转换为数字">int()  取整数  可以将字符串转换为数字</h5>
+<p><strong>注</strong>：相当于js中parseInt(对象 , 基数)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数字</th>
+<th style="text-align:center">字符串</th>
+<th style="text-align:center">类似浮点的字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">int(1.1)</td>
+<td style="text-align:center">int('23')</td>
+<td style="text-align:center">int('23.2')</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">23</td>
+<td style="text-align:center"><strong>出错，不支持</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong>：不支持 int('23.2')  转换浮点类型的字符串</p>
+<hr>
+<h5 id="浮点数转换">浮点数转换</h5>
+<p><strong>注：相当于js中parseFloat(对象)</strong><br>
+float()</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数字</th>
+<th style="text-align:center">字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">float(1.2)</td>
+<td style="text-align:center">float('2.3')</td>
+</tr>
+<tr>
+<td style="text-align:center">1.2</td>
+<td style="text-align:center">2.3</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h5 id="数字转字符串">数字转字符串</h5>
+<p>str(数字) 返回字符串，支持浮点数。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数字</th>
+<th style="text-align:center">字符串</th>
+<th style="text-align:center">类似浮点的字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">str(1.1)</td>
+<td style="text-align:center">str('23')</td>
+<td style="text-align:center">str(5e19)</td>
+</tr>
+<tr>
+<td style="text-align:center">'1.1'</td>
+<td style="text-align:center">'23'</td>
+<td style="text-align:center">'5e+19'</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h5 id="运算符">运算符</h5>
+<pre><code>+ - * /   等同数学
+ %  求余数  2%9  返回2    3%9  返回3         9%2 返回1    11%3 返回2
+ ** 幂运算   2**2  等于 2*2     3**3  等于  3*3*3
+ 地板除 '//'   9//2  等于 4      11//3  等于3   舍去小数点之后的数字
+</code></pre>
+<p><strong>优先级</strong><br>
+幂运算》正负号》算数操作符》比较操作符》逻辑运算符</p>
+<h5 id="断言assert">断言assert</h5>
+<p>assert 3&gt;4<br>
+当这个 关键词  后边条件为假的时候，程序崩溃并且抛出<strong>AssertionError</strong>异常</p>
+<h4 id="字符串">字符串</h4>
+<p>1.可以通过访问下标的方式访问字符串的的某一位<br>
+2.可以使用分片功能<br>
+3.<a href="http://bbs.fishc.com/forum.php?mod=viewthread&amp;tid=38992&amp;extra=page=1&amp;filter=typeid&amp;typeid=403">参考链接</a></p>
+<h4 id="字符串方法">字符串方法</h4>
+<p><strong>capitalize()</strong><br>
+把字符串的第一个字符改为大写</p>
+<p><strong>casefold()</strong><br>
+把整个字符串的所有字符改为小写</p>
+<p><strong>center(width)</strong><br>
+将字符串居中，并使用空格填充至长度 width 的新字符串</p>
+<p><strong>count(sub[, start[, end]])</strong><br>
+返回 sub 在字符串里边出现的次数，start 和 end 参数表示范围，可选。</p>
+<p><strong>decode(encoding='utf-8', errors='strict')</strong><br>
+以 encoding 指定的编码格式对字符串进行编码。</p>
+<p><strong>endswith(sub[, start[, end]])</strong><br>
+检查字符串是否以 sub 子字符串结束，如果是返回 True，否则返回 False。start 和 end 参数表示范围，可选。</p>
+<p><strong>expandtabs([tabsize=8])</strong><br>
+把字符串中的 tab 符号（\t）转换为空格，如不指定参数，默认的空格数是 tabsize=8。</p>
+<p><strong>find(sub[, start[, end]])</strong><br>
+检测 sub 是否包含在字符串中，如果有则返回索引值，否则返回 -1，start 和 end 参数表示范围，可选。</p>
+<p><strong>index(sub[, start[, end]])</strong><br>
+跟 find 方法一样，不过如果 sub 不在 string 中会产生一个异常。</p>
+<p><strong>isalnum()</strong><br>
+如果字符串至少有一个字符并且所有字符都是字母或数字则返回 True，否则返回 False。</p>
+<p><strong>isalpha()</strong><br>
+如果字符串至少有一个字符并且所有字符都是字母则返回 True，否则返回 False。</p>
+<p><strong>isdecimal()</strong><br>
+如果字符串只包含十进制数字则返回 True，否则返回 False。</p>
+<p><strong>isdigit()</strong><br>
+如果字符串只包含数字则返回 True，否则返回 False。</p>
+<p><strong>islower()</strong><br>
+如果字符串中至少包含一个区分大小写的字符，并且这些字符都是小写，则返回 True，否则返回 False。</p>
+<p><strong>isnumeric()</strong><br>
+如果字符串中只包含数字字符，则返回 True，否则返回 False。</p>
+<p><strong>isspace()</strong><br>
+如果字符串中只包含空格，则返回 True，否则返回 False。</p>
+<p><strong>istitle()</strong><br>
+如果字符串是标题化（所有的单词都是以大写开始，其余字母均小写），则返回 True，否则返回 False</p>
+<p><strong>isupper()</strong><br>
+如果字符串中至少包含一个区分大小写的字符，并且这些字符都是大写，则返回 True，否则返回 False。</p>
+<p><strong>join(sub)</strong><br>
+以字符串作为分隔符，插入到 sub 中所有的字符之间。</p>
+<p><strong>ljust(width)</strong><br>
+返回一个左对齐的字符串，并使用空格填充至长度为 width 的新字符串。</p>
+<p><strong>lower()</strong><br>
+转换字符串中所有大写字符为小写。</p>
+<p><strong>lstrip()</strong><br>
+去掉字符串左边的所有空格</p>
+<p><strong>partition(sub)</strong><br>
+找到子字符串 sub，把字符串分成一个 3 元组 (pre_sub, sub, fol_sub)，如果字符串中不包含 sub 则返回 ('原字符串', '', '')</p>
+<p><strong>replace(old, new[, count])</strong><br>
+把字符串中的 old 子字符串替换成 new 子字符串，如果 count 指定，则替换不超过 count 次。</p>
+<p><strong>rfind(sub[, start[, end]])</strong><br>
+类似于 find() 方法，不过是从右边开始查找。</p>
+<p><strong>rindex(sub[, start[, end]])</strong><br>
+类似于 index() 方法，不过是从右边开始。</p>
+<p><strong>rjust(width)</strong><br>
+返回一个右对齐的字符串，并使用空格填充至长度为 width 的新字符串。</p>
+<p><strong>rpartition(sub)</strong><br>
+类似于 partition() 方法，不过是从右边开始查找。</p>
+<p><strong>rstrip()</strong><br>
+删除字符串末尾的空格。</p>
+<p><strong>split(sep=None, maxsplit=-1)</strong><br>
+不带参数默认是以空格为分隔符切片字符串，如果 maxsplit 参数有设置，则仅分隔 maxsplit 个子字符串，返回切片后的子字符串拼接的列表。</p>
+<p><strong>splitlines(([keepends]))</strong><br>
+按照 '\n' 分隔，返回一个包含各行作为元素的列表，如果 keepends 参数指定，则返回前 keepends 行。</p>
+<p><strong>startswith(prefix[, start[, end]])</strong><br>
+检查字符串是否以 prefix 开头，是则返回 True，否则返回 False。start 和 end 参数可以指定范围检查，可选。</p>
+<p><strong>strip([chars])</strong><br>
+删除字符串前边和后边所有的空格，chars 参数可以定制删除的字符，可选。</p>
+<p><strong>swapcase()</strong><br>
+翻转字符串中的大小写。</p>
+<p><strong>title()</strong><br>
+返回标题化（所有的单词都是以大写开始，其余字母均小写）的字符串。</p>
+<p><strong>translate(table)</strong><br>
+根据 table 的规则（可以由 str.maketrans('a', 'b') 定制）转换字符串中的字符。</p>
+<p><strong>upper()</strong><br>
+转换字符串中的所有小写字符为大写。</p>
+<p><strong>zfill(width)</strong><br>
+返回长度为 width 的字符串，原字符串右对齐，前边用 0 填充。</p>
+<p><strong>str.format()</strong><br>
+<strong>语法：</strong> '{0} 0需要在前面 {b}{c}'.format('注：',b='索引在前',c='字母在后')<br>
+<strong>返回值：</strong> '注： 0需要在前面 索引在前字母在后'<br>
+可以先声明一个字符串，在调用这个方法</p>
+<h4 id="字符串格式化">字符串格式化</h4>
+<p>语法：</p>
+<pre><code class="language-python">'%d' % 3  	 ##返回字符串 '3'
+
+'%d %d' % (1,3.3)	##返回字符串 '1 3'
+
+'%d,%d' % (1,3.3)   ##返回字符串 '1,3'
+</code></pre>
+<h3 id="数组-列表">数组 &gt;&gt;&gt; 列表</h3>
+<p>格式和js一样，有长度属性 js：length  == python 的 len 属性，都是获取数组的长度<br>
+<strong>1.</strong> a=[1, '你好' ,'3', [1,2,3]]<br>
+<strong>2.</strong> len(a)  返回4<br>
+<strong>3.</strong> 支持下标读取 a[2]  返回 '3'<br>
+<strong>4.</strong> list方法可以将<code>字符串元组</code>等转换为<code>列表</code></p>
+<h4 id="元素添加">元素添加</h4>
+<h5 id="向列表尾部添加元素-append-和-extend">向列表<code>尾部</code>添加元素 append 和 extend</h5>
+<p><strong>方法1：</strong></p>
+<blockquote>
+<p>格式： 列表.append(需要添加的对象) 默认添加在列表尾部<br>
+**注：**只能添加一个对象</p>
+</blockquote>
+<p><strong>方法2：</strong></p>
+<blockquote>
+<p>格式： 列表.extend([需要添加的对象]) 默认添加在列表尾部，被添加的对象要以列表的方式存在<br>
+**注：**只能添加一个对象</p>
+</blockquote>
+<h5 id="在列表任意位置追加-元素">在列表<code>任意位置</code>追加 元素</h5>
+<p>**语法：**列表.insert(参数1，参数2)<br>
+参数1：被添加元素的位置<br>
+参数2：需要添加的元素<br>
+注意：插入元素实际位置是指定位置的前一个位置</p>
+<h4 id="元素删除">元素删除</h4>
+<h5 id="remove">remove()</h5>
+<p>语法：列表.remove(需要移除的元素)<br>
+只会删除一个</p>
+<blockquote>
+<p>a = [1, 2, 2, 2]<br>
+a.remove(2)<br>
+a<br>
+[1, 2, 2]</p>
+</blockquote>
+<h5 id="del">del()</h5>
+<p>语法： del 列表[下标]</p>
+<blockquote>
+<p>a = [1,2,3,4]<br>
+del a[1]<br>
+a<br>
+[1, 3, 4]</p>
+</blockquote>
+<p><strong>del +列表</strong> 会删除整个列表</p>
+<h5 id="pop">pop()</h5>
+<p>**语法：**列表.pop(参数为下标，默认为最后一位，可不写)   <code>等同于js中pop()</code><br>
+<strong>注：</strong>  可以带参数下标`，默认移除最后一位，并且返回它</p>
+<h4 id="列表分片">列表分片</h4>
+<p>**注:**两个参数都可以省略，冒号不可以。省略参数1，默认从0；省略参数2，默认是最后一位。<br>
+两个参数都不写，默认是拷贝一份</p>
+<pre><code>a = [1,2,3,4]
+a[1:3]  参数1 开始位置 ： 参数2 结束位置，不包含自身
+返回[2, 3]
+</code></pre>
+<h4 id="列表操作符">列表操作符</h4>
+<ol>
+<li>两个列表可以进行比较，以第一位为首先比较，返回true和false</li>
+<li>两个列表加，等于合并</li>
+<li>单个列表*数字，等于复制自己加入尾部</li>
+<li>成员操作。
+<ul>
+<li>in   语法：元素 in 列表 。如果列表存在，返回true  反之 false</li>
+<li>not in  语法 ：元素 not in 列表 。如果列表存在，返回false 反之 true</li>
+</ul>
+</li>
+</ol>
+<h4 id="列表内置方法">列表内置方法</h4>
+<p>获取所有 dir(list)</p>
+<h5 id="1-count-计算它的参数在列表中出现的总次数">1. count 计算它的参数在列表中出现的总次数</h5>
+<p>语法：列表.count (参数)   返回值为，参数在列表出现的次数</p>
+<h5 id="2index参数1参数2参数3-返回参数1在列表中的下标位置">2.index(参数1，参数2，参数3)  返回参数1在列表中的下标位置</h5>
+<blockquote>
+<p>参数1 ，是需要寻找的元素<br>
+参数2，可以不填，是开始寻找的起始位置<br>
+参数3，可以不填，是结束寻找的位置</p>
+</blockquote>
+<h5 id="3reverse-和-reversed-翻转整个列表">3.reverse() 和  reversed 翻转整个列表</h5>
+<p>语法：列表.reverse() ，没有参数，没有返回值</p>
+<p>#####4. sort()  和 sorted 用指定的方法给列表排序<br>
+<a href="http://www.jb51.net/article/52730.htm">sort详解</a><br>
+语法：列表. sort()  默认行为将列表从小到大排列<br>
+<a href="http://jingyan.baidu.com/article/90808022a546b8fd90c80f48.html">sorted详解</a><br>
+语法：sorted（列表）</p>
+<p><strong>列表排序不支持数字和字符串混淆</strong><br>
+**注：**可以从大到小排列<br>
+列表. sort(reverse=True)   True  首字母大写<br>
+reverse=True从大到小排列</p>
+<pre><code>
+x = [4, 6, 2, 1, 7, 9]
+x.sort()
+print x  
+输出：[1, 2, 4, 6, 7, 9]
+
+a={'6':'one','2':'two','a':'three'}
+print(sorted(a))
+输出['2', '6', 'a']
+
+print(sorted(a,reverse=True))
+输出：['a', '6', '2']
+
+a={'a':10,'b':20,'acv':30,'1':22}
+for c in sorted(a,reverse=True):
+    print('{}--{}'.format(c,a[c]))
+输出：
+b--20
+acv--30
+a--10
+1--22
+
+</code></pre>
+<h5 id="5-max-用于返回元组和列表中最大的对象">5.  max() 用于返回元组和列表中最大的对象</h5>
+<h5 id="6-min-返回元组和列表中的最小值">6. min() 返回元组和列表中的最小值</h5>
+<p><strong>注：</strong> max和min方法必须要保证 判断的对象数据类型是一致的</p>
+<h5 id="7enumerate对象-枚举-返回每个对象为-index对象-的元组">7.enumerate(对象) 枚举 — 返回每个对象为 index+对象 的元组</h5>
+<pre><code class="language-python">a=[1,23,4,67,2]
+enumerate(a)
+&lt;enumerate object at 0x000001B95C8E9EA0&gt;
+list(enumerate(a))
+[(0, 1), (1, 23), (2, 4), (3, 67), (4, 2)]
+</code></pre>
+<h5 id="8zip-返回由各个-参数-的序列-组成的元组">8.zip 返回由各个 参数 的序列 组成的元组</h5>
+<pre><code class="language-python">a=[1.2,3,5,6,8]
+b=[11,23,56,78,33,66,88,99,11,45]
+list(zip(a,b))
+[(1.2, 11), (3, 23), (5, 56), (6, 78), (8, 33)]
+&gt;&gt;&gt; 
+</code></pre>
+<h4 id="元组">元组</h4>
+<p><strong>数据类型：tuple</strong><br>
+格式：a=1,2,3  <strong>注</strong> 创建元组条件就是逗号<br>
+一般情况下写 ：a=(1,2,3)<br>
+如果只有一个元素：a=(1,)<br>
+创建一个空元组：a=();</p>
+<p><strong>注：</strong> tuple方法可以将<code>列表</code>等转换为<code>元组</code></p>
+<p><strong>元组可以使用的方法：</strong><br>
+1.列表切片方法<br>
+2.除了直接修改元组方法外，基本上和列表方法相似</p>
+<h3 id="循环体">循环体</h3>
+<h5 id="for循环">for循环</h5>
+<blockquote>
+<p><strong>语法</strong>for 目标 in 表达式：<br>
+循环体</p>
+</blockquote>
+<pre><code>a = [1,34,5,'ni']
+for i in a:
+	print(i)
+
+1
+34
+5
+ni
+</code></pre>
+<h5 id="range">range()</h5>
+<p><strong>语法</strong> range( 参数1, 参数2, 参数3 )<br>
+参数1：可选，起始位置。默认为0<br>
+参数2：必填，结束位置<br>
+参数3：可选，默认为1， 步长</p>
+<pre><code>for i in range(0,15,2):
+	print(i)
+0
+2
+4
+6
+8
+10
+12
+14
+</code></pre>
+<h5 id="break终止程序跳出整个循环退出">break（终止程序，跳出整个循环，退出）</h5>
+<h5 id="continue-跳过当前下面代码都不执行执行下一次循环">continue （跳过当前，下面代码都不执行，执行下一次循环）</h5>
+<h3 id="字典dict">字典dict</h3>
+<p>数据类型dict<br>
+id(字典对象)  返回在内存中的地址信息</p>
+<h4 id="创建">创建</h4>
+<pre><code class="language-python">a={'1':'one','2':'two','3':'three'}
+b=dict(a='A',b='B',c='C')
+
+print(a['1'])   #one
+
+print(b['a'])   #A
+
+# 赋值
+b['c']='change'
+
+print(b['c'])   #change
+
+# 添加
+b['d']='add'
+
+print(b) #{'a': 'A', 'd': 'add', 'b': 'B', 'c': 'change'}
+</code></pre>
+<h5 id="pop-删除-popitem删除-setdefault-添加-update组合">pop 删除 ，popitem删除   ，setdefault 添加 ，update组合</h5>
+<p>1.pop:弹出选择的字典中对象，然后在字典中删除这个对象</p>
+<pre><code> b=dict(a='A',b='B',c='C')
+{'b': 'B', 'c': 'C', 'a': 'A'}
+
+b.pop('b')
+{'c': 'C', 'a': 'A'}
+</code></pre>
+<p>2.popitem随机弹出字典一个对象，然后在字典中删除这个对象<br>
+语法：b.popitem()</p>
+<p>3.setdefault 像字典里面添加<br>
+语法：b.setdefault(11,'222')</p>
+<p>4.update利用一个字典或者映射更新另外一个字典<br>
+语法：b.update(c)</p>
+<pre><code>b={'aa':'AA'}
+c={'bb':'BB'}
+b.update(c)
+{'aa': 'AA', 'bb': 'BB'}
+</code></pre>
+<h5 id="清空一个字典clear">清空一个字典clear()</h5>
+<p>语法：字典.clear()</p>
+<h5 id="浅拷贝-copy">浅拷贝 copy</h5>
+<p>语法： 新对象=被拷贝对象.copy()</p>
+<h3 id="集合-无序不支持索引">集合-无序，不支持索引</h3>
+<p>数据类型set</p>
+<h5 id="创建-2">创建：</h5>
+<p>a={1,2,3,4} 和 b={'a','c'}<br>
+c=set([1,2,3,4])  #{1,2,3,4}</p>
+<h5 id="集合的唯一性剔除相同的对象">集合的唯一性，剔除相同的对象</h5>
+<pre><code class="language-python">a={1,2,3,4,'1',1,'a','b','a'}
+&gt;&gt;&gt; a
+{1, 2, 3, 4, 'b', '1', 'a'}
+</code></pre>
+<p>可以用来去掉一个列表的重复对象<br>
+nub=[1,2,3,4,5,3,2,1,0]<br>
+nub=list(set(nub))<br>
+<strong>返回：</strong>[0, 1, 2, 3, 4, 5]</p>
+<blockquote>
+<p>s1 = set([1, 2, 3])<br>
+s2 = set([2, 3, 4])<br>
+s1 &amp; s2<br>
+{2, 3}<br>
+s1 | s2<br>
+{1, 2, 3, 4}</p>
+</blockquote>
+<h5 id="添加-add">添加 add</h5>
+<p>语法：集合.add(新增对象)</p>
+<h5 id="移除-remove">移除 remove</h5>
+<p>语法：集合.remove(移除对象)</p>
+<h5 id="不可变集合-frozenset">不可变集合 frozenset</h5>
+<p>语法：c=frozenset([1,2,3,4]) ，不可添加和修改</p>
+<h3 id="pickle">pickle</h3>
+<h4 id="写入-pickledump写入的文件被写入的文件">写入  pickle.dump(写入的文件，被写入的文件)</h4>
+<pre><code class="language-python">import pickle  #引入
+list=[1,2,3,4] #列表
+x_list=open('E:\\桌面\\py\\m_list.pkl','wb')
+#新建一个文件
+
+pickle.dump(list,x_list)
+#将列表内容导入文件
+x_list.close()
+#关闭文档
+</code></pre>
+<h4 id="读取-pickleload">读取  pickle.load</h4>
+<p>x_list=open('E:\桌面\py\m_list.pkl','rb')<br>
+print(pickle.load(x_list))<br>
+[1, 2, 3, 4]</p>
+<h3 id="处理错误">处理错误</h3>
+<h5 id="try-可后接else">try 可后接else</h5>
+<p><strong>注：</strong>  遇到错误就会跳出，这样会对程序造成影响</p>
+<pre><code class="language-python">try:
+    int('2.2')
+    a=1+1
+    print(a)
+except ValueError as cuowu:
+    print('错误为'+str(cuowu))
+else：
+	代码。。。。
+#返回：错误为invalid literal for int() with base 10: '2.2'
+
+注意：print(a)没有打印
+</code></pre>
+<h5 id="finally善后代码try跳出后此处执行比如关闭文档之类">finally善后代码，try跳出后，此处执行，比如关闭文档之类</h5>
+<h5 id="with语句">with语句</h5>
+<p>语法：with open() as f:<br>
+如果出错，文档会自动关闭</p>
+<pre><code>def txtCS():
+    lux = '/Users/zhaoyue/pyCS/'
+    for name in range(1,11):
+        with open(lux+str(name)+'.txt','w') as f:
+            f.write('文档'+str(name))
+            f.close()
+            print(name)
+txtCS()
+</code></pre>
+<h3 id="对象-属性方法">对象-属性+方法</h3>
+<p>如果属性名和方法名一样，属性会覆盖方法</p>
+<h5 id="对象创建">对象创建</h5>
+<pre><code class="language-python">创建 
+class Obj:  #对象创建首字母大写
+    color='green'
+    age='10'
+
+    def eat(self):
+        print('十晚饭')
+
+    def eat2(self):
+        print('十晚饭2')
+ 调用
+tt=Obj()
+tt.age
+'10'
+tt.eat()
+十晚饭
+&gt;&gt;&gt; 
+</code></pre>
+<h5 id="_-_-init-_-_函数">_ _ init _ _函数</h5>
+<pre><code class="language-python">class top1:
+    def __init__(self,x):
+        self.num=x
+    def cs(self):
+        print('我是%s' % self.num)
+
+b=top1('z选一')
+b.cs()
+#返回：我是z选一
+ 
+</code></pre>
+<p>遇到子级也需要此方法，同时不替换父级<br>
+在def函数声明内部添加：<br>
+1.父级对象name._ _ init _ _ (self)<br>
+2.super()._ _ init _ _ ()</p>
+<h5 id="对象继承">对象继承</h5>
+<pre><code class="language-python">class parent:
+    def hellow(self):
+        print('父级方法')
+
+class son(parent):
+    #def hellow(self):
+        #print('如果子集方法有重名的方法，则覆盖父级的方法')
+    pass
+
+s=son()
+s.hellow()
+#返回：父级方法
+</code></pre>
+<h4 id="类和对象bif">类和对象BIF</h4>
+<h5 id="issubclassclassclassinfo-检查子类父级关系">issubclass(class,classinfo) 检查子类父级关系</h5>
+<blockquote>
+<p>1.第一个class是第二个classinfo的子类，则返回true<br>
+2.一个类被认为是自身的子类<br>
+3.第二个参数可以为一个<strong>元组</strong></p>
+</blockquote>
+<h5 id="isinstanceobjectclassinfo检查实例化对象是否属于第二个参数">isinstance(object,classinfo)检查实例化对象是否属于第二个参数</h5>
+<blockquote>
+<ol>
+<li>第一个参数为实例化对象 a=某个类。</li>
+<li>第二个参数为一个类，可以为元组，元组为类组成</li>
+</ol>
+</blockquote>
+<h5 id="hasattr对象name测试一个对象是否有制定的属性">hasattr(对象，'name')测试一个对象是否有制定的属性</h5>
+<blockquote>
+<p>1.第一个参数为对象，第二个为属性</p>
+</blockquote>
+<pre><code class="language-python">&gt;&gt;&gt; class c:
+	def __init__(self,x):
+		self.x=1	
+&gt;&gt;&gt; 
+&gt;&gt;&gt; c1=c()
+&gt;&gt;&gt; 
+
+**hasattr**
+&gt;&gt;&gt; hasattr(c1,'x')
+True
+&gt;&gt;&gt; hasattr(c1,'x2')
+False
+
+**getattr**
+&gt;&gt;&gt; getattr(c1,'x','访问的属性不存在')
+1
+&gt;&gt;&gt; getattr(c1,'x2','访问的属性不存在')
+'访问的属性不存在'
+&gt;&gt;&gt; 
+
+**setattr**
+&gt;&gt;&gt; setattr(c1,'f','新属性呦')
+&gt;&gt;&gt; c1.f
+'新属性呦'
+&gt;&gt;&gt; 
+</code></pre>
+<h5 id="getattrobjnamedefault-返回对象指定的属性值">getattr(obj,'name'[,default]) 返回对象指定的属性值</h5>
+<blockquote>
+<p>1.如果属性值不存在，则返回default，否则抛出异常AttributeError<br>
+2.参考代码如上</p>
+</blockquote>
+<h5 id="setattrobjnamevalue-返回对象指定的属性值">setattr(obj,'name',value) 返回对象指定的属性值</h5>
+<blockquote>
+<p>1.设置对象中指定属性的值，如果属性不存在，则新建一个属性并复制<br>
+2.参考代码如上</p>
+</blockquote>
+<h5 id="delattrobjname-删除对象中指定的属性">delattr(obj,'name') 删除对象中指定的属性</h5>
+<blockquote>
+<p>1.如果属性不存在就会报错</p>
+</blockquote>
+<h5 id="propertyfgetnonefsetnonefdelnonedocnone通过属性来设置属性">property(fget=none,fset=none,fdel=none,doc=none)通过属性来设置属性</h5>
+<blockquote>
+<p>1.第一个参数：获取属性的方法<br>
+1.第二个参数：设置属性的方法<br>
+1.第三个参数：删除属性的方法</p>
+</blockquote>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#python-idle">python - IDLE</a><br>
+*
+<ul>
+<li><a href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0">内置函数</a><br>
+*
+<ul>
+<li><a href="#dir-_-_-builtins_-_-%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0">dir( _ _ builtins_ _) 获取所有内置函数</a></li>
+<li><a href="#import-random-as-r-%E9%9A%8F%E6%9C%BA%E5%87%BD%E6%95%B0">import random as r 随机函数</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%88%A4%E6%96%AD">数据类型的判断</a></li>
+<li><a href="#%E5%B8%83%E5%B0%94%E5%80%BC">布尔值</a></li>
+<li><a href="#%E7%A9%BA%E5%80%BC">空值</a></li>
+<li><a href="#%E5%B8%B8%E9%87%8F">常量</a></li>
+<li><a href="#%E9%99%A4%E6%B3%95">除法</a></li>
+<li><a href="#%E6%95%B0%E5%80%BC%E5%92%8C%E5%AD%97%E7%AC%A6%E8%BD%AC%E6%8D%A2">数值和字符转换</a>
+<ul>
+<li><a href="#int-%E5%8F%96%E6%95%B4%E6%95%B0-%E5%8F%AF%E4%BB%A5%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97">int()  取整数  可以将字符串转换为数字</a></li>
+<li><a href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BD%AC%E6%8D%A2">浮点数转换</a></li>
+<li><a href="#%E6%95%B0%E5%AD%97%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2">数字转字符串</a></li>
+<li><a href="#%E8%BF%90%E7%AE%97%E7%AC%A6">运算符</a></li>
+<li><a href="#%E6%96%AD%E8%A8%80assert">断言assert</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2">字符串</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95">字符串方法</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96">字符串格式化</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E7%BB%84-%E5%88%97%E8%A1%A8">数组 &gt;&gt;&gt; 列表</a>
+<ul>
+<li><a href="#%E5%85%83%E7%B4%A0%E6%B7%BB%E5%8A%A0">元素添加</a>
+<ul>
+<li><a href="#%E5%90%91%E5%88%97%E8%A1%A8%E5%B0%BE%E9%83%A8%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0-append-%E5%92%8C-extend">向列表<code>尾部</code>添加元素 append 和 extend</a></li>
+<li><a href="#%E5%9C%A8%E5%88%97%E8%A1%A8%E4%BB%BB%E6%84%8F%E4%BD%8D%E7%BD%AE%E8%BF%BD%E5%8A%A0-%E5%85%83%E7%B4%A0">在列表<code>任意位置</code>追加 元素</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%83%E7%B4%A0%E5%88%A0%E9%99%A4">元素删除</a>
+<ul>
+<li><a href="#remove">remove()</a></li>
+<li><a href="#del">del()</a></li>
+<li><a href="#pop">pop()</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%97%E8%A1%A8%E5%88%86%E7%89%87">列表分片</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C%E7%AC%A6">列表操作符</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95">列表内置方法</a>
+<ul>
+<li><a href="#1-count-%E8%AE%A1%E7%AE%97%E5%AE%83%E7%9A%84%E5%8F%82%E6%95%B0%E5%9C%A8%E5%88%97%E8%A1%A8%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%80%BB%E6%AC%A1%E6%95%B0">1. count 计算它的参数在列表中出现的总次数</a></li>
+<li><a href="#2index%E5%8F%82%E6%95%B01%E5%8F%82%E6%95%B02%E5%8F%82%E6%95%B03-%E8%BF%94%E5%9B%9E%E5%8F%82%E6%95%B01%E5%9C%A8%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E4%BD%8D%E7%BD%AE">2.index(参数1，参数2，参数3)  返回参数1在列表中的下标位置</a></li>
+<li><a href="#3reverse-%E5%92%8C-reversed-%E7%BF%BB%E8%BD%AC%E6%95%B4%E4%B8%AA%E5%88%97%E8%A1%A8">3.reverse() 和  reversed 翻转整个列表</a></li>
+<li><a href="#5-max-%E7%94%A8%E4%BA%8E%E8%BF%94%E5%9B%9E%E5%85%83%E7%BB%84%E5%92%8C%E5%88%97%E8%A1%A8%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E5%AF%B9%E8%B1%A1">5.  max() 用于返回元组和列表中最大的对象</a></li>
+<li><a href="#6-min-%E8%BF%94%E5%9B%9E%E5%85%83%E7%BB%84%E5%92%8C%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC">6. min() 返回元组和列表中的最小值</a></li>
+<li><a href="#7enumerate%E5%AF%B9%E8%B1%A1-%E6%9E%9A%E4%B8%BE-%E8%BF%94%E5%9B%9E%E6%AF%8F%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B8%BA-index%E5%AF%B9%E8%B1%A1-%E7%9A%84%E5%85%83%E7%BB%84">7.enumerate(对象) 枚举 — 返回每个对象为 index+对象 的元组</a></li>
+<li><a href="#8zip-%E8%BF%94%E5%9B%9E%E7%94%B1%E5%90%84%E4%B8%AA-%E5%8F%82%E6%95%B0-%E7%9A%84%E5%BA%8F%E5%88%97-%E7%BB%84%E6%88%90%E7%9A%84%E5%85%83%E7%BB%84">8.zip 返回由各个 参数 的序列 组成的元组</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%83%E7%BB%84">元组</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BE%AA%E7%8E%AF%E4%BD%93">循环体</a><br>
+*
+<ul>
+<li><a href="#for%E5%BE%AA%E7%8E%AF">for循环</a></li>
+<li><a href="#range">range()</a></li>
+<li><a href="#break%E7%BB%88%E6%AD%A2%E7%A8%8B%E5%BA%8F%E8%B7%B3%E5%87%BA%E6%95%B4%E4%B8%AA%E5%BE%AA%E7%8E%AF%E9%80%80%E5%87%BA">break（终止程序，跳出整个循环，退出）</a></li>
+<li><a href="#continue-%E8%B7%B3%E8%BF%87%E5%BD%93%E5%89%8D%E4%B8%8B%E9%9D%A2%E4%BB%A3%E7%A0%81%E9%83%BD%E4%B8%8D%E6%89%A7%E8%A1%8C%E6%89%A7%E8%A1%8C%E4%B8%8B%E4%B8%80%E6%AC%A1%E5%BE%AA%E7%8E%AF">continue （跳过当前，下面代码都不执行，执行下一次循环）</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%97%E5%85%B8dict">字典dict</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA">创建</a>
+<ul>
+<li><a href="#pop-%E5%88%A0%E9%99%A4-popitem%E5%88%A0%E9%99%A4-setdefault-%E6%B7%BB%E5%8A%A0-update%E7%BB%84%E5%90%88">pop 删除 ，popitem删除   ，setdefault 添加 ，update组合</a></li>
+<li><a href="#%E6%B8%85%E7%A9%BA%E4%B8%80%E4%B8%AA%E5%AD%97%E5%85%B8clear">清空一个字典clear()</a></li>
+<li><a href="#%E6%B5%85%E6%8B%B7%E8%B4%9D-copy">浅拷贝 copy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%9B%86%E5%90%88-%E6%97%A0%E5%BA%8F%E4%B8%8D%E6%94%AF%E6%8C%81%E7%B4%A2%E5%BC%95">集合-无序，不支持索引</a><br>
+*
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA-2">创建：</a></li>
+<li><a href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7%E5%89%94%E9%99%A4%E7%9B%B8%E5%90%8C%E7%9A%84%E5%AF%B9%E8%B1%A1">集合的唯一性，剔除相同的对象</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0-add">添加 add</a></li>
+<li><a href="#%E7%A7%BB%E9%99%A4-remove">移除 remove</a></li>
+<li><a href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E9%9B%86%E5%90%88-frozenset">不可变集合 frozenset</a></li>
+</ul>
+</li>
+<li><a href="#pickle">pickle</a>
+<ul>
+<li><a href="#%E5%86%99%E5%85%A5-pickledump%E5%86%99%E5%85%A5%E7%9A%84%E6%96%87%E4%BB%B6%E8%A2%AB%E5%86%99%E5%85%A5%E7%9A%84%E6%96%87%E4%BB%B6">写入  pickle.dump(写入的文件，被写入的文件)</a></li>
+<li><a href="#%E8%AF%BB%E5%8F%96-pickleload">读取  pickle.load</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%84%E7%90%86%E9%94%99%E8%AF%AF">处理错误</a><br>
+*
+<ul>
+<li><a href="#try-%E5%8F%AF%E5%90%8E%E6%8E%A5else">try 可后接else</a></li>
+<li><a href="#finally%E5%96%84%E5%90%8E%E4%BB%A3%E7%A0%81try%E8%B7%B3%E5%87%BA%E5%90%8E%E6%AD%A4%E5%A4%84%E6%89%A7%E8%A1%8C%E6%AF%94%E5%A6%82%E5%85%B3%E9%97%AD%E6%96%87%E6%A1%A3%E4%B9%8B%E7%B1%BB">finally善后代码，try跳出后，此处执行，比如关闭文档之类</a></li>
+<li><a href="#with%E8%AF%AD%E5%8F%A5">with语句</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AF%B9%E8%B1%A1-%E5%B1%9E%E6%80%A7%E6%96%B9%E6%B3%95">对象-属性+方法</a><br>
+*
+<ul>
+<li><a href="#%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA">对象创建</a></li>
+<li><a href="#_-_-init-_-_%E5%87%BD%E6%95%B0">_ _ init _ _函数</a></li>
+<li><a href="#%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF">对象继承</a></li>
+<li><a href="#%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1bif">类和对象BIF</a>
+<ul>
+<li><a href="#issubclassclassclassinfo-%E6%A3%80%E6%9F%A5%E5%AD%90%E7%B1%BB%E7%88%B6%E7%BA%A7%E5%85%B3%E7%B3%BB">issubclass(class,classinfo) 检查子类父级关系</a></li>
+<li><a href="#isinstanceobjectclassinfo%E6%A3%80%E6%9F%A5%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%B1%9E%E4%BA%8E%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0">isinstance(object,classinfo)检查实例化对象是否属于第二个参数</a></li>
+<li><a href="#hasattr%E5%AF%B9%E8%B1%A1name%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E6%9C%89%E5%88%B6%E5%AE%9A%E7%9A%84%E5%B1%9E%E6%80%A7">hasattr(对象，'name')测试一个对象是否有制定的属性</a></li>
+<li><a href="#getattrobjnamedefault-%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E6%8C%87%E5%AE%9A%E7%9A%84%E5%B1%9E%E6%80%A7%E5%80%BC">getattr(obj,'name'[,default]) 返回对象指定的属性值</a></li>
+<li><a href="#setattrobjnamevalue-%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E6%8C%87%E5%AE%9A%E7%9A%84%E5%B1%9E%E6%80%A7%E5%80%BC">setattr(obj,'name',value) 返回对象指定的属性值</a></li>
+<li><a href="#delattrobjname-%E5%88%A0%E9%99%A4%E5%AF%B9%E8%B1%A1%E4%B8%AD%E6%8C%87%E5%AE%9A%E7%9A%84%E5%B1%9E%E6%80%A7">delattr(obj,'name') 删除对象中指定的属性</a></li>
+<li><a href="#propertyfgetnonefsetnonefdelnonedocnone%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E6%9D%A5%E8%AE%BE%E7%BD%AE%E5%B1%9E%E6%80%A7">property(fget=none,fset=none,fdel=none,doc=none)通过属性来设置属性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

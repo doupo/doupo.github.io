@@ -1,0 +1,3039 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://doupo.github.io</id>
+    <title>豆</title>
+    <updated>2021-02-27T13:58:15.573Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://doupo.github.io"/>
+    <link rel="self" href="https://doupo.github.io/atom.xml"/>
+    <subtitle>For what it is worth ,it is never too late.</subtitle>
+    <logo>https://doupo.github.io/images/avatar.png</logo>
+    <icon>https://doupo.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2021, 豆</rights>
+    <entry>
+        <title type="html"><![CDATA[vue项目配置使用svg]]></title>
+        <id>https://doupo.github.io/post/vue-xiang-mu-pei-zhi-shi-yong-svg/</id>
+        <link href="https://doupo.github.io/post/vue-xiang-mu-pei-zhi-shi-yong-svg/">
+        </link>
+        <updated>2021-02-26T01:28:12.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="svg-优势">svg 优势</h3>
+<ul>
+<li>体积小</li>
+<li>矢量图形,不受像素影响</li>
+<li>方便的修改大小颜色</li>
+</ul>
+<p><a href="https://www.iconfont.cn/">iconfont</a></p>
+<h3 id="在vue项目中使用">在vue项目中使用</h3>
+<h4 id="安装依赖">安装依赖</h4>
+<p><code>npm i svg-sprite-loader -D</code></p>
+<p>配置vue.config.js</p>
+<pre><code>module.exports = {
+    ...,
+    chainWebpack(config) {
+        ...,
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/icons'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
+    }
+}
+</code></pre>
+<h4 id="建立文件">建立文件</h4>
+<p>在src目录下创建<strong>icons/</strong><br>
+<img src="https://doupo.github.io/post-images/1614304247291.png" alt="" loading="lazy"></p>
+<ul>
+<li>svg文件存放在svg文件夹</li>
+</ul>
+<p>index.js</p>
+<pre><code>import Vue from 'vue'
+import SvgIcon from '@/components/SvgIcon'// svg component
+
+Vue.component('svg-icon', SvgIcon)
+
+const req = require.context('./svg', false, /\.svg$/)
+const requireAll = requireContext =&gt; requireContext.keys().map(requireContext)
+requireAll(req)
+</code></pre>
+<h3 id="创建svgicon组件">创建SvgIcon组件</h3>
+<p>在components目录下创建<strong>SvgIcon/index.vue</strong></p>
+<pre><code>&lt;template&gt;
+  &lt;div v-if=&quot;isExternal&quot; :style=&quot;styleExternalIcon&quot; class=&quot;svg-external-icon svg-icon&quot; v-on=&quot;$listeners&quot; /&gt;
+  &lt;svg v-else :class=&quot;svgClass&quot; aria-hidden=&quot;true&quot; v-on=&quot;$listeners&quot;&gt;
+    &lt;use :xlink:href=&quot;iconName&quot; /&gt;
+  &lt;/svg&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: 'SvgIcon',
+  props: {
+    iconClass: {
+      type: String,
+      required: true
+    },
+    className: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    iconName() {
+      return `#icon-${this.iconClass}`
+    },
+    svgClass() {
+      if (this.className) {
+        return 'svg-icon ' + this.className
+      } else {
+        return 'svg-icon'
+      }
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+&lt;/style&gt;
+
+</code></pre>
+<h3 id="使用">使用</h3>
+<p>首先在main.js引入 <code>import './icons'</code><br>
+在页面中使用<br>
+<code>&lt;svg-icon class-name=&quot;search-icon&quot; icon-class=&quot;search&quot; @click.stop=&quot;click&quot; /&gt;</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[计算机网络-更新中]]></title>
+        <id>https://doupo.github.io/post/ji-suan-ji-wang-luo/</id>
+        <link href="https://doupo.github.io/post/ji-suan-ji-wang-luo/">
+        </link>
+        <updated>2021-02-25T08:10:24.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="下方链接访问">下方链接访问</h3>
+<blockquote>
+<p>受限于篇幅，该系列使用gitbook构建发布</p>
+</blockquote>
+<p><a href="https://tudou-website-1256033844.cos-website.ap-shanghai.myqcloud.com/net/">更新-点击访问</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[npm模块安装机制]]></title>
+        <id>https://doupo.github.io/post/npm-mo-kuai-an-zhuang-ji-zhi/</id>
+        <link href="https://doupo.github.io/post/npm-mo-kuai-an-zhuang-ji-zhi/">
+        </link>
+        <updated>2021-02-25T07:36:51.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="nmp-i-执行">nmp i 执行</h3>
+<p>npm install 执行之后，会检查项目中是否有 package-lock.json 文件。</p>
+<p>如果有，使用 package-lock.json 中的信息，从缓存或网络资源中加载依赖；<br>
+如果没有，</p>
+<p>如果声明的包依赖版本规范不一致，按照 npm 版本进行处理（不同 npm 版本处理会有不同）。</p>
+<p>如果没有，则根据 package.json 递归构建依赖树。然后按照构建好的依赖树下载完整的依赖资源，最后生成 package-lock.json</p>
+<h3 id="npm-缓存机制">npm 缓存机制</h3>
+<p>安装之前，会检查是否存在相关资源缓存：</p>
+<p>存在，则将缓存内容解压到 node_modules 中；</p>
+<p>否则就先从 npm 远程仓库下载包，校验包的完整性，并添加到缓存，同时解压到 node_modules。</p>
+<p><code>npm config get cache</code></p>
+<p>可以查看缓存的目录</p>
+<h3 id="npm-install-s-d-g">npm install -S -D -g</h3>
+<p>-D 写入dependencies<br>
+-S 写入devDependencies</p>
+<blockquote>
+<p>需要特别说明的是：并不是只有在 dependencies 中的模块才会打包，而devDependencies 中的依赖不会被打包。实际上，是否被打包，完全取决于项目里是否被引入了该模块。dependencies 和 devDependencies 在业务中更多的只是一个规范作用</p>
+</blockquote>
+<p>-g  全局安装</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HTML DOM （文档对象模型）]]></title>
+        <id>https://doupo.github.io/post/html-dom-wen-dang-dui-xiang-mo-xing/</id>
+        <link href="https://doupo.github.io/post/html-dom-wen-dang-dui-xiang-mo-xing/">
+        </link>
+        <updated>2021-02-23T01:55:09.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="1获取节点">1.获取节点</h3>
+<h4 id="document">document</h4>
+<blockquote>
+<ul>
+<li>getElementById('ID')</li>
+<li>getElementsByName(name)   **注：**通过元素name属性获取节点    **返回值：**数组</li>
+<li>getElementsByTagName(&quot;元素标签&quot;);     **注：**IE9以下 不支持   **返回值：**数组</li>
+</ul>
+</blockquote>
+<h4 id="节点">节点</h4>
+<p><strong>节点可以分为元素节点，属性节点和文本节点</strong><br>
+<strong>如果获取的节点为元素节点：可使用<code>innerHTML</code>，如果是文本节点可使用<code>nodeValue</code></strong><br>
+| 节点类型|    nodeName <strong>只读</strong>| nodeType <strong>只读</strong>|nodeValue <strong>可读写</strong>|<br>
+| :-------- | :--------😐 :--: |<br>
+|元素|  元素节点|  1   |null|<br>
+| 属性|属性节点  |  2  |属性值  |<br>
+| 文本|<strong>#Text</strong>|  3   |文本内容（不包含html标签）  |</p>
+<h5 id="childnodes">childNodes</h5>
+<blockquote>
+<p>childNodes 获取当前元素的所有子节点  <strong>返回值为一个数组</strong> <strong>注：这些字节点包括元素字节点和文本子节点</strong></p>
+<ul>
+<li>a：文本子节点无法使用innerHTML这个属性，可以使用nodeValue进行赋值</li>
+<li>b： <strong>IE9以下不包含空节点</strong></li>
+<li>c：非W3C标准的children属性 <strong>只有效子节点，即忽略空文本节点</strong></li>
+</ul>
+</blockquote>
+<pre><code>    &lt;div id=&quot;a&quot;&gt;
+        &lt;p&gt;1&lt;/p&gt;
+        &lt;p&gt;2&lt;/p&gt;
+        &lt;p&gt;3&lt;/p&gt;
+    &lt;/div&gt;
+</code></pre>
+<pre><code class="language-javascript">    &lt;script&gt;
+        var oa = document.getElementById('a');
+       var op=oa.childNodes;
+
+       op[0].nodeValue='nodeValue测试'  //第一位为空文本节点
+       op[1].innerHTML='元素节点测试'  //第二位为空文本节点
+
+       alert(op.length)  //7  3个p元素节点，4个空的文本节点
+
+    &lt;/script&gt;
+</code></pre>
+<h5 id="childnodes移除空白文本节点">childNodes移除空白文本节点</h5>
+<pre><code>        var oa = document.getElementById('a');
+        var op2=oa.childNodes;
+        alert(op2.length) //7 包含空文本节点
+        
+       var op=removeSpace(oa.childNodes);
+       alert(op.length) //3 移除了空的文本节点
+</code></pre>
+<pre><code class="language-javascript">function removeSpace(node) {  
+       for(var i=0;i&lt;node.length;i++){  
+      if(node[i].nodeType===3&amp;&amp;/^\s+$/.test(node[i].nodeValue)){  
+          node[i].parentNode.removeChild(node[i]);  
+      }   
+       }  
+       return node;  
+    }
+</code></pre>
+<p>=================</p>
+<h5 id="firstchild方法和lastchild方法">firstChild()方法和lastChild()方法</h5>
+<blockquote>
+<ul>
+<li><code>firstChild()</code>方法用于获取当前元素节点的第一个字节点对象，相当于<code>childNodes[0]</code></li>
+<li><code>lastChild()</code>方法用于获取当前元素节点的最后一个字节点对象，相当于<code>childNodes[childNodes.length-1]</code></li>
+</ul>
+</blockquote>
+<h5 id="1-parentnode-返回父节点-2previoussibling前一个同级节点-3nextsibling后一个同级节点">1. <code>parentNode</code> 返回父节点  2.<code>previousSibling</code>前一个同级节点 3.<code>nextSibling</code>后一个同级节点</h5>
+<pre><code class="language-javascript">	   var oa = document.getElementById('a');
+       var op=oa.childNodes;
+
+       alert(oa.parentNode.nodeName)  //返回值body
+       alert(oa.previousSibling.nodeName)  //#Text   一个空文本节点
+       alert(oa.nextSibling.nodeName)  //#Text   一个空文本节点
+</code></pre>
+<h5 id="firstchild等方法移除-空文本节点">firstChild()等方法移除 空文本节点</h5>
+<pre><code>    &lt;div id=&quot;a&quot;&gt;
+        &lt;p&gt;1&lt;/p&gt;
+        &lt;p&gt;2&lt;/p&gt;
+        &lt;p&gt;3&lt;/p&gt;
+    &lt;/div&gt;
+</code></pre>
+<pre><code class="language-javascript">	   var oa = document.getElementById('a');
+       alert(oa.firstChild.nodeName)  //#text
+       alert(removeSpace2(oa).firstChild.nodeName)  //p节点
+       
+    function removeSpace2(node) {  
+         for(var i=0;i&lt;node.childNodes.length;i++){  
+            if(node.childNodes[i].nodeType===3&amp;&amp;/^\s+$/.test(node.childNodes[i].nodeValue)){  
+                 node.childNodes[i].parentNode.removeChild(node.childNodes[i]);  
+            }   
+          }  
+     return node;  
+}
+</code></pre>
+<h3 id="创建插入删除替换和复制节点">创建，插入，删除，替换和复制节点</h3>
+<h5 id="创建一个元素插入文档">创建一个元素插入文档</h5>
+<blockquote>
+<ul>
+<li>createElement()创建</li>
+<li>appendChild()方法可以将一个新创建的元素节点添加到某个节点的子节点的列表的末尾上</li>
+<li>createTextNode()方法可以创建一个包含着指定文本的新文本节点 , nodeType属性值将为3</li>
+</ul>
+</blockquote>
+<pre><code>&lt;body&gt;
+    &lt;div id=&quot;a&quot;&gt;
+        &lt;p&gt;1&lt;/p&gt;
+        &lt;p&gt;2&lt;/p&gt;
+        &lt;p&gt;3&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+    var oa = document.getElementById('a');
+
+    //新创建一个li元素节点，添加到指定元素节点的子节点  
+    var liNode=document.createElement(&quot;p&quot;);  
+    //创建一个有指定文本的文本节点  
+    var textNode=document.createTextNode(&quot;4&quot;);  
+    //添加到新建li元素节点的子节点(文本节点)中  
+    liNode.appendChild(textNode);  
+     
+    //添加到指定元素节点的末尾  
+    oa.appendChild(liNode); 
+
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<p><strong>运行结果</strong><br>
+<img src="./QQ%E6%88%AA%E5%9B%BE20160822173140.jpg" alt="Alt text" loading="lazy"></p>
+<h5 id="insertbefore方法">insertBefore()方法</h5>
+<blockquote>
+<p>共同的父级.insertBefore(要添加的新节点,已知节点)</p>
+</blockquote>
+<h5 id="replacechild-替换">replaceChild() 替换</h5>
+<blockquote>
+<p>父级.replaceChild(新节点，被替换节点)</p>
+</blockquote>
+<pre><code>&lt;script&gt;
+window.onload = function() {
+	
+	var oDiv = document.getElementById('div1');
+	var oBtn = document.getElementById('btn');
+	var oP = document.getElementById('p1');
+	
+	oBtn.onclick = function() {
+		
+		document.body.replaceChild( oDiv, oP );
+		//用div1替换了p
+	
+	}
+	
+}
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;div id=&quot;div1&quot;&gt;div1&lt;/div&gt;
+    &lt;input type=&quot;button&quot; value=&quot;按钮&quot; id=&quot;btn&quot; /&gt;
+    &lt;hr /&gt;
+    &lt;p id=&quot;p1&quot;&gt;ppppp&lt;/p&gt;
+&lt;/body&gt;
+</code></pre>
+<p><strong>效果</strong><br>
+<img src="./QQ%E6%88%AA%E5%9B%BE20160822201306.png" alt="Alt text" loading="lazy"></p>
+<h5 id="clonenode-复制元素节点">cloneNode() 复制元素节点</h5>
+<blockquote>
+<p>语法 var 新存储的变量 = 需要复制的节点 <strong>cloneNode()</strong></p>
+<ul>
+<li>参数可选。默认是 <strong>false</strong>。<br>
+设置为 <strong>true</strong>，如果您需要克隆节点及其属性，以及后代<br>
+设置为 <strong>false</strong>，如果您只需要克隆节点及其后代</li>
+</ul>
+</blockquote>
+<h5 id="removechild-删除元素节点">removeChild() 删除元素节点</h5>
+<blockquote>
+<p>语法需要删除的元素的父节点（parentNode）. removeChild(需要删除的元素);</p>
+</blockquote>
+<h3 id="获取非行间样式">获取非行间样式</h3>
+<p>**特别注意一点：如果要获取当前对象的颜色信息，IE返回的是16进制的'#ffffff'，而FF返回的是rgb(255,255,255) **</p>
+<h5 id="参考文章链接"><a href="http://www.jb51.net/article/34863.htm">参考文章链接</a></h5>
+<h5 id="参考文档"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/currentStyle">参考文档</a></h5>
+<pre><code class="language-javascript">function getStyle(obj,attr){
+		if(obj.currentStyle){
+			//兼容IE
+			return obj.currentStyle[attr];
+		}
+		else{
+			return getComputedStyle(obj,false)[attr];
+		}
+	}
+//参数obj为需要获取样式的对象，attr为需要获取的属性
+
+//示例：
+//假设这个div有一个left为250px的样式
+var aDiv = document.getElementsByTagName('div');
+console.log(getStyle(aDiv[1],'left')) //返回250px
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Js中this,call,apply,bind]]></title>
+        <id>https://doupo.github.io/post/js-zhong-thiscallapplybind/</id>
+        <link href="https://doupo.github.io/post/js-zhong-thiscallapplybind/">
+        </link>
+        <updated>2021-02-23T01:54:41.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="this">this</h4>
+<p><strong>this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象</strong><br>
+<strong>window是js中的全局对象，我们创建的变量实际上是给window添加属性</strong></p>
+<h5 id="例1">例1：</h5>
+<pre><code class="language-javascript">function athis(){
+  console.log(this);
+}
+athis(); //window
+
+//如果是点击执行：
+var oa1=document.getElementById('a1'); 
+oa1.onclick=athis; //指向id为a1的元素 object HTMLDivElement
+</code></pre>
+<h5 id="例2">例2：</h5>
+<pre><code class="language-javascript">	var user='hhh';
+var o = {
+    user:&quot;追梦子&quot;,
+    fn:function(){
+        console.log(this.user)  //追梦子
+        return function(){
+          console.log(this.user)  //指向window =&gt; hhh
+        }
+    }
+}
+console.log(o.fn()());
+
+if =&gt; console.log(o.fn())
+返回： //追梦子 和 function(){console.log(this.user)
+</code></pre>
+<blockquote>
+<p><code>o.fn()</code>返回<code>追梦子 和 function(){console.log(this.user)</code>;<br>
+如果执行<code>o.fn()()</code>；则返回的函数是由<code>window</code>调用；<br>
+返回全局变量<code>var user='hhh';</code></p>
+</blockquote>
+<h4 id="注意3点">注意3点</h4>
+<h5 id="情况1">情况1：</h5>
+<p>如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window</p>
+<h5 id="情况2">情况2：</h5>
+<p>如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。</p>
+<h5 id="情况3">情况3：</h5>
+<p>如果一个函数中有this，这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象</p>
+<h5 id="例3">例3：</h5>
+<pre><code class="language-javascript">var o = {
+    a:10,
+    b:{
+        a:12,  //如果这里没有给a定义值，则返回undefined
+        fn:function(){
+            console.log(this.a); //12
+        }
+    }
+}
+o.b.fn();
+
+var o = {
+    a:10,
+    b:{
+        //a:12,
+        fn:function(){
+            console.log(this.a); //undefined
+        }
+    }
+}
+o.b.fn();
+</code></pre>
+<h5 id="例4">例4：</h5>
+<pre><code class="language-javascript">var x = 20;
+    var a = {
+        x: 15,
+        fn: function () {
+            var x = 30;
+            return function () {
+                return this.x;
+            };
+        }
+    };
+
+    console.log(a.fn());  //function(){return this.x;}
+    console.log((a.fn())()); //20
+    console.log(a.fn()());  //20
+    console.log(a.fn()() == (a.fn())()); //true
+    console.log(a.fn().call(this));  //20
+    console.log(a.fn().call(a));   //15
+	
+	return后的函数指向window
+	最后一个把this指向了a对象，所以输出的是a.x就为15
+</code></pre>
+<h5 id="例5">例5：</h5>
+<pre><code class="language-javascript">  var o = {
+    e:10,
+    b:{
+        e:12,
+        fn:function(){
+            console.log(this.e); //undefined
+            console.log(this); //window
+        }
+    }
+}
+var j = o.b.fn;
+j();
+</code></pre>
+<blockquote>
+<p>this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁。<br>
+例子5中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window，这&gt;和例子3是不一样的，例子3是直接执行了fn</p>
+</blockquote>
+<h4 id="构造函数版this">构造函数版this</h4>
+<h5 id="例1-2">例1</h5>
+<pre><code class="language-javascript">function Fn(){
+    this.user = &quot;222&quot;;
+}
+var a = new Fn();
+console.log(a.user); //222
+</code></pre>
+<p>#####<a href="http://www.cnblogs.com/pssp/p/5216085.html">分析</a></p>
+<blockquote>
+<p>这里之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将这个this指向对象a，为什么我说a是对象，因为用了new关键字就是创建一个对象实例，理解这句话可以想想我们的例子3，我们这里用变量a创建了一个Fn的实例（相当于复制了一份Fn到对象a里面），此时仅仅只是创建，并没有执行，而调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象Fn中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份。</p>
+</blockquote>
+<h5 id="当this碰到return">当this碰到return</h5>
+<p><strong>如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例</strong><br>
+注：虽然null也是对象，this还是指向那个函数的实例，因为null比较特殊</p>
+<pre><code class="language-javascript">//1空对象
+function fn()  
+{  
+    this.user = '追梦子';  
+    return {};  
+}
+var a = new fn;  
+console.log(a.user); //undefined
+
+//2.返回对象
+function fn()  
+{  
+    this.user = '追梦子';  
+    return {user:'111'};  
+}
+var a = new fn;  
+console.log(a.user); //111
+
+//3.undefined和字母数字之类
+function fn()  
+{  
+    this.user = '222';  
+    return undefined;
+}
+var a = new fn;  
+console.log(a.user); //222
+</code></pre>
+<h4 id="call">call</h4>
+<p><strong>如果<code>call</code>和<code>apply</code>的第一个参数写的是<code>null</code>，那么<code>this</code>指向的是<code>window</code>对象</strong></p>
+<blockquote>
+<p>1.替换函数运行环境中的this<br>
+2.传递参数<br>
+3.运行函数</p>
+</blockquote>
+<pre><code class="language-javascript">var a = {
+    user:&quot;call&quot;,
+    fn:function(e,ee){
+        console.log(this.user); //call
+        console.log(e+ee); //3
+    }
+}
+var b = a.fn;
+b.call(a,1,2);
+
+//call方法将原本指向window的this指向了a；
+
+var a = {
+    user:&quot;call&quot;,
+    fn:function(e,ee){
+        console.log(this.user); //undefined
+        console.log(e+ee); //3
+    }
+}
+var b = a.fn;
+b(1,2);
+//没有使用call，window下没有user返回undefined
+</code></pre>
+<h4 id="apply">apply</h4>
+<blockquote>
+<p>方法使用和call一样，需要注意的是第二个参数为数组</p>
+</blockquote>
+<pre><code class="language-javascript">var a = {
+    user:&quot;apply&quot;,
+    fn:function(e,ee){
+        console.log(this.user); //apply
+        console.log(e+ee); //6a
+    }
+}
+var b = a.fn;
+b.apply(a,[6,'a']);
+</code></pre>
+<h4 id="bind">bind</h4>
+<p><strong>返回的是一个修改过后的函数</strong></p>
+<h5 id="例1-3">例1</h5>
+<pre><code class="language-javascript">var a = {
+    user:&quot;bind&quot;,
+    fn:function(){
+        console.log(this.user); 
+    }
+}
+var b = a.fn;
+var c = b.bind(a);
+console.log(c)  //function (){console.log(this.user);}
+c(); //bind
+</code></pre>
+<h5 id="例2-2">例2</h5>
+<pre><code class="language-javascript">var a = {
+    user:&quot;bind&quot;,
+    fn:function(e,d,f){
+        console.log(this.user); //bind
+        console.log(e,d,f); //10 1 2
+    }
+}
+var b = a.fn;
+var c = b.bind(a,6,7,8);
+c();
+
+// var c = b.bind(a,10,4);
+// c(2);
+
+//var c = b.bind(a);
+//c(2,3,4);
+
+//var c = b.bind(a,22);  
+//优先级高,参数超出取前，参数不够undefined
+//c(2,3,4,5); //22,2,3
+
+console.log(c);  //function (e,d,f){ console.log(this.user);  console.log(e,d,f); }
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[node学习]]></title>
+        <id>https://doupo.github.io/post/node-xue-xi/</id>
+        <link href="https://doupo.github.io/post/node-xue-xi/">
+        </link>
+        <updated>2021-02-23T01:51:47.000Z</updated>
+        <content type="html"><![CDATA[<p>@(js学习笔记)</p>
+<h2 id="node学习1">node学习（1）</h2>
+<p>[toc]</p>
+<h3 id="nodejs简介">Node.js简介</h3>
+<p><a href="http://nodejs.cn/">中文官网</a></p>
+<h4 id="简介">简介</h4>
+<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境;<br>
+V8引擎本身就是用于Chrome浏览器的JS解释部分</p>
+<h4 id="特点">特点</h4>
+<p><strong><code>单线程</code></strong><br>
+在Java、PHP或者.net等服务器端语言中，会为每一个客户端连接创建一个新的线程。<br>
+Node.js不为每个客户连接创建一个新的线程，而仅仅使用一个线程。</p>
+<p><strong><code>非阻塞I/O</code></strong><br>
+Node.js中采用了非阻塞型I/O机制，在执行了访问数据库的代码之后，将立即转而执行其后面的代码，把数据库返回结果的处理代码放在回调函数中，从而提高了程序的执行效率。</p>
+<p><strong><code>事件驱动</code></strong><br>
+在Node中，客户端请求建立连接，提交数据等行为，会触发相应的事件。在Node中，在一个时刻，只能执行一个事件回调函数，但是在执行一个事件回调函数的中途，可以转而处理其他事件，然后返回继续执行原事件的回调函数，这种处理机制，称为“事件环”机制</p>
+<p><strong><code>模块</code></strong><br>
+Node.js中，将很多的功能，划分为了一个个mudule，使用 require 指令来载入模块</p>
+<h4 id="开始">开始</h4>
+<h5 id="hello-world">Hello World</h5>
+<p>创建HelloWorld.js文件</p>
+<blockquote>
+<p>使用 http.createServer() 方法创建服务器，并使用 listen 方法绑定 8080 端口。 函数通过 request, response 参数来接收和响应数据</p>
+</blockquote>
+<pre><code class="language-javascript">//载入 http 模块，赋值给变量 http
+var http = require(&quot;http&quot;);
+//创建服务器，参数是一个回调函数，表示如果有请求进来，要做什么
+var server = http.createServer(function(request,response){
+	//设置HTTP头部，状态码是200，文件类型是html，字符集是utf8
+	response.writeHead(200,{&quot;Content-type&quot;:&quot;text/html;charset=UTF-8&quot;});
+	response.end(&quot;Hello World&quot;);
+});
+
+//运行服务器，监听8080端口
+server.listen(8080,&quot;localhost&quot;);
+</code></pre>
+<p>使用 node 命令执行<br>
+<code>node HelloWorld.js</code></p>
+<p>使用浏览器访问<code>http://localhost:8080/</code><br>
+<img src="https://doupo.coding.me/note_img/node/node_01.png" alt="enter image description here" loading="lazy"></p>
+<h3 id="模块">模块</h3>
+<h4 id="node内置模块">node内置模块</h4>
+<h5 id="requrl">req.url</h5>
+<p>可以用来做判断，处理顶层路由</p>
+<h5 id="url">url</h5>
+<p>可以用来获取地址后查询字符串等<br>
+<code>url.parse()</code>可以将一个完整的URL地址，分为很多部分：host、port、pathname、path、query</p>
+<p><strong>语法：</strong><br>
+<code>url.parse(req.url,true)</code><br>
+获取一个对象</p>
+<h5 id="fs">fs</h5>
+<p>文件系统<br>
+<strong>读取文件</strong></p>
+<pre><code class="language-javascript">fs.readFile(&quot;文件地址&quot;,function(err,data){
+	if(err){
+			throw err;
+		}
+});
+</code></pre>
+<p><strong>创建</strong></p>
+<pre><code class="language-javascript">fs.mkdir(&quot;文件夹名&quot;);
+</code></pre>
+<p><strong>读取路径下所有文件</strong><br>
+<code>readdir</code> 返回数组格式文件信息</p>
+<p><strong>检测</strong><br>
+<code>fs.stat</code>检测状态<br>
+<code>data.isDirectory()</code>检测是否是一个文件夹，返回true和false</p>
+<p>例：</p>
+<pre><code class="language-javascript">fs.stat(&quot;./abc&quot;,function(err,data){
+		//检测这个路径，是不是一个文件夹
+		console.log(data.isDirectory());
+	});
+</code></pre>
+<h5 id="path">path</h5>
+<p>获取文件扩展名</p>
+<pre><code class="language-javascript">	var extname = path.extname(pathname);
+	//假设pathname为index.html
+	//extname='.html'
+</code></pre>
+<h4 id="书写模块">书写模块</h4>
+<p>● 在Node.js中，以模块为单位划分所有功能，并且提供了一个完整的模块加载机制，这时的我们可以将应用程序划分为各个不同的部分。<br>
+不可能用一个js文件去写全部的业务。肯定要有MVC。<br>
+● Node.js中，一个JavaScript文件中定义的变量、函数，都只在这个文件内部有效。当需要从此JS文件外部引用这些变量、函数时，必须使用exports对象进行暴露。使用者要用require()命令引用这个JS文件</p>
+<h5 id="普通对象">普通对象</h5>
+<p><strong>例：</strong><br>
+<strong>模块</strong></p>
+<pre><code class="language-javascript">var a = &quot;hello&quot;;
+exports.a = a;
+</code></pre>
+<p>A这个变量，是一个js文件内部才有作用域的变量。<br>
+如果别人想用这个变量，那么就要用exports进行暴露。</p>
+<p><strong>使用者：</strong></p>
+<pre><code class="language-javascript">var newA = require(&quot;./test/a.js&quot;);
+console.log(newA.a);
+
+//输出  hello
+</code></pre>
+<h5 id="类对象">类对象</h5>
+<blockquote>
+<p>用<code>module.export = 构造函数名;</code>的方式向外暴露一个类</p>
+</blockquote>
+<p><strong>模块</strong></p>
+<pre><code class="language-javascript">function People(name, sex, age) {
+    this.name = name;
+    this.sex = sex;
+    this.age = age;
+}
+
+People.prototype.sayHello = function () {
+    console.log(this.name + this.sex + this.age);
+}
+
+//此时，People就被视为构造函数，可以用new来实例化了。
+module.exports = People;
+</code></pre>
+<p><strong>使用者：</strong></p>
+<pre><code class="language-javascript">var People = require(&quot;./模块.js&quot;);
+var xiaoming = new People(&quot;小明&quot;,&quot;男&quot;,&quot;12&quot;);
+xiaoming.sayHello();
+
+//输出  小明男12
+</code></pre>
+<h5 id="模块规范">模块规范</h5>
+<p>每一个模块文件夹中，推荐都写一个package.json文件，这个文件的名字不能改。node将自动读取里面的配置。有一个main项，就是入口文件：</p>
+<pre><code class="language-javascript">{
+  &quot;name&quot;: &quot;app&quot;,
+  &quot;version&quot;: &quot;1.0.1&quot;,
+  &quot;main&quot; : &quot;app.js&quot;  //定义，可以使用非index的名字
+}
+</code></pre>
+<p>package.json文件，要放在模块文件夹的根目录</p>
+<hr>
+<h4 id="require写法">require写法</h4>
+<h5 id="require模块js">require(&quot;./模块.js&quot;)</h5>
+<p>当前目录寻找文件</p>
+<h5 id="require模块js-2">require(&quot;模块.js&quot;)</h5>
+<p>没有写路径，所以是一个特殊的路径，<br>
+那么Node.js将该文件视为node_modules目录下的一个文件</p>
+<p>**注：**node_modules文件夹并不一定在同级目录里面，在任何直接祖先级目录</p>
+<h5 id="requirea">require(&quot;a&quot;)</h5>
+<p>没有路径，没有<code>.js</code>扩展名。所以读取<code>node_modules</code>下文件夹a里面的<code>index.js</code>文件</p>
+<hr>
+<h4 id="npm使用">NPM使用</h4>
+<p><a href="https://www.npmjs.com">官网</a><br>
+可以下载和上传自己的模块<br>
+我们用package.json来管理依赖</p>
+<blockquote>
+<p>可以使用npm init可以初始化一个package.json文件</p>
+</blockquote>
+<p><a href="https://docs.npmjs.com/files/package.json">package文档</a></p>
+<hr>
+<h3 id="构建本地服务器实例">构建本地服务器实例</h3>
+<pre><code class="language-javascript">var http = require(&quot;http&quot;);
+var url = require(&quot;url&quot;);
+var fs = require(&quot;fs&quot;);
+var path = require(&quot;path&quot;);
+
+http.createServer(function (req, res) {
+	//得到用户的路径
+	var pathname = url.parse(req.url).pathname;
+
+	var	mimeData;
+
+	//默认首页
+	if (pathname == &quot;/&quot;) {
+		pathname = &quot;index.html&quot;;
+	}
+
+	//读数据类型文件
+	(function () {
+		fs.readFile(&quot;./mime.json&quot;, function (err, data) {
+			if (err) {
+				throw err;
+			};
+			res.writeHead(200, { &quot;Content-type&quot;: &quot;application/json&quot; });
+			mimeData = JSON.parse(data);
+		});
+	})();
+
+	//拓展名
+	var extname = path.extname(pathname);
+
+	//读取这个文件
+	fs.readFile(&quot;./test/&quot; + pathname, function (err, data) {
+		if (err) {
+			//如果此文件不存在，就应该用404返回
+			fs.readFile(&quot;./static/404.html&quot;, function (err, data) {
+				res.writeHead(404, { &quot;Content-type&quot;: &quot;text/html;charset=UTF8&quot; });
+				res.end(data);
+			});
+			return;
+		};
+	
+		//MIME类型
+		//网页文件：  text/html
+		//jpg文件 :   image/jpg
+		var mime = getMime(extname,mimeData);
+		res.writeHead(200, { &quot;Content-type&quot;: mime });
+		res.end(data);
+	});
+
+}).listen(8888, &quot;localhost&quot;);
+
+function getMime(extname,mimeData) {
+	if(mimeData[extname]){
+		return mimeData[extname];
+	}
+}
+</code></pre>
+<h3 id="post请求">post请求</h3>
+<p>node为了追求极致，它是一个小段一个小段接收的。<br>
+防止一个过大的表单阻塞了整个进程</p>
+<pre><code class="language-javascript"> var alldata = &quot;&quot;;
+req.addListener(&quot;data&quot;, function (chunk) {
+    alldata += chunk;
+});
+//全部传输完毕
+req.addListener(&quot;end&quot;, function () {
+    console.log(alldata.toString());
+    res.end(&quot;success&quot;);
+});
+</code></pre>
+<p>原生写POST处理，比较复杂，要写两个监听。文件上传业务比较难写。<br>
+所以，用第三方模块。<code>formidable</code>。</p>
+<p>只要涉及文件上传，那么form标签要加一个属性：<br>
+<code>&lt;form action=&quot;&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</code></p>
+<h3 id="express框架">Express框架</h3>
+<h5 id="官网"><a href="http://www.expressjs.com.cn/">官网</a></h5>
+<h4 id="模板引擎">模板引擎</h4>
+<p>ejs和jade</p>
+<h5 id="ejs使用">ejs使用</h5>
+<p><strong>模板部分</strong><br>
+模板默认需要放置在<code>views</code>文件夹；<br>
+如果需要自定义设置文件夹名字，使用<code>app.set(&quot;views&quot;,&quot;aaaa&quot;);</code><br>
+文件名<code>hh.ejs</code><br>
+插入通用模块<code>&lt;% include header.ejs %&gt;</code></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul&gt;
+    &lt;% for (var i = 0;i &lt; news.length;i++){ %&gt;
+    &lt;li&gt;&lt;%= news[i] %&gt;&lt;/li&gt;
+    &lt;% } %&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>js部分</strong></p>
+<pre><code class="language-javascript">var express = require('express');
+var app = express();
+
+app.set('view engine', 'ejs');
+
+app.get('/', function (req, res) {
+    res.render('hh', {
+        news: ['1', '2', '3']
+    })
+}).listen(8080, 'localhost');
+</code></pre>
+<h4 id="路由">路由</h4>
+<h5 id="用get请求访问"><strong>用get请求访问</strong></h5>
+<pre><code>app.get(&quot;/&quot;,function(req,res){
+});
+</code></pre>
+<h5 id="用post访问"><strong>用post访问</strong></h5>
+<pre><code>app.post(&quot;/&quot;,function(req,res){
+});
+</code></pre>
+<h5 id="处理所有请求">处理所有请求</h5>
+<p><strong>如果想处理这个网址的任何method的请求，那么写all</strong></p>
+<pre><code>app.all(&quot;/&quot;,function(){
+});
+</code></pre>
+<h5 id="地址信息">地址信息</h5>
+<p><strong>地址信息不分大小写</strong></p>
+<pre><code>app.get(&quot;/ABc&quot;,function(req,res){
+    res.send(&quot;你好&quot;);
+});
+</code></pre>
+<p>访问 <code>/abc</code>也可以</p>
+<h5 id="get参数"><strong>GET参数</strong></h5>
+<p>● GET请求的参数在URL中，在原生Node中，需要使用<code>url</code>模块来识别参数字符串。在Express中，可以直接使用<code>req.query</code>对象。</p>
+<p>● POST请求在express中不能直接获得，必须使用<code>body-parser</code>模块。使用后，将可以用<code>req.body</code>得到参数。但是如果表单中含有文件上传，那么还是需要使用<code>formidable</code>模块。`</p>
+<pre><code class="language-javascript">var bodyParser = require('body-parser')
+//bodyParser API
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.post(&quot;/&quot;,function(req,res){
+    console.log(req.body);
+});
+</code></pre>
+<h5 id="正则表达式"><strong>正则表达式</strong></h5>
+<p>正则表达式可以被使用。正则表达式中，未知部分用圆括号分组，然后可以用req.params[0]、[1]得到。<br>
+req.params类数组对象。</p>
+<pre><code>app.get(/^\/student\/([\d]{10})$/,function(req,res){
+    res.send(&quot;学生信息，学号&quot; + req.params[0]);
+});
+</code></pre>
+<p><strong>推荐使用冒号写法</strong></p>
+<pre><code>app.get(&quot;/student/:id&quot;,function(req,res){
+    var id = req.params[&quot;id&quot;];
+    var reg= /^[\d]{6}$/;   //正则验证
+    if(reg.test(id)){
+        res.send(id);
+    }else{
+        res.send(&quot;请检查格式&quot;);
+    }
+});
+</code></pre>
+<h5 id="表单可以提交到自己上">表单可以提交到自己上</h5>
+<p>app.get(&quot;/&quot;,function(req,res){<br>
+res.render(&quot;form&quot;);<br>
+});</p>
+<p>app.post(&quot;/&quot;,function(req,res){<br>
+//将数据添加进入数据库<br>
+res.send(&quot;成功&quot;);<br>
+});</p>
+<h4 id="静态文件服务">静态文件服务</h4>
+<p><code>app.use(express.static(&quot;./路径&quot;));</code></p>
+<h4 id="中间件">中间件</h4>
+<p>Express的中间件，用来实现各种功能。对于同一个网络请求，可能同时有多个匹配的中间件，一般顺序执行。而 next() 则是把执行控制权，从上一个中间件，转移到下一个中间件的函数</p>
+<p>下面例子中如果我的的get回调函数中，没有next参数，那么只会匹配上第一个符合条件的路由</p>
+<h5 id="next">next()</h5>
+<pre><code class="language-javascript">如果想往下匹配的话，那么需要写next()
+app.get(&quot;/&quot;,function(req,res,next){
+    console.log(&quot;1&quot;);
+    next();
+    res.send();
+});
+
+app.get(&quot;/&quot;,function(req,res){
+    console.log(&quot;2&quot;);
+    res.send();
+});
+
+//如果没有设置next参数，那么这个文件执行，只只会打印出1
+</code></pre>
+<blockquote>
+<p>express中所有的路由（中间件）的顺序至关重要。<br>
+具体的往上写，抽象的往下写<br>
+中间件讲究顺序，匹配上第一个之后，就不会往后匹配了。next函数才能够继续往后匹配</p>
+</blockquote>
+<h5 id="appuse">app.use()</h5>
+<p>app.use()也是一个中间件。与get、post不同的是，他的网址不是精确匹配的，而是能够有小文件夹拓展的。<br>
+比如访问网址：  <code>http://locakhost:8080/admin/id/123</code></p>
+<pre><code class="language-javascript">app.use(&quot;/admin&quot;,function(req,res){ 
+    res.write(req.originalUrl + &quot;\n&quot;);   //原始网址   /admin/id/123
+    res.write(req.baseUrl + &quot;\n&quot;);  // 顶层地址  /admin
+    res.write(req.path + &quot;\n&quot;);   //   /id/123
+    res.end(&quot;over&quot;);
+});
+</code></pre>
+<p>admin之下全部可以访问</p>
+<h4 id="express-session">express-session</h4>
+<p><a href="https://www.npmjs.com/package/express-session">文档</a></p>
+<blockquote>
+<p>HTTP是无状态的协议，Session就是利用cookie，实现的“会话”。就是第一次访问的时候，可以在服务器上为这个用户缓存一些信息。服务器会下发一个秘钥（cookie），客户端每次访问都携带这个秘钥，那么服务器如果发现这个秘钥吻合，就能够显示这个用户曾经保存的信息。</p>
+</blockquote>
+<p>使用需要下载<br>
+<strong>引入</strong></p>
+<pre><code class="language-javascript">var session = require(&quot;express-session&quot;);
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+</code></pre>
+<p><strong>设置</strong></p>
+<pre><code class="language-javascript">app.get(&quot;/login&quot;,function(req,res){
+	req.session.login = &quot;1&quot;;	//设置这个session
+	res.send(&quot;你已经成功登陆&quot;);
+});
+</code></pre>
+<p><strong>获取</strong></p>
+<pre><code class="language-javascript">app.get(&quot;/&quot;,function(req,res){
+	console.log(req.sission.login);
+});
+</code></pre>
+<hr>
+<h5 id="md5">MD5</h5>
+<p>node中crypto模块<br>
+<a href="http://nodejs.cn/api/crypto.html">文档</a></p>
+<blockquote>
+<p>MD5加密是函数型加密<br>
+特点：</p>
+</blockquote>
+<ul>
+<li>任意长度的数据，算出的MD5值长度都是固定的</li>
+<li>对原数据进行任何改动，哪怕只修改1个字节，所得到的MD5值都有很大区别</li>
+<li>MD5没有反函数破解的可能</li>
+</ul>
+<pre><code class="language-javascript">var crypto = require(&quot;crypto&quot;);
+var md5 = crypto.createHash('md5');
+var password = md5.update(password).digest('base64');
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ node中使用MongoDB]]></title>
+        <id>https://doupo.github.io/post/node-zhong-shi-yong-mongodb/</id>
+        <link href="https://doupo.github.io/post/node-zhong-shi-yong-mongodb/">
+        </link>
+        <updated>2021-02-23T01:49:41.000Z</updated>
+        <content type="html"><![CDATA[<p>@(js学习笔记)</p>
+<h2 id="node中使用mongodb">node中使用MongoDB</h2>
+<blockquote>
+<p>Node.js 连接 MongoDB，封装简易的增删改查的模块</p>
+</blockquote>
+<hr>
+<p>[toc]</p>
+<h3 id="使用">使用</h3>
+<p>本机环境：<br>
+系统：MAC OS 10.12.4<br>
+node：6.2.0<br>
+npm：3.8.9<br>
+Mongodb：3.4.6</p>
+<h3 id="创建-nodejs-应用">创建 Node.js 应用</h3>
+<h4 id="引入模块">引入模块</h4>
+<p>引入模块：<code>express</code> ， <code>mongodb</code></p>
+<pre><code class="language-javascript">//引入模块
+var express = require('express');
+var app = express();
+
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://localhost:27017/test';
+</code></pre>
+<h4 id="创建服务器">创建服务器</h4>
+<p>创建一个服务器，监听本地的8080端口</p>
+<pre><code class="language-javascript">app.get('/', function (req, res) {
+    res.send('hello node')
+});
+
+app.listen(8080, 'localhost');
+</code></pre>
+<h3 id="数据库操作">数据库操作</h3>
+<p>注：还有些其他的方法（删除一个，替换等），可以见官方文档<br>
+<a href="https://docs.mongodb.com/getting-started/node/client/">文档</a></p>
+<h5 id="创建文件">创建文件</h5>
+<blockquote>
+<p>因为需要将常用的操作封装，所以单独新建了一个<code>module/db.js</code>引入</p>
+</blockquote>
+<h5 id="配置路径">配置路径</h5>
+<pre><code class="language-javascript">exports.Url = 'mongodb://localhost:27017/test';
+</code></pre>
+<h5 id="连接数据库">连接数据库</h5>
+<pre><code class="language-javascript">//连接数据库
+function connectDB(callback) {
+    var url = dataUrl.Url;
+    MongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        callback(db);
+    });
+}
+</code></pre>
+<h4 id="增">增</h4>
+<p><strong>模块</strong><br>
+函数接受3个参数，集合名，新增的数据，回调函数</p>
+<pre><code class="language-javascript">// ######新增数据
+exports.insertOne = function (collectionName, json, callback) {
+    connectDB(function (db) {
+        // 接受外部传入的数据 集合名字 ，数据json ，回调函数
+        db.collection(collectionName).insertOne(json, function (err, result) {
+            callback(err, result);
+            db.close();
+        });
+    });
+}
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">app.get('/', function (req, res) {
+    db.insertOne('cs',{'name': 'yue2','age': 12}, function (err, result) {
+        if(err){
+            res.send('插入数据失败');
+            return;
+        }
+        res.send('成功');
+    })
+});
+app.listen(8888, 'localhost');
+</code></pre>
+<p>当我们在浏览器打开<code>localhost:8080</code>就会像数据库(test下的cs)插入一条<code>{'name': 'yue2','age': 12}</code>数据</p>
+<h4 id="删">删</h4>
+<p><strong>模块</strong></p>
+<pre><code class="language-javascript">// ######删除数据
+exports.deleteMany = function (collectionName, json, callback) {
+    connectDB(function (db) {
+        db.collection(collectionName).deleteMany(
+            json,
+            function (err, results) {
+                callback(err, results);
+                db.close();
+            }
+        );
+    });
+}
+
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">app.get('/', function (req, res) {
+    db.deleteMany('cs',{'name': 'yue2'}, function (err, result) {
+        if(err){
+            res.send('删除数据失败');
+            return;
+        }
+        res.send(result);
+    })
+});
+app.listen(8888, 'localhost');
+</code></pre>
+<p>删除所有<code>name:yue2</code>的数据</p>
+<h4 id="改">改</h4>
+<p>修改数据，接受4个参数<br>
+集合名，需要被修改的数据，修改的数据，回调函数<br>
+<strong>模块</strong></p>
+<pre><code class="language-javascript">// ######修改数据
+exports.updateMany = function (collectionName, oldJson, newJson, callback) {
+    connectDB(function (db) {
+        db.collection(collectionName).updateMany(
+            oldJson,
+            newJson,
+            function (err, results) {
+                callback(err, results);
+                db.close();
+            });
+    });
+}
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">app.get('/', function (req, res) {
+    db.updateMany('cs',{'name':'yue'},{$set:{'name':123}}, function (err, result) {
+        if(err){
+            res.send('数据修改失败');
+            return;
+        }
+
+        res.send(result);
+
+    })
+});
+</code></pre>
+<p>将所有name:yue的数据修改为name:123</p>
+<h4 id="查">查</h4>
+<p><strong>查询数据</strong><br>
+因为会涉及到有些参数非必填项</p>
+<blockquote>
+<p>参数为：集合名字，查询的条件，limit和skip，回调函数，排序方式<br>
+查询条件可以为空，默认为查询全部<br>
+limit和skip可以为空，默认为全部</p>
+<ul>
+<li>limit和skip配合可以用来做分页效果<br>
+排序方式可以为空，默认正序</li>
+</ul>
+</blockquote>
+<p><strong>模块</strong></p>
+<pre><code class="language-javascript">// ######查找数据
+exports.find = function (collectionName, json, pageJson, callback, sortJson) {
+    connectDB(function (db) {
+        if (pageJson.pageNum || pageJson.pageNum == 0) {
+            var limitNum = pageJson.pageSize;
+            var skipNum = pageJson.pageSize * pageJson.pageNum;
+        } else {
+            var limitNum = 0;
+            var skipNum = 0;
+        }
+
+        var resultData = [];
+        var cursor = db.collection(collectionName).find(json).limit(limitNum).skip(skipNum).sort(sortJson);
+        cursor.each(function (err, doc) {
+            if (err) {
+                db.close();
+                callback(err, null);
+                return;
+            }
+            if (doc != null) {
+                resultData.push(doc);
+            } else {
+                callback(null, resultData);
+                db.close();
+            }
+        });
+
+    });
+}
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">// 函数默认值
+app.get('/', function (req, res) {
+    db.find('mess', {}, {'pageSize': 4, 'pageNum': 0}, function (err, result) {
+        if (err) {
+            res.end(-1);
+            return;
+        }
+        console.log(result)
+        res.render('message', {
+            dataJson: result
+        });
+    }, {'dataTime': -1})
+});
+</code></pre>
+<p>这里使用<code>req.query.page</code>获取查询字符串，做分页<br>
+浏览器<code>localhost/read?page=0</code> 可以获取不同的数据</p>
+<p><strong>查询数据数量</strong><br>
+<strong>模块</strong><br>
+参数为：集合名，需要查询的数据（可以为空），回调函数</p>
+<pre><code class="language-javascript">// 获取数据的条数
+exports.findDataNum = function (collectionName, json, callback) {
+    connectDB(function (db) {
+        var collection = db.collection(collectionName);
+        collection.count(json).then(function (count) {
+            callback(count);
+            db.close();
+        })
+    });
+}
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">db.findDataNum('mess',{}, function (result) {
+    console.log(result)
+})
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[es6]]></title>
+        <id>https://doupo.github.io/post/es6/</id>
+        <link href="https://doupo.github.io/post/es6/">
+        </link>
+        <updated>2021-02-23T01:47:38.000Z</updated>
+        <content type="html"><![CDATA[<p>@(js学习笔记)</p>
+<h1 id="ecmascript-6">ECMAScript 6</h1>
+<p>[toc]</p>
+<h2 id="let和const命令">let和const命令</h2>
+<h3 id="let命令">let命令</h3>
+<h4 id="基本用法">基本用法</h4>
+<p>ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。</p>
+<pre><code class="language-javascript">{
+		var a = 100;
+		let b = 200;
+	}
+	console.log(a);	//100
+	console.log(b);	//b is not defined -- Error
+</code></pre>
+<h4 id="不存在变量提升">不存在变量提升</h4>
+<p>let不像var那样，会发生“变量提升”现象。</p>
+<pre><code class="language-javascript">//ES5
+	console.log(&quot;ES5:&quot;);
+	var a = [];
+	for (var i = 0; i &lt; 10; i++) {
+		var c = i;
+		a[i] = function () {
+			console.log(c);
+		};
+	};
+	a[5]();	//9
+
+	//ES6
+	console.log(&quot;ES6:&quot;);
+	var b = [];
+	for (var j = 0; j &lt; 10; j++) {
+		let d = j;
+		b[j] = function () {
+			console.log(d);
+		};
+	};
+	b[5]();	//5
+
+/////////////
+console.log(a)   //undefined
+var a=1;        //预解析变量提升
+
+console.log(a)   //报错a is not defined
+let a=1;        //不存在变量提升
+</code></pre>
+<h4 id="暂时性死区">暂时性死区</h4>
+<p>只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。</p>
+<pre><code class="language-javascript">	var a = 10;
+        {
+            //console.log(a);	//a is not defined
+            let a = 100;
+            console.log(a);	//100
+        }
+
+        console.log(a); //10
+</code></pre>
+<h4 id="不允许重复声明">不允许重复声明</h4>
+<p>let不允许在相同作用域内，重复声明同一个变量。</p>
+<pre><code class="language-javascript">var a=1;
+let a=1;
+//报错Identifier 'a' has already been declared “a”已被声明
+
+let a=1;
+let a=1;
+//报错同上
+</code></pre>
+<h3 id="const命令">const命令</h3>
+<h4 id="const声明一个只读的常量-一旦声明常量的值就不能改变">const声明一个只读的常量。一旦声明，常量的值就不能改变。</h4>
+<blockquote>
+<p>1.不可改变，不可重复声明<br>
+2.块级作用域<br>
+3.同样存在暂时性死区，变量不提升，声明后使用<br>
+4.申明时必须赋值<br>
+5.申明为简单数据类型时值不可改变，如果是对象，则引用不可改变，内部数据可以改变</p>
+</blockquote>
+<pre><code class="language-javascript">		const a = [];
+        a.push('Hello'); // 可执行
+        console.log(a);  //['Hello']
+        a.length = 0;    // 可执行
+        console.log(a);  //[]
+        a=[]//报错Assignment to constant variable.
+</code></pre>
+<p>上面代码中，常量a是一个数组，这个数组本身是可写的，但是如果将另一个数组赋值给a，就会报错。</p>
+<hr>
+<h2 id="变量的解构赋值">变量的解构赋值</h2>
+<p><a href="http://es6.ruanyifeng.com/#docs/destructuring">链接</a></p>
+<h3 id="概念">概念</h3>
+<blockquote>
+<p>一种匹配模式，只要等号两步模式相同，则左边的变量就可以被赋予对应的值</p>
+</blockquote>
+<h3 id="解构赋值主要分为">解构赋值主要分为</h3>
+<h4 id="1数组的解构赋值">1.数组的解构赋值</h4>
+<pre><code class="language-javascript">let [a,b,c]=[1,2,3];
+console.log(a,b,c);    //1  2  3
+
+let [a, [[b], c]] = [1, [[2], 3]];
+console.log(a, b, c);    //1  2  3
+
+let [, , c] = [1, 2, 3];
+console.log(c);    // 3
+
+let [x]=[];
+console.log(x); //undefined
+</code></pre>
+<h5 id="带有默认值的解构赋值">带有默认值的解构赋值</h5>
+<pre><code class="language-javascript">let [a='1']=[];
+console.log(a);  //1
+
+let [a='1']=[2];
+console.log(a);  //2
+</code></pre>
+<h4 id="2对象的解构赋值">2.对象的解构赋值</h4>
+<pre><code class="language-javascript">let { a, b } = { a: 1, b: 'bb' };
+console.log(typeof a, b);      //number bb
+
+let { a: b, c } = { a: 1, c: 2 };  //这种模式，a为属性名
+console.log(b, c);  //1
+console.log(a);  //a is not defined
+</code></pre>
+<h4 id="3基本类型的解构赋值">3.基本类型的解构赋值</h4>
+<p><strong>注</strong>null 和 undefined 不能进行解构赋值</p>
+<pre><code class="language-javascript">let [a, b, c, d] = '1234';
+console.log(a, b, c, d);  //1 2 3 4
+</code></pre>
+<h5 id="length属性解构赋值">length属性解构赋值</h5>
+<pre><code class="language-javascript">let { length: len } = '123a';
+console.log(len);  //4   字符长度 
+
+
+let {toString: a1} = 1;
+let {toString: a2} = true;
+console.log(a1 === Number.prototype.toString);	//true
+console.log(a2 === Boolean.prototype.toString);	//true
+</code></pre>
+<hr>
+<h2 id="set数据结构">set数据结构</h2>
+<h3 id="基本用法-2">基本用法</h3>
+<blockquote>
+<p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。<br>
+Set 本身是一个构造函数，用来生成 Set 数据结构。</p>
+</blockquote>
+<h4 id="创建一个set">创建一个set</h4>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet);  //{1, 2, 3}
+console.log(typeof newSet);  //object
+</code></pre>
+<h4 id="set的属性">set的属性</h4>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.size);  //3
+</code></pre>
+<h4 id="set中的方法">set中的方法</h4>
+<h5 id="1-setaddvalue-添加数据">1-set.add(value) 添加数据</h5>
+<blockquote>
+<p>添加一个数据，返回Set结构本身。所以也可以链式添加数据</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.add(4).add(5));  //{1, 2, 3, 4, 5}
+</code></pre>
+<h5 id="2-setdeletevalue-删除数据">2-set.delete(value) 删除数据</h5>
+<blockquote>
+<p>删除指定数据，返回布尔值，表示是否删除成功</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.delete(1));  //true
+console.log(newSet);  //{2, 3}
+</code></pre>
+<h5 id="3-sethasvalue-判断值是否存在">3-set.has(value) 判断值是否存在</h5>
+<blockquote>
+<p>判断该值是否为Set的成员，反回一个布尔值</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.has(1));  //true
+console.log(newSet.has(6));  //false
+</code></pre>
+<h5 id="4-setclear-清除数据">4-set.clear() 清除数据</h5>
+<blockquote>
+<p>清除所有数据，没有返回值。</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+newSet.clear();  
+console.log(newSet);  //{}
+</code></pre>
+<h4 id="遍历操作">遍历操作</h4>
+<blockquote>
+<p><code>keys</code>方法、<code>values</code>方法、<code>entries</code>方法返回的都是**<code>遍历器对象</code>**。由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以<code>keys</code>方法和<code>values</code>方法的行为完全一致。</p>
+</blockquote>
+<p><strong>注</strong></p>
+<blockquote>
+<p>遍历器对象可用<code>for..of</code>获取</p>
+</blockquote>
+<h5 id="1-keys-返回键名">1-keys() 返回键名</h5>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.keys());     //SetIterator {1, 2, 3}
+console.log(newSet.values());   //SetIterator {1, 2, 3}
+</code></pre>
+<h5 id="2-values-返回键值">2-values() 返回键值</h5>
+<blockquote>
+<p>效果同上</p>
+</blockquote>
+<h5 id="3-entries-返回键值对">3-entries() 返回键值对</h5>
+<pre><code class="language-javascript">const newSet = new Set([1, 2, 3]);
+        for (let item of newSet.entries()) {
+            console.log(item);
+            };
+        /*
+        [1, 1]
+        [2, 2]
+        [3, 3]
+        */
+</code></pre>
+<h5 id="4-foreach-使用回调函数遍历每个成员">4-forEach() 使用回调函数遍历每个成员</h5>
+<blockquote>
+<p>回调参数，第一个是值，第二个是键，第三个是数据本身</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet = new Set([1, 2, 3, 'a']);
+newSet.forEach(function (key, value, Set) {
+    console.log(value + 1);
+});
+// 2  3  4  a1
+
+console.log(newSet);   //{1, 2, 3, &quot;a&quot;}  newSet没有被修改
+</code></pre>
+<hr>
+<h2 id="map数据结构">Map数据结构</h2>
+<h3 id="含义和基本用法">含义和基本用法</h3>
+<p>JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构），但是传统上只能用字符串当作键。这给它的使用带来了很大的限制。</p>
+<pre><code class="language-javascript">const data = {};
+const element = document.getElementById('myDiv');
+
+data[element] = 'metadata';
+data['[object HTMLDivElement]'] // &quot;metadata&quot;
+</code></pre>
+<p>上面代码原意是将一个 DOM 节点作为对象<code>data</code>的键，但是由于对象只接受字符串作为键名，所以<code>element</code>被自动转为字符串<code>[object HTMLDivElement]</code>。</p>
+<p>为了解决这个问题，ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适。</p>
+<pre><code class="language-javascript">const m = new Map();
+const o = {p: 'Hello World'};
+
+m.set(o, 'content')
+m.get(o) // &quot;content&quot;
+
+m.has(o) // true
+m.delete(o) // true
+m.has(o) // false
+</code></pre>
+<p>上面代码使用 Map 结构的<code>set</code>方法，将对象<code>o</code>当作<code>m</code>的一个键，然后又使用<code>get</code>方法读取这个键，接着使用<code>delete</code>方法删除了这个键。</p>
+<blockquote>
+<p><a href="http://es6.ruanyifeng.com/?search=set&amp;x=0&amp;y=0#docs/set-map">上面这段来源于阮一峰 ES 6 标准入门</a></p>
+</blockquote>
+<hr>
+<h4 id="创建一个map">创建一个Map</h4>
+<pre><code class="language-javascript">const map = new Map([
+    ['a', 1],
+    ['b', 2]
+]);
+
+console.log(map);   // {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2}
+</code></pre>
+<h4 id="map的属性">Map的属性</h4>
+<pre><code class="language-javascript">const map = new Map([
+    ['a', 1],
+    ['b', 2]
+]);
+console.log(map.size);  //2
+</code></pre>
+<h4 id="map中的方法">Map中的方法</h4>
+<h5 id="1-mapsetkey-value-添加数据">1-Map.set(key, value) 添加数据</h5>
+<blockquote>
+<p>添加键名为<code>key</code>键值为<code>value</code>的数据，然后返回整个 <code>Map</code>。如果<code>key</code>已经存在，则键值会被更新，否则就新生成数据。<br>
+<strong>可以使用链式添加</strong></p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['m1', 'm']
+]);
+map.set('a1', 1).set('b1', '2').set('c1', '3');
+console.log(map);   
+//{&quot;m1&quot; =&gt; &quot;m&quot;, &quot;a1&quot; =&gt; 1, &quot;b1&quot; =&gt; &quot;2&quot;, &quot;c1&quot; =&gt; &quot;3&quot;}
+</code></pre>
+<h5 id="2-mapgetkey-获取数据">2-Map.get(key)  获取数据</h5>
+<blockquote>
+<p>读取key对应的键值，如果找不到 key，返回undefined。</p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.get('a1'));   //1
+console.log(map.get('d'));   //undefined
+</code></pre>
+<h5 id="3-mapdeletekey-删除数据">3-Map.delete(key) 删除数据</h5>
+<blockquote>
+<p>删除某个键，方法返回一个布尔值，判断是否删除成功</p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.delete('a1'));   //true
+console.log(map.delete('d'));   //false
+console.log(map);   //{&quot;b1&quot; =&gt; &quot;2&quot;, &quot;c1&quot; =&gt; &quot;3&quot;}
+</code></pre>
+<h5 id="4-maphaskey-判断数据是否存在">4-Map.has(key)  判断数据是否存在</h5>
+<blockquote>
+<p>方法返回一个布尔值，判断数据是否存在</p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.has('a1'));   //true
+console.log(map.has('d'));   //false
+</code></pre>
+<h5 id="5-mapclear-清除数据">5-Map.clear() 清除数据</h5>
+<blockquote>
+<p>清除所有数据，没有返回值。</p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+map.clear();
+console.log(map);   //{}
+</code></pre>
+<h4 id="遍历操作-2">遍历操作</h4>
+<p><strong>注</strong></p>
+<blockquote>
+<p>遍历器对象可用<code>for..of</code>获取</p>
+</blockquote>
+<h5 id="6-mapkeys-返回键名">6-Map.keys() 返回键名</h5>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.keys());  
+ //MapIterator {&quot;a1&quot;, &quot;b1&quot;, &quot;c1&quot;}
+</code></pre>
+<h5 id="7-mapvalues-返回键值">7-Map.values() 返回键值</h5>
+<pre><code class="language-javascript">console.log(map.values());   
+//MapIterator {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;}
+</code></pre>
+<h5 id="8-mapentries-返回键值对">8-Map.entries() 返回键值对</h5>
+<pre><code class="language-javascript"> const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.entries());   //MapIterator {&quot;a1&quot; =&gt; &quot;1&quot;, &quot;b1&quot; =&gt; &quot;2&quot;, &quot;c1&quot; =&gt; &quot;3&quot;}
+
+// 遍历器对象获取数据
+for (let item of map.entries()) {
+    console.log(item);
+};
+//['a1', '1'] ['b1', '2'] ['c1', '3']
+</code></pre>
+<h5 id="9-mapforeach-使用回调函数遍历每个成员">9-Map.forEach() 使用回调函数遍历每个成员</h5>
+<blockquote>
+<p>回调参数，第一个是值，第二个是键，第三个是数据本身</p>
+</blockquote>
+<pre><code class="language-javascript">const map1 = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+map1.forEach(function (value, key, map) {
+    console.log(key);  //a1 b1 c1
+})
+</code></pre>
+<h5 id="map-中key值一些注意点">Map 中key值一些注意点</h5>
+<p>1.NaN===NaN</p>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1']
+]);
+map.set(NaN, 1).set(NaN, 2);
+console.log(map);   
+//{&quot;a1&quot; =&gt; &quot;1&quot;, NaN =&gt; 2}  map中NaN===NaN
+</code></pre>
+<p>2.空对象不相等，比较的是内存的地址</p>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1']
+]);
+map.set({}, '1').set({}, '2');
+console.log(map);   
+//{&quot;a1&quot; =&gt; &quot;1&quot;, Object {} =&gt; &quot;1&quot;, Object {} =&gt; &quot;2&quot;}
+console.log({} === {}); //false
+</code></pre>
+<hr>
+<h2 id="iterator和forof循环">Iterator和for...of循环</h2>
+<p><a href="http://es6.ruanyifeng.com/#docs/iterator">阮一峰Iterator章节</a></p>
+<blockquote>
+<p>一个数据结构只要具有<code>Symbol.iterator</code>属性，就可以认为是“可遍历的”（iterable）。<br>
+在ES6中，有三类数据结构原生具备Iterator接口：</p>
+<ul>
+<li>1-数组、</li>
+<li>2-某些类似数组的对象（存在数值键名和length属性））、</li>
+<li>3-Set和Map结构</li>
+<li>4-字符串</li>
+</ul>
+<p><strong>注</strong> — 对象（Object）没有默认部署Iterator接口</p>
+</blockquote>
+<pre><code class="language-javascript">let str = 'abc';
+const a1 = str[Symbol.iterator]();
+console.log(a1.next());     //{value: &quot;a&quot;, done: false}
+console.log(a1.next());     //{value: &quot;b&quot;, done: false}
+console.log(a1.next());     //{value: &quot;c&quot;, done: false}
+console.log(a1.next());     //{value: undefined, done: true}
+</code></pre>
+<h4 id="iterator的遍历过程">Iterator的遍历过程</h4>
+<p>（1）创建一个指针对象，指向当前数据结构的起始位置。也就是说，遍历器对象本质上，就是一个指针对象。<br>
+（2）第一次调用指针对象的<code>next</code>方法，可以将指针指向数据结构的第一个成员。<br>
+（3）第二次调用指针对象的<code>next</code>方法，指针就指向数据结构的第二个成员。<br>
+（4）不断调用指针对象的<code>next</code>方法，直到它指向数据结构的结束位置。<br>
+每一次调用<code>next</code>方法，都会返回数据结构的当前成员的信息。具体来说，就是返回一个包含<code>value</code>和<code>done</code>两个属性的对象。其中，<code>value</code>属性是当前成员的值，<code>done</code>属性是一个布尔值，表示遍历是否结束。</p>
+<h5 id="模拟next方法返回值">模拟next方法返回值</h5>
+<pre><code class="language-javascript">const arr = [1, 2, 3];
+function iterator(arr) {
+    let index = 0;
+    return {
+        next: function () {
+            return index &lt; arr.length ?
+                { value: arr[index++], done: false } :
+                { value: undefined, done: true };
+        }
+    }
+};
+
+const it = iterator(arr);   //
+console.log(it.next());     //{value: 1, done: false}
+console.log(it.next());     //{value: 2, done: false}
+console.log(it.next());     //{value: 3, done: false}
+console.log(it.next());     //{value: undefined, done: true}
+</code></pre>
+<h4 id="具备iterator接口的数据结构特性">具备iterator接口的数据结构特性</h4>
+<h5 id="解构赋值">解构赋值</h5>
+<pre><code class="language-javascript">const set = new Set(['a', 'b', 'c']);
+let [x, y] = set;
+console.log(x, y);      //a b
+</code></pre>
+<h5 id="扩展运算符">扩展运算符</h5>
+<pre><code class="language-javascript">let str = 'hellow';
+let arrStr = [...str];
+console.log(arrStr);    // [&quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;]
+
+//数组去重
+const arr2 = ['a', 1, 2, 3, 2, 1, 'a', '2'];
+console.log([...new Set(arr2)]);    //[&quot;a&quot;, 1, 2, 3, &quot;2&quot;]
+</code></pre>
+<h4 id="forof循环">for...of循环</h4>
+<blockquote>
+<p><code>for...of</code>循环内部调用的是数据结构的<code>Symbol.iterator</code>方法</p>
+</blockquote>
+<p><code>for...of</code>循环可以代替数组实例的<code>forEach</code>方法。</p>
+<pre><code class="language-javascript">const arr = ['red', 'green', 'blue'];
+
+arr.forEach(function (element, index) {
+  console.log(element); // red green blue
+  console.log(index);   // 0 1 2
+});
+</code></pre>
+<p>#####遍历 Set 结构和 Map 结构</p>
+<blockquote>
+<p>**1-**遍历的顺序是按照各个成员被添加进数据结构的顺序。<br>
+**2-**Set 结构遍历时，返回的是一个值<br>
+<strong>3-</strong> Map 结构遍历时，返回的是一个数组，该数组的两个成员分别为当前 Map 成员的键名和键值。</p>
+</blockquote>
+<pre><code class="language-javascript">//set
+const newSet = new Set([1, 2, 3]);
+for (let i of newSet) {
+    console.log(i);     //1  2  3
+};
+
+//map
+const newMap = new Map([
+    [1, 2],
+    ['a', 3],
+    ['c', 4]
+]);
+for (let i of newMap) {
+    console.log(i);     // [1, 2]   [&quot;a&quot;, 3]    [&quot;c&quot;, 4]
+};
+
+//使用解构赋值
+const newMap = new Map([
+    [1, 2],
+    ['a', 3],
+    ['c', 4]
+]);
+for (let [key, value] of newMap) {
+    console.log(key);     // 1  a   c
+    console.log(value);     // 2  3  4
+}
+</code></pre>
+<h4 id="与其他遍历语法的比较">与其他遍历语法的比较</h4>
+<blockquote>
+<p><a href="http://es6.ruanyifeng.com/#docs/iterator#%E4%B8%8E%E5%85%B6%E4%BB%96%E9%81%8D%E5%8E%86%E8%AF%AD%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83">下面这段来源于阮一峰 ES 6 标准入门</a></p>
+</blockquote>
+<p>以数组为例，JavaScript 提供多种遍历语法。最原始的写法就是<code>for</code>循环。</p>
+<pre><code class="language-javascript">for (var index = 0; index &lt; myArray.length; index++) {
+  console.log(myArray[index]);
+}
+</code></pre>
+<p>这种写法比较麻烦，因此数组提供内置的<code>forEach</code>方法。</p>
+<pre><code class="language-javascript">myArray.forEach(function (value) {
+  console.log(value);
+});
+</code></pre>
+<p>这种写法的问题在于，无法中途跳出<code>forEach</code>循环，<code>break</code>命令或<code>return</code>命令都不能奏效。</p>
+<p><code>for...in</code>循环可以遍历数组的键名。</p>
+<pre><code class="language-javascript">for (var index in myArray) {
+  console.log(myArray[index]);
+}
+</code></pre>
+<p><code>for...in</code>循环有几个缺点。</p>
+<ul>
+<li>数组的键名是数字，但是<code>for...in</code>循环是以字符串作为键名“0”、“1”、“2”等等。</li>
+<li><code>for...in</code>循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。</li>
+<li>某些情况下，<code>for...in</code>循环会以任意顺序遍历键名。</li>
+</ul>
+<p>总之，<code>for...in</code>循环主要是为遍历对象而设计的，不适用于遍历数组。</p>
+<p><code>for...of</code>循环相比上面几种做法，有一些显著的优点。</p>
+<pre><code class="language-javascript">for (let value of myArray) {
+  console.log(value);
+}
+</code></pre>
+<ul>
+<li>有着同<code>for...in</code>一样的简洁语法，但是没有<code>for...in</code>那些缺点。</li>
+<li>不同用于<code>forEach</code>方法，它可以与<code>break</code>、<code>continue</code>和<code>return</code>配合使用。</li>
+<li>提供了遍历所有数据结构的统一操作接口。</li>
+</ul>
+<p>下面是一个使用break语句，跳出<code>for...of</code>循环的例子。</p>
+<pre><code class="language-javascript">const a1 = [1, 2, 3, 4, 5, 6, 7, 8, 8, 9]
+for (var n of a1) {
+    if (n &gt; 4)
+        break;
+    console.log(n);     //1  2  3  4
+}
+</code></pre>
+<hr>
+<h2 id="class语法">Class语法</h2>
+<hr>
+<h2 id="symbol">Symbol</h2>
+<h3 id="1-什么是-symbol">1-什么是 Symbol ?</h3>
+<p>ES5 的对象属性名都是字符串，这容易造成属性名的冲突。这就是 ES6 引入<code>Symbol</code>的原因。</p>
+<blockquote>
+<ul>
+<li>Symbol，表示独一无二的值。它是 JS 中的第七种数据类型。</li>
+</ul>
+</blockquote>
+<p><strong>基本的数据类型</strong>： Null Undefined Number Boolean String Symbol<br>
+**引用数据类型：**Object</p>
+<h4 id="创建一个symbol">创建一个<code>Symbol</code></h4>
+<p>**注：**Symbol 函数前不能使用 new 否则会报错，原因在于 Symbol 是一个原始类型的值，不是对象。</p>
+<pre><code class="language-javascript">let s1 = Symbol();
+let s2 = Symbol();
+console.log(typeof s1); //symbol
+console.log(s1 === s2); //false
+</code></pre>
+<h5 id="-symbol参数">- Symbol参数</h5>
+<blockquote>
+<p>函数接收一个字符串作为参数，表示对Symbol的描述，主要是为了在控制台显示，或者转为字符串的时候，比较容易区分</p>
+</blockquote>
+<pre><code class="language-javascript">let s3 = Symbol('a1');
+let s4 = Symbol('a2');
+console.log(s3, s4);    //Symbol(a1) Symbol(a2)
+</code></pre>
+<p>注意，<code>Symbol</code>函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的<code>Symbol</code>函数的返回值是不相等的。</p>
+<pre><code class="language-javascript">// 没有参数的情况
+var s1 = Symbol();
+var s2 = Symbol();
+
+s1 === s2 // false
+
+// 有参数的情况
+var s1 = Symbol('foo');
+var s2 = Symbol('foo');
+
+s1 === s2 // false
+</code></pre>
+<h3 id="2-symbol-数据类型的转换">2-Symbol 数据类型的转换</h3>
+<p>-1 转换成字符</p>
+<pre><code class="language-javascript">console.log(String(Symbol('a1'))); // Symbol(a1)
+console.log(Symbol('a2').toString()); // Symbol(a2)
+</code></pre>
+<p>-2 转换成布尔值</p>
+<pre><code class="language-javascript">console.log(!!Symbol()); // true
+</code></pre>
+<p>-3 TypeError: 不能转换成数字</p>
+<pre><code class="language-javascript">console.log(Number(Symbol()));  
+</code></pre>
+<p>-4 Symbol 值不能与其他类型的值进行运算</p>
+<pre><code class="language-javascript">console.log(Symbol('1') * 100);  //报错
+</code></pre>
+<h3 id="3-作为对象的属性名">3-作为对象的属性名</h3>
+<blockquote>
+<p>需要使用<code>[]</code>，设置和读取</p>
+</blockquote>
+<pre><code class="language-javascript">let s1 = Symbol('a1');
+const obj = {};
+obj[s1] = 'hello';
+console.log(obj);       //Object {Symbol(a1): &quot;hello&quot;}
+console.log(obj[s1]);   //hello
+
+// 第二种写法
+var a = {
+  [s1]: 'Hello!'
+};
+</code></pre>
+<p>Symbol 作为属性名，该属性不会出现在<code>for...in</code>、<code>for...of</code>循环中，也不会被<code>Object.keys()</code>、<code>Object.getOwnPropertyNames()</code>、<code>JSON.stringify()</code>返回。<br>
+但是，它也不是私有属性，有一个<code>Object.getOwnPropertySymbols</code>方法，可以获取指定对象的所有 Symbol 属性名。</p>
+<pre><code class="language-javascript">const cs1 = {
+    [Symbol()]: 0,
+    [Symbol()]: 1,
+    a: 2,
+    b: 3
+};
+
+console.log(cs1);   // {a: 2, b: 3, Symbol(): 0, Symbol(): 1}
+console.log(cs1['Symbol()']);   //undefined 无法获取
+
+for (let i in cs1) {
+    console.log(i);
+}
+//a  b  无法获取
+
+
+console.log(Object.getOwnPropertySymbols(cs1));         //[Symbol(), Symbol()]
+console.log(cs1[Object.getOwnPropertySymbols(cs1)[0]]); //0
+</code></pre>
+<hr>
+<h2 id="字符串的扩展">字符串的扩展</h2>
+<h3 id="模板字符串">模板字符串</h3>
+<pre><code class="language-javascript">let flag = true;
+let data = {
+    name: &quot;doupo&quot;,
+    age: &quot;18&quot;
+}
+let html = `&lt;ul&gt;
+              &lt;li&gt;
+                &lt;span&gt;${'首页'}&lt;/span&gt;        //添加字符
+                &lt;span&gt;${data.name}&lt;/span&gt;   //外部数据
+                &lt;span class=&quot;${flag ? 'show' : 'hide'}&quot;&gt;&lt;/span&gt; //动态class
+              &lt;/li&gt;
+            &lt;/ul&gt;`;
+
+console.log(html);
+    /*
+        &lt;ul&gt;
+              &lt;li&gt;
+                &lt;span&gt;首页&lt;/span&gt;        &lt;!--添加字符--&gt;
+                &lt;span&gt;doupo&lt;/span&gt;
+                &lt;span class=&quot;show&quot;&gt;&lt;/span&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+    */
+</code></pre>
+<h3 id="字符串新增方法">字符串新增方法</h3>
+<h4 id="repeat方法">repeat方法</h4>
+<blockquote>
+<p>将原字符串重复n次返回<br>
+参数为0返回空字符</p>
+</blockquote>
+<pre><code class="language-javascript">let a = 'a1';
+console.log(a.repeat(3));   //a1a1a1
+</code></pre>
+<h4 id="includes-startswith-endswith">includes() startsWith() endsWith()</h4>
+<blockquote>
+<p>includes()：返回布尔值，查找参数字符是否存在<br>
+startsWith()：返回布尔值，从头部开始查找参数字符<br>
+endsWith()：返回布尔值，从尾部开始查找参数字符</p>
+</blockquote>
+<pre><code class="language-javascript">let str1 = &quot;doupo&quot;;
+console.log(str1.includes('dou'));  //true
+console.log(str1.includes('du'));  //false
+console.log(str1.includes('o', 3));  //true  
+
+console.log(str1.startsWith('dou'));  //true  头部开始搜索
+console.log(str1.startsWith('ou'));  //false  
+console.log(str1.startsWith('ou', 1));  //true  
+
+console.log(str1.endsWith('po'));  //true  尾部开始搜索
+console.log(str1.endsWith('p', str1.length - 1));  //true  
+</code></pre>
+<p><code>includes() startsWith()</code>这两个方法使用第二个参数的时候，表示是从参数开始位置==&gt;字符结尾	（正）<br>
+<code>endsWith()</code>表示是从参数位置==&gt;字符开始（倒）</p>
+<h4 id="字符串补全">字符串补全</h4>
+<blockquote>
+<p><code>padStart()</code>用于头部补全，<code>padEnd()</code>用于尾部补全</p>
+</blockquote>
+<pre><code class="language-javascript">let str1 = 'abcd';
+console.log(str1.padStart(6, '123456'));     //12abcd  
+console.log(str1.padStart(3, '123456'));     //abcd  //字符原长度大于等于参数的长度，就返回原字符  
+console.log(str1.padStart(6, '1'));     //11abcd 
+console.log(str1.padStart(6));     //‘  abcd’ 第二个参数为空，默认使用空格补全
+
+// 尾部补全方法同上
+</code></pre>
+<h2 id="数组的扩展">数组的扩展</h2>
+<h4 id="arrayfrom-类数组转化为数组">Array.from() 类数组转化为数组</h4>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;script&gt;
+        let arrayLike = {
+            '0': 'a',
+            '1': 'b',
+            '2': 'c',
+            length:3
+        };
+        let arr2 = Array.from(arrayLike);
+        console.log(arr2);  // ['a', 'b', 'c']
+
+        let domlist=document.querySelectorAll('li');
+        console.log(domlist);   // [li, li, li]length: 3  0: li 1: li 2: li __proto__: NodeList
+        console.log(Array.from(domlist));   //[li, li, li] 0: li 1: li 2: lilength: 3 __proto__: Array(0)
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h4 id="arrayof">Array.of()</h4>
+<blockquote>
+<p>将一组值，转换为数组</p>
+</blockquote>
+<pre><code class="language-javascript">let arr1 = Array.of(1, 2, 3);
+console.log(arr1);  //[1, 2, 3]
+</code></pre>
+<h4 id="find-findindex-查找">find()  findIndex() 查找</h4>
+<blockquote>
+<p>都是找出第一个符合条件的数组成员<br>
+<code>findIndex()</code>返回的是下标</p>
+</blockquote>
+<pre><code class="language-javascript">const arr = [-1, -2, 3, 4];
+let res = arr.find(function (a) {
+    return a &gt; 0;
+});
+console.log(res);   //3 
+
+const arr2 = [1, -2, 3, 4];
+let res2 = arr2.findIndex(function (a) {
+    return a &lt; 0;
+});
+console.log(res2);  //1 下标1
+</code></pre>
+<h4 id="fill-填充">fill() 填充</h4>
+<pre><code class="language-javascript">const arr = [-1, -2, 3, 4];
+console.log(arr.fill('a')); //[&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;]
+console.log(arr.fill('a', 1, 3)); //[-1, &quot;a&quot;, &quot;a&quot;, 4]
+// 第二个和第三个参数，表示起始和结束位置，不包含结束位置
+</code></pre>
+<hr>
+<h2 id="对象的扩展">对象的扩展</h2>
+<h4 id="对象的简洁表示法">对象的简洁表示法</h4>
+<pre><code class="language-javascript">// 属性简写///
+let str1 = 'doupo';
+let obj1 = {
+    str1: str1
+}
+console.log(obj1);  //{str1: &quot;doupo&quot;}
+//简写
+let obj2 = { str1 };
+console.log(obj2);  //{str1: &quot;doupo&quot;}
+
+//方法简写///
+let obj3 = {
+    fun1: function () {
+        console.log('1');
+    },
+    fun2() {
+        console.log('2');
+    }
+};
+
+obj3.fun1();    //1
+obj3.fun2();    //2
+</code></pre>
+<h4 id="objectis">Object.is()</h4>
+<blockquote>
+<p>比较两个值是否严格相等</p>
+</blockquote>
+<pre><code class="language-javascript">let obj1 = {};
+let obj2 = {};
+console.log(Object.is(obj1, obj2));   //false
+console.log(Object.is(NaN, NaN));   //true
+console.log(Object.is(+0, -0));     //false
+</code></pre>
+<h4 id="objectassign">Object.assign()</h4>
+<blockquote>
+<p>用于对象的合并，将源对象的所有可枚举属性，复制到目标对象。<br>
+<code>Object.assign</code>方法的第一个参数是目标对象，后面的参数都是源对象</p>
+</blockquote>
+<pre><code class="language-javascript">let obj1 = { a: 1 };
+let obj2 = { a: 2, b: 3 };
+let obj3 = { c: 'abc' };
+Object.assign(obj1, obj2, obj3);
+console.log(obj1);  //{a: 2, b: 3, c: &quot;abc&quot;}  如果有同名属性，后面覆盖前面
+</code></pre>
+<p><code>Object.assign</code>方法实行的是浅拷贝，而不是深拷贝。源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。<br>
+这个对象的任何变化，都会反映到目标对象上面</p>
+<pre><code class="language-javascript">let obj1 = { a: { b: 1 } };
+let obj2 = Object.assign({}, obj1);
+obj2.a.b = 2;
+console.log(obj1.a.b) // 2
+</code></pre>
+<hr>
+<h2 id="函数扩展">函数扩展</h2>
+<h4 id="1-为函数参数指定默认值">1-为函数参数指定默认值</h4>
+<pre><code class="language-javascript">function fn(a, b = 'World') {
+    // 参数变量a,b是默认声明
+    //let a = 'hi';          //报错提示已经被声明
+    console.log(a + b);
+}
+fn();           //undefinedWorld
+fn('Hello');    //HelloWorld
+</code></pre>
+<h4 id="2-函数的-rest-参数">2-函数的 rest 参数</h4>
+<p>rest 参数形式为（“...变量名”），用于获取函数的多余参数，这样就不需要使用arguments对象了。rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。</p>
+<pre><code class="language-javascript">function sum() {
+    var args = arguments;
+    var res = 0;
+    for (var i = 0; i &lt; args.length; i++) {
+        res += args[i];
+    }
+    console.log(res);
+}
+sum(1, 2, 3, 4, 5); //15
+
+function sum(a, b, ...arr) {
+//传递其他参数需要放在rest参数前，否则会报错
+    var res = a;
+    for (var i = 0; i &lt; arr.length; i++) {
+        res += arr[i];
+    }
+    res += b;
+    console.log(res);
+}
+sum(10, 'c', 1, 2, 3, 4, 5); //25c
+</code></pre>
+<h4 id="3-箭头函数">3-箭头函数</h4>
+<blockquote>
+<p>ES6允许使用“箭头”（=&gt;）定义函数</p>
+</blockquote>
+<pre><code class="language-javascript">let fn = a =&gt; a;
+//等同于
+let fn2 = function (a) {
+    return a;
+};
+</code></pre>
+<blockquote>
+<p>如果箭头函数不需要参数或需要多个参数，可以使用()</p>
+</blockquote>
+<pre><code class="language-javascript">var f = () =&gt; 5;
+// 等同于
+var f = function () { return 5 };
+
+var sum = (num1, num2) =&gt; num1 + num2;
+// 等同于
+var sum = function (num1, num2) {
+    return num1 + num2;
+};
+</code></pre>
+<blockquote>
+<p>箭头函数简化sort排序</p>
+</blockquote>
+<pre><code class="language-javascript">var arr = [3, 1, 3, 5, 2];
+
+arr.sort(function (a, b){
+   return a - b;
+});
+
+//箭头函数
+arr.sort((a, b) =&gt; a - b);
+</code></pre>
+<h3 id="使用注意点">使用注意点</h3>
+<p>（1）函数体内的<code>this</code>对象，就是定义时所在的对象，而不是使用时所在的对象。</p>
+<p>（2）不可以当作构造函数，也就是说，不可以使用<code>new</code>命令，否则会抛出一个错误。</p>
+<p>（3）不可以使用<code>arguments</code>对象，该对象在函数体内不存在。如果要用，可以用Rest参数代替。</p>
+<p>（4）不可以使用<code>yield</code>命令，因此箭头函数不能用作Generator函数。</p>
+<hr>
+<h2 id="promise">Promise</h2>
+<p><code>Promise</code>对象代表一个异步操作，有三种状态：<code>Pending</code>（进行中）、<code>Resolved</code>（已完成，又称 Fulfilled）和<code>Rejected</code>（已失败）</p>
+<p>Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject。</p>
+<p><code>resolve</code>函数将状态从“未完成”变为“成功”（即从Pending变为Resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去<br>
+<code>reject</code>函数将状态从“未完成”变为“失败”（即从Pending变为Rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去</p>
+<p>Promise实例生成以后，可以用<code>then</code>方法分别指定<code>Resolved</code>状态和<code>Reject</code>状态的回调函数。</p>
+<h5 id="promiseprototypethen-状态改变回调">Promise.prototype.then() 状态改变回调</h5>
+<p><code>then</code>方法的第一个参数是Resolved状态的回调函数，第二个参数（可选）是Rejected状态的回调函数。<br>
+<strong>不建议这样写，推荐使用失败回调catch</strong></p>
+<pre><code class="language-javascript">loadImage('http://doupo.me/imaes/profile_img.jpg').then(function (img) {
+    document.body.appendChild(img)
+}, function (err) {
+    console.log(err);
+});
+</code></pre>
+<h5 id="promiseprototypecatch失败回调">Promise.prototype.catch()		失败回调</h5>
+<pre><code class="language-javascript">var imgArry = ['http://doupo.me/images/profile_img.jpg', 'http://doupo.me/images/same_text_time_icon.jpg'];
+function loadImage(url) {
+    return new Promise(function (resolve, reject) {
+        var image = new Image();
+
+        image.onload = function () {
+            resolve(image);
+            //成功 传出image
+        };
+
+        image.onerror = function () {
+            reject(new Error('加载失败 ' + url));
+            //失败-传出错误信息
+        };
+
+        image.src = url;
+    });
+}
+
+loadImage(imgArry[0]).then(function (img) {
+    document.body.appendChild(img);
+    //成功，将图片显示在body中
+}).catch(function (err) {
+    console.log(err);
+    //失败，打印错误信息
+});
+</code></pre>
+<h5 id="promiseall">Promise.all()</h5>
+<p>Promise.all方法用于将多个Promise实例，包装成一个新的Promise实例，接受一个数组作为参数，数组成员为Promise对象实例<br>
+<strong>注</strong>只有全部实例状态都为成功（全部成功后将所有实例的返回值组成一个数组传递给回调函数），才返回成功，否则返回失败（返回第一个出错的返回值）</p>
+<pre><code class="language-javascript">var imgArry = ['http://doupo.me/images/profile_img.jpg', 'http://doupo.me/images/same_text_time_icon.jpg'];
+function loadImage(url) {
+    return new Promise(function (resolve, reject) {
+        var image = new Image();
+
+        image.onload = function () {
+            resolve(image);
+        };
+
+        image.onerror = function () {
+            reject(new Error('加载失败 ' + url));
+        };
+
+        image.src = url;
+    });
+}
+
+let newPlist = Promise.all([loadImage(imgArry[0]), loadImage(imgArry[1])]);
+newPlist.then(function (img) {
+    //此处img为两个实例返回的数组
+    for (var i of img) {
+        document.body.appendChild(i);
+    };
+}).catch(function (err) {
+    console.log(err);
+});
+</code></pre>
+<h3 id="promiseresolve">Promise.resolve()</h3>
+<blockquote>
+<p>将现有对象转为Promise对象</p>
+</blockquote>
+<h5 id="1-参数为promise实例">1-参数为Promise实例</h5>
+<blockquote>
+<p>将不做任何修改，返回这个实例</p>
+</blockquote>
+<pre><code class="language-javascript">Promise.resolve(loadImage(imgArry[0])).then(function(img){
+            document.body.appendChild(img);
+       })
+</code></pre>
+<h5 id="2-参数是一个thenable对象">2-参数是一个thenable对象</h5>
+<blockquote>
+<p><code>thenable</code>对象指的是具有<code>then</code>方法的对象<br>
+将对象转为Promise对象，然后立即执行<code>thenable</code>对象的<code>then</code>方法</p>
+</blockquote>
+<pre><code class="language-javascript">var imgArry = ['http://doupo.me/images/profile_img.jpg', 'http://doupo.me/images/same_text_time_icon.jpg'];
+Promise.resolve({
+    then(resolve, reject) {
+        var image = new Image();
+        image.src = imgArry[0];
+        image.onload = function () {
+            resolve(image)
+        }
+    }
+}).then(function (img) {
+    document.body.appendChild(img);
+});
+</code></pre>
+<h5 id="不传参或者基本数据类型">不传参或者基本数据类型</h5>
+<p>参数是一个基本数据类型或者不传参数，那么返回一个状态为<code>resolved</code>的Promise对象</p>
+<pre><code class="language-javascript">Promise.resolve('hi').then(function (str) {
+    console.log(str);    //hi
+});
+</code></pre>
+<hr>
+<h2 id="generator">Generator</h2>
+<hr>
+<h2 id="async-函数">async 函数</h2>
+<hr>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[正则表达式]]></title>
+        <id>https://doupo.github.io/post/zheng-ze-biao-da-shi/</id>
+        <link href="https://doupo.github.io/post/zheng-ze-biao-da-shi/">
+        </link>
+        <updated>2021-02-23T01:46:22.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="正则的写法-regular-expression">正则的写法 Regular Expression</h4>
+<p>var re = /a/;<br>
+var re = new RegExp('a');</p>
+<h3 id="正则表达式常用方法">正则表达式常用方法</h3>
+<h4 id="转义字符">转义字符</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\s</td>
+<td style="text-align:center">空格</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td style="text-align:center">非空格</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:center">数字</td>
+</tr>
+<tr>
+<td style="text-align:center">\D</td>
+<td style="text-align:center">非数字</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:center">字符   ( 字母 ，数字，下划线_ )</td>
+</tr>
+<tr>
+<td style="text-align:center">\W</td>
+<td style="text-align:center">匹配任何非单词字符。等价于[^A-Za-z0-9_]</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">独立的部分   （ 起始，结束，空格 ）</td>
+</tr>
+<tr>
+<td style="text-align:center">\B</td>
+<td style="text-align:center">非独立的部分</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车符</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">制表符</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1test-字符串判断匹配">1.test 字符串判断(匹配)</h4>
+<p><strong>test的写法 : <code>正则.test(字符串)</code></strong></p>
+<h5 id="判断手机号码">判断手机号码</h5>
+<p><strong>!(/^1[3|4|5|7|8]\d{9}$/.test(phone))</strong></p>
+<blockquote>
+<p>返回真假<br>
+正则.test(字符串)</p>
+</blockquote>
+<h5 id="指定字符匹配">指定字符匹配</h5>
+<pre><code class="language-javascript">//test : 正则去匹配字符串，如果匹配成功就返回真，如果匹配失败就返回假
+var str = 'abcdef';
+var re = /b/;	//b可以匹配到，‘ab’也可以，如果有间隔‘ce’不连续则返回false
+alert( re.test(str) );  //返回true
+</code></pre>
+<h5 id="例子判断字符是否全是数字">例子：判断字符是否全是数字</h5>
+<pre><code class="language-javascript">var str = '374829348791';
+
+//str = '374829348791'; =&gt; else
+//str = 'l37h482r9348791'; =&gt; if
+
+var re = /\D/;
+if( re.test(str) ){
+	alert('不全是数字');
+}
+else{
+	alert('全是数字');
+}
+</code></pre>
+<h4 id="2search字符串搜索">2.search字符串搜索</h4>
+<p><strong>search的写法 : <code>字符串.search(正则)</code></strong></p>
+<blockquote>
+<p>返回出现的位置(成功返回位置，失败就返回 -1)<br>
+字符串.search(正则)<br>
+忽略大小写：i——ignore<br>
+<em>*<code>var re=/I/i;</code> ==== <code>var re = new RegExp('B','i');</code></em>*</p>
+</blockquote>
+<h5 id="例子字符串搜索">例子：字符串搜索</h5>
+<pre><code class="language-javascript">//正则中的默认 : 是区分大小写的 , 寻找第一个
+var str='nishiyige';
+var re=/I/;				//I =&gt; -1;  i=&gt; 1;
+alert(str.search(re));
+
+//如果不区分大小写的话，在正则的最后加标识
+var str='nishiyige';
+var re=/I/i;				
+alert(str.search(re));	// 1
+</code></pre>
+<h4 id="3match正则去匹配字符串">3.match正则去匹配字符串</h4>
+<p>如果匹配成功，就返回匹配成功的数组，如果匹配不成功，就返回null<br>
+<strong>match的写法 : <code>字符串.match(正则)</code></strong></p>
+<blockquote>
+<p>获取匹配的项目,<br>
+返回数组<br>
+量词：+  至少出现一次<br>
+全局匹配：g——global</p>
+</blockquote>
+<h5 id="例子找出所有数字">例子：找出所有数字</h5>
+<pre><code class="language-javascript">	var str = 'haj123sdk54hask33dkhalsd879';
+
+var re = /\d+/g;    
+//re = /\d\d/g; =&gt; [12,54,33,87]   
+//re = /\d\d\d/g; =&gt; [123,879]  
+//re = /\d\d\d\d/g; =&gt; null
+
+alert( str.match(re) );   //[123,54,33,879]
+</code></pre>
+<h5 id="例子match匹配子项">例子：match匹配子项</h5>
+<pre><code class="language-javascript">var str = 'dacdef';
+var re = /(a)(c)/;
+alert( str.match(re) );  //[ac,a,c](当match不加g的时候才可以获取到子项的集合)
+</code></pre>
+<h4 id="4-replace匹配替换">4. replace匹配替换</h4>
+<p><strong>replace的写法 : <code>字符串.replace(正则,新的字符串)</code></strong></p>
+<blockquote>
+<p>替换所有匹配<br>
+返回替换后的字符串<br>
+字符串.replace(正则,想替换的)<br>
+<code>|</code> : 或的意思<br>
+<code>replace : 第二个参数：</code>可以是<code>字符串</code>，也可以是一个<code>回调函数</code></p>
+</blockquote>
+<h5 id="例子敏感词过滤">例子：敏感词过滤</h5>
+<pre><code class="language-javascript">	var str='菲称仁爱礁附近17艘中国船均在菲军监视之下';
+	var re = /菲称|中国船|监视之下/g;
+	var newstr='';
+		 newstr = str.replace(re,function(str){
+			//函数的第一个参数：就是匹配成功的字符	 
+			 alert( str );  //菲称 中国船 监视之下 
+			 var result = '';
+			 for(var i=0;i&lt;str.length;i++){
+				 result += '*';
+			 }
+			 return result;
+		 });
+		 alert(newstr);		//**仁爱礁附近17艘***均在菲军****
+</code></pre>
+<h5 id="匹配子项">匹配子项</h5>
+<h5 id="匹配子项注意点">匹配子项注意点！</h5>
+<blockquote>
+<p>拿到子项的前提是匹配到母项,rt,/\d+-/g只能匹配到 '2017-' '3-',最后一个'2'匹配不到<br>
+<img src="./%E5%AD%90%E9%A1%B9%E5%8C%B9%E9%85%8D%E6%B3%A8%E6%84%8F%E7%82%B9.png" alt="Alt text" loading="lazy"></p>
+</blockquote>
+<h5 id="例子日期格式化">例子：日期格式化</h5>
+<h5 id="正则表达式中小括号">正则表达式中小括号</h5>
+<p><strong>小括号<code>()</code> (还有另外一个意思，分组操作)</strong></p>
+<pre><code class="language-javascript">//把正则的整体叫做（母亲）
+//然后把左边第一个小括号里面的正则，叫做这个第一个子项(母亲的第一个孩子)
+//第二个小括号就是第二个孩子
+
+var str = '2017-3-2';
+
+var re = /(\d+)(-)/g;
+
+str = str.replace(re,function($0,$1,$2){
+	//第一个参数：$0（母亲）,第二个参数 : $1(第一个孩子)
+	//,第二个参数 : $1(第二个孩子)
+	
+	alert( $0 ); //2017-  3-
+	alert( $1 ); //2017  3     //子项内容来源于母项==&gt;所以没有匹配到最后一个2
+	alert( $2 ); //-  -
+	return $1 + '.';		//2017+'.'  3+'.'
+	
+	// return $0.substring(0,$0.length-1) + '.';
+	
+});
+
+alert( str );   //2017.3.2
+</code></pre>
+<h4 id="正则表达式字符类">正则表达式字符类</h4>
+<h5 id="任意字符">任意字符</h5>
+<blockquote>
+<p>字符类 : 一组相似的元素   [] 中括号的整体代表一个字符，或的关系<br>
+例:</p>
+</blockquote>
+<pre><code class="language-javascript">	var str = 'abdc';
+	var re = /a[bde]+c/;
+	alert( re.test(str) );  //返回 true
+</code></pre>
+<h5 id="范围">范围</h5>
+<blockquote>
+<p>[a-z]、[0-9]、[A-Z]</p>
+</blockquote>
+<h5 id="例a-z0-9a-z">例：[a-z0-9A-Z]</h5>
+<pre><code class="language-javascript">var str = 'abc';	//str = 'a*c'; 返回 false
+var re = /a[a-z0-9A-Z]c/;
+alert( re.test(str) );  //返回 true
+</code></pre>
+<h5 id="排除">排除</h5>
+<blockquote>
+<p><code>[^a]</code>^ 如果^写在<code>[]</code>里面的话，就代表排除的意思</p>
+</blockquote>
+<h5 id="例子a">例子：[^a]</h5>
+<pre><code class="language-javascript">var str = 'a2c';
+var re = /a[^bde]c/;
+alert( re.test(str) );  //不能拥有和[^bde]相匹配的字符
+</code></pre>
+<h5 id="例子综合去掉html中的标签">例子综合：去掉html中的标签</h5>
+<pre><code class="language-javascript">	window.onload=function(){
+    var htmltxt=document.getElementById('htmltxt').innerHTML;
+    console.log(htmltxt);
+    var re=/&lt;[^&gt;]+&gt;/g;
+    htmltxt=htmltxt.replace(re,'');
+    console.log(htmltxt);
+	}
+
+//执行返回	多语言
+            
+                //中 文
+                //English
+                //日本語
+                //Русский
+                //한국어
+  
+//html
+&lt;div id=&quot;htmltxt&quot;&gt;
+    &lt;li class=&quot;nav-dropdown-container language&quot;&gt;
+    &lt;a class=&quot;nav-link&quot;&gt;多语言&lt;/a&gt;&lt;span class=&quot;arrow&quot;&gt;&lt;/span&gt;
+        &lt;ul class=&quot;nav-dropdown&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;https://cn.vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;中文&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;https://vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;English&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;https://jp.vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;日本語&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;https://ru.vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;Русский&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;https://kr.vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;한국어&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/div&gt;
+</code></pre>
+<h5 id="转义字符1~n的用法">转义字符\1~n的用法</h5>
+<p><code>\1</code> : 重复的第一个子项<br>
+<code>\2</code> : 重复的第二个子项<br>
+<code>\n</code> : 重复的第n个子项</p>
+<pre><code class="language-javascript">var str = 'abcb';
+var re = /(a)(b)(c)\2/;
+alert( re.test(str) );  
+//返回true var re = /(a)(b)(c)\2/;  ==&gt; var re = /(a)(b)(c)(b)/; 
+
+if var str = 'abcc';  ==&gt; 返回 false
+
+var re = /\w\w/;   		//可以匹配 ab a1 等等
+var re = /(\w)\1/; 		//只能匹配 aa 11 等等
+</code></pre>
+<h5 id="转义字符b和的用法">转义字符\b和.的用法</h5>
+<h4 id="正则需要传参的写法">正则需要传参的写法</h4>
+<p><strong>当正则需要传参的时候，一定要用全称的写法；且需要转义</strong></p>
+<h5 id="获取class元素">获取class元素</h5>
+<pre><code class="language-javascript">	function getByClass(oParent,sClass){
+		var arr = [];
+		var aEle = oParent.getElementsByTagName('*');
+		
+		//var re = /sClass/;  //当正则需要传参的时候，一定要用全称的写法
+		var re = new RegExp('\\b'+sClass+'\\b');
+		
+		for(var i=0;i&lt;aEle.length;i++){
+			if( re.test(aEle[i].className) ){
+				arr.push( aEle[i] );
+			}
+		}
+		return arr;
+	}
+</code></pre>
+<h4 id="量词">量词 : {}，+，？，*</h4>
+<pre><code class="language-javascript">{4,7}  : 最少出现4次，最多出现7次
+{4,} : 最少出现4次,没有上限
+{4} : 正好出现4次
+
++ : {1,}
+? : {0,1}  : 出现0次或者1次
+* : {0,}  : 至少出现0次
+
+
+var str = 'ac';
+var re = /ab*c/;
+
+alert(re.test(str));  //返回true
+//var re = /ab*c/; b后缀*表示可以不用出现，匹配成功，所以var str = 'ac'; 也可以是 var str = 'abc';
+</code></pre>
+<h4 id="正则中和">正则中^和$</h4>
+<p><code>[^a]</code>^ 如果^写在<code>[]</code>里面的话，就代表排除的意思<br>
+<code>^</code>: 正则的最开始位置，就代笔起始的意思<br>
+<code>$</code> : 正则的最后位置 , 就代笔结束的意思</p>
+<h5 id="例和">例：^和$</h5>
+<pre><code class="language-javascript">var str='1s2345a';
+var re=/^\d\w+a$/g;
+alert(re.test(str)); //true
+
+var re=/^\d\w+a$/g; 起始为数字，中间为字符,结尾为'a'
+</code></pre>
+<h5 id="例去前后空格">例：去前后空格</h5>
+<pre><code class="language-javascript">var str = ' hello ';
+alert( '('+trim(str)+')' );
+function trim(str){
+	var re = /^\s+|\s+$/g;
+	return str.replace(re,'');
+}
+</code></pre>
+<h5 id="例解释">例：解释</h5>
+<pre><code class="language-javascript">var re = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/;
+起始为字符且多位 + @ + a-z和0-9+ 转义后的 . + a-z + 量词，可以多位
+</code></pre>
+<h4 id="创建正则方法集合">创建正则方法集合</h4>
+<pre><code class="language-javascript">var str = '你是134你';
+
+var re = {
+	email : /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/,	//验证邮箱
+	tel:/^1[3|4|5|7|8]\d{9}$/,					//验证手机号
+	Dupp:/[A-Z]/g,					//去掉大写字母
+	Dnum:/[0-9]/g,					//去掉数字
+	UDUD:/-(\w)/g,					//转驼峰
+	china:/^[\u4e00-\u9fa5]+$/g,	//只允许中文
+};
+
+//转驼峰
+str=str.replace(re.UDUD,function(a1,a2){
+	return a2.toUpperCase();
+});	 
+
+
+alert(re.china.test(str));	
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ vuex 和 axios]]></title>
+        <id>https://doupo.github.io/post/vuex-he-axios/</id>
+        <link href="https://doupo.github.io/post/vuex-he-axios/">
+        </link>
+        <updated>2021-02-23T01:45:08.000Z</updated>
+        <content type="html"><![CDATA[<p>@(js学习笔记)</p>
+<h2 id="vuex">vuex</h2>
+<h3 id="vuex介绍">vuex介绍</h3>
+<p><a href="https://vuex.vuejs.org/zh-cn/">vuex官网</a></p>
+<blockquote>
+<p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态</p>
+</blockquote>
+<h4 id="配合插件">配合插件</h4>
+<p>vue devtools</p>
+<h4 id="安装vuex">安装vuex</h4>
+<p><strong>安装模块</strong><br>
+<code>npm install vuex --save</code></p>
+<p><strong>使用插件</strong><br>
+<code>import Vue from 'vue'</code><br>
+<code>import Vuex from 'vuex'</code><br>
+<code>Vue.use(Vuex)</code></p>
+<p><strong>定义</strong><br>
+<code>new Vuex.Store()</code></p>
+<p><strong>注入vue实例</strong><br>
+<code>store</code></p>
+<hr>
+<h3 id="vuex核心概念">vuex核心概念</h3>
+<h4 id="store">store</h4>
+<blockquote>
+<p>1.页面中只能存在一个<br>
+2.状态响应<br>
+3.状态更改需要提交mutation</p>
+</blockquote>
+<pre><code class="language-javascript">let store = new Vuex.Store({
+	state:{},
+	getters:{},
+	...
+})
+
+export default store
+</code></pre>
+<h4 id="state">state</h4>
+<blockquote>
+<p>包含了全部的应用层级状态</p>
+</blockquote>
+<pre><code class="language-javascript"> state: {
+    a: 1,
+    b: 2
+  }
+  
+  //组件中使用
+  computed: {
+     num(){
+     return this.$store.state.a
+     },
+     num2(){
+     return this.$store.state.b
+     },
+   }
+</code></pre>
+<p>获取多个状态时候，可以使用<code>mapState辅助函数</code>简化操作</p>
+<h4 id="getters">getters</h4>
+<blockquote>
+<p>store的计算属性<br>
+Getters 接受 state 作为其第一个参数<br>
+Getters 会暴露为store.getters对象</p>
+</blockquote>
+<pre><code class="language-javascript">getters: {
+    a(state){
+      return ...
+    }
+  }
+
+//组件中使用
+this.$store.getters.a
+</code></pre>
+<h4 id="mutations">mutations</h4>
+<h5 id="使用">使用</h5>
+<blockquote>
+<p>更改 Vuex 的 store 中的状态的唯一方法<br>
+mutation 必须是同步函数</p>
+</blockquote>
+<pre><code class="language-javascript">state: {
+    num: 1
+  },
+  mutations: {
+    addNum (state) {
+      // 变更状态
+      state.num++
+    }
+  }
+  
+//组件中调用
+this.$store.commit('addNum')
+</code></pre>
+<h5 id="提交payload">提交Payload</h5>
+<pre><code class="language-javascript">  mutations: {
+    addNum (state,payload) {
+      // 变更状态
+      state.num+=payload.newNum
+    }
+  }  
+  
+//组件中调用
+this.$store.commit('addNum'，{
+newNum:3
+})
+//或
+this.$store.commit({
+type:'addNum',
+newNum:3
+})
+//也可以传单个参数
+this.$store.commit('addNum', 10)
+//接收时用形参直接使用
+</code></pre>
+<h4 id="actions">actions</h4>
+<blockquote>
+<p>Action 提交的是 mutation，而不是直接变更状态。<br>
+Action 可以包含任意异步操作。</p>
+</blockquote>
+<pre><code class="language-javascript">state: {
+    num: 1
+  },
+  mutations: {
+    addNum (state) {
+      // 变更状态
+      state.num++
+    }
+  },
+  actions: {
+    asyncAdd(context){
+      setTimeout(function () {
+          context.commit('addNum', {n: 5});
+        },1000);
+        context.dispatch('newCs', 'cs')
+    },
+    newCs(context, obj){
+      console.log(obj) //cs
+    }
+  }
+  
+//组件中调用
+this.$store.dispatch('asyncAdd');
+</code></pre>
+<hr>
+<h3 id="辅助函数">辅助函数</h3>
+<p><strong>引入</strong><br>
+<code>import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'</code></p>
+<h4 id="mapstate">mapState</h4>
+<blockquote>
+<p>获取多个状态时候，可以使用<code>mapState辅助函数</code>简化操作</p>
+</blockquote>
+<pre><code class="language-javascript"> state: {
+    a: 1,
+    b: 2,
+    c: 3
+  }
+  
+  //组件中使用
+	//计算属性的名称与state状态名称一样,可以给mapState传一个字符串数组
+	//###1
+    computed:{
+      ...mapState(['a','b','c'])  //扩展运算
+    }
+
+	//###2
+	computed: mapState(['a','b','c'])
+
+	//###3
+	computed: mapState({
+      //###3-1 
+      a: state =&gt; state.a
+	  //###3-2
+      b: 'b'
+      //###3-3
+      c(state){
+        return state.c
+      }
+    })
+</code></pre>
+<h4 id="mapgetters">mapGetters</h4>
+<blockquote>
+<p>将 store 中的 getters 映射到局部计算属性</p>
+</blockquote>
+<pre><code class="language-javascript">getters: {
+    a(state){
+      return ...
+    }
+  }
+
+//组件中使用
+computed:{
+	...mapGetters({
+	    num:'a'
+	 })
+ }
+</code></pre>
+<h4 id="mapmutations">mapMutations</h4>
+<pre><code class="language-javascript">methods: {
+	...mapMutations({
+	  a:'addNum'
+	})
+}
+</code></pre>
+<h4 id="mapactions">mapActions</h4>
+<pre><code class="language-javascript">methods: {
+	...mapActions({
+	   a:'asyncAdd'
+	 })
+ }
+</code></pre>
+<h3 id="modules">Modules</h3>
+<blockquote>
+<p>Vuex 允许我们将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块</p>
+</blockquote>
+<pre><code class="language-javascript">let newModule = {
+  state: {
+	  num:1
+  }
+  /* ... */
+}
+
+//实例中添加
+let store = new Vuex.Store({
+  modules:{
+    newModule
+  }
+})
+
+//组件中使用
+this.$store.state.newModule.num
+</code></pre>
+<blockquote>
+<p>为了便于维护可以用不同的js文件区别不同的Modules</p>
+</blockquote>
+<pre><code class="language-javascript">//Modules文件
+let newModule = {
+  state: {
+	  num:1
+  }
+  /* ... */
+}
+export default newModule
+
+//在根实例文件中添加
+import newModule from './newModule'
+
+let store = new Vuex.Store({
+  modules:{
+    newModule
+  }
+})
+</code></pre>
+<hr>
+<h2 id="axios">axios</h2>
+<h3 id="介绍">介绍</h3>
+<p><strong>浏览器支持</strong><br>
+如果你的浏览器环境不支持 ES6 Promise，你可以使用 <a href="https://github.com/stefanpenner/es6-promise">polyfill</a></p>
+<p>基于 Promise 可用于浏览器和 Node.js<br>
+<strong>特征</strong></p>
+<ul>
+<li>支持 promise API</li>
+<li>拦截请求</li>
+<li>在浏览器中发送 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest">XMLHttpRequests</a> 请求</li>
+<li>拦截请求和响应</li>
+<li>转换请求和响应数据</li>
+<li>自动转换 JSON 数据</li>
+</ul>
+<p><strong>安装</strong><br>
+<code>$ npm install axios</code></p>
+<h3 id="使用-2">使用</h3>
+<p><strong>在模块中引入</strong><br>
+<code>import axios from 'axios'</code></p>
+<p><strong>支持的请求方式</strong></p>
+<ul>
+<li>axios.get(url[, config])</li>
+<li>axios.delete(url[, config])</li>
+<li>axios.head(url[, config])</li>
+<li>axios.post(url[, data[, config]])</li>
+<li>axios.put(url[, data[, config]])</li>
+<li>axios.patch(url[, data[, config]])</li>
+</ul>
+<h4 id="例-getpost">例-get,post</h4>
+<p><strong>get</strong></p>
+<pre><code class="language-javascript">//普通请求数据
+axios.get('url')
+  .then((response)=&gt;{
+      console.log(response)
+  })
+  .catch((error) =&gt;{
+       console.log(error)
+   })
+
+//带参数
+axios.get('/user', {
+    params: {
+      ID: 123
+    }
+  })
+  .then((response)=&gt;{
+      console.log(response)
+  })
+  .catch((error) =&gt;{
+       console.log(error)
+   })
+</code></pre>
+<p><strong>post</strong></p>
+<pre><code class="language-javascript">axios.post('/user', {
+      ID: 123
+  })
+  .then((response)=&gt;{
+      console.log(response)
+  })
+  .catch((error) =&gt;{
+       console.log(error)
+   })
+</code></pre>
+<h4 id="例-并发请求">例-并发请求</h4>
+<p><strong>语法</strong><br>
+<code>axios.all(iterable)</code><br>
+<code>axios.spread(callback)</code></p>
+<p><strong>例</strong></p>
+<pre><code class="language-javascript">    function http1(){
+      return axios.get(&quot;url&quot;)
+    }
+
+    function http2(){
+      return axios.get(&quot;url&quot;)
+    }
+
+    axios.all([http1(),http2()])
+      .then(axios.spread((res1,res2)=&gt;{
+          console.log(res1)
+          console.log(res2)
+      }))
+      .catch((error) =&gt;{
+        console.log(error)
+    })
+</code></pre>
+<hr>
+<h3 id="自定义请求">自定义请求</h3>
+<p><strong>创建</strong><br>
+<code>axios.create(config)</code></p>
+<p><strong>配置信息</strong></p>
+<pre><code class="language-javascript">axios.create({
+    baseURL:'', //接口
+    timeout: 1000, //超时时间
+    responseType:'json', //返回数据类型
+    headers:{},  //请求头信息
+    params{},  //参数
+    transformRequest[function (data) {return data;}],  //发送请求之前对请求数据做处理
+    transformResponse:[function (data) {return data;}], //提前处理返回的数据
+    validateStatus:function(status){
+	     return status &lt; 400;
+    }, //定义对于给定的HTTP 响应状态码是（根据返回值判断） resolve 或 reject
+    cancelToken:source.token //指定用于取消请求的 cancel token
+})
+
+//###注：transformRequest 可以使用 queryString模块
+</code></pre>
+<h5 id="canceltoken取消请求">cancelToken取消请求</h5>
+<p><strong>创建</strong><br>
+<code>var CancelToken = axios.CancelToken;</code><br>
+<code>var source = CancelToken.source();</code></p>
+<p><strong>配置</strong><br>
+<code>cancelToken:source.token</code></p>
+<p><strong>捕获取消错误</strong><br>
+<code>if (axios.isCancel(thrown)) { console.log('Request canceled', thrown.message); } else { console.log(error) }</code></p>
+<p><strong>取消请求</strong> -- message 参数是可选的<br>
+<code>source.cancel('取消')</code></p>
+<h5 id="例子"><strong>例子</strong></h5>
+<pre><code class="language-javascript">import axios from 'axios'
+var CancelToken = axios.CancelToken;
+var source = CancelToken.source();
+
+var HTTP = axios.create({
+  baseURL: 'url',
+  timeout: 1000,
+  cancelToken: source.token
+})
+
+
+HTTP.post(&quot;url&quot;)
+  .then((response) =&gt; {
+    console.log(response)
+  })
+  .catch((error) =&gt; {
+    if (axios.isCancel(error)) {
+      console.log(error.message);
+    } else {
+      console.log(error)
+    }
+  })
+
+source.cancel('取消')
+
+</code></pre>
+<hr>
+<h3 id="拦截器">拦截器</h3>
+<p>在请求或响应被 then 或 catch 处理前拦截它们</p>
+<pre><code class="language-javascript">// 添加请求拦截器
+axios.interceptors.request.use(function (config) {
+    // 在发送请求之前做些什么
+    return config;
+  }, function (error) {
+    // 对请求错误做些什么
+    return Promise.reject(error);
+  });
+
+// 添加响应拦截器
+axios.interceptors.response.use(function (response) {
+    // 对响应数据做点什么
+    return response;
+  }, function (error) {
+    // 对响应错误做点什么
+    return Promise.reject(error);
+  });
+</code></pre>
+<p><strong>取消拦截</strong></p>
+<pre><code class="language-javascript">var myInterceptor = axios.interceptors.request.use(function () {/*...*/});
+axios.interceptors.request.eject(myInterceptor);
+</code></pre>
+<hr>
+<h3 id="在vue中使用axios">在vue中使用axios</h3>
+<p><strong>在组件中使用</strong><br>
+引入后正常使用<br>
+<code>import axios from 'axios';</code></p>
+<p><strong>注册为全局的函数</strong><br>
+在入口文件main.js文件中引入</p>
+<pre><code class="language-javascript">import Axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios,Axios)
+
+//之后在组件中使用
+this.$http.get('url')
+  .then((response) =&gt; {
+    console.log(response)
+  })
+  .catch((error) =&gt; {
+    console.log(error)
+</code></pre>
+]]></content>
+    </entry>
+</feed>

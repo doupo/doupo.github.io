@@ -1,0 +1,1360 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>es6 | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="es6 | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="@(js学习笔记)
+ECMAScript 6
+[toc]
+let和const命令
+let命令
+基本用法
+ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。
+{
+		var a =..." />
+    <meta name="keywords" content="js" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              es6
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                28 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/js/" class="post-tag">
+                  # js
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>@(js学习笔记)</p>
+<h1 id="ecmascript-6">ECMAScript 6</h1>
+<p>[toc]</p>
+<h2 id="let和const命令">let和const命令</h2>
+<h3 id="let命令">let命令</h3>
+<h4 id="基本用法">基本用法</h4>
+<p>ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。</p>
+<pre><code class="language-javascript">{
+		var a = 100;
+		let b = 200;
+	}
+	console.log(a);	//100
+	console.log(b);	//b is not defined -- Error
+</code></pre>
+<h4 id="不存在变量提升">不存在变量提升</h4>
+<p>let不像var那样，会发生“变量提升”现象。</p>
+<pre><code class="language-javascript">//ES5
+	console.log(&quot;ES5:&quot;);
+	var a = [];
+	for (var i = 0; i &lt; 10; i++) {
+		var c = i;
+		a[i] = function () {
+			console.log(c);
+		};
+	};
+	a[5]();	//9
+
+	//ES6
+	console.log(&quot;ES6:&quot;);
+	var b = [];
+	for (var j = 0; j &lt; 10; j++) {
+		let d = j;
+		b[j] = function () {
+			console.log(d);
+		};
+	};
+	b[5]();	//5
+
+/////////////
+console.log(a)   //undefined
+var a=1;        //预解析变量提升
+
+console.log(a)   //报错a is not defined
+let a=1;        //不存在变量提升
+</code></pre>
+<h4 id="暂时性死区">暂时性死区</h4>
+<p>只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。</p>
+<pre><code class="language-javascript">	var a = 10;
+        {
+            //console.log(a);	//a is not defined
+            let a = 100;
+            console.log(a);	//100
+        }
+
+        console.log(a); //10
+</code></pre>
+<h4 id="不允许重复声明">不允许重复声明</h4>
+<p>let不允许在相同作用域内，重复声明同一个变量。</p>
+<pre><code class="language-javascript">var a=1;
+let a=1;
+//报错Identifier 'a' has already been declared “a”已被声明
+
+let a=1;
+let a=1;
+//报错同上
+</code></pre>
+<h3 id="const命令">const命令</h3>
+<h4 id="const声明一个只读的常量-一旦声明常量的值就不能改变">const声明一个只读的常量。一旦声明，常量的值就不能改变。</h4>
+<blockquote>
+<p>1.不可改变，不可重复声明<br>
+2.块级作用域<br>
+3.同样存在暂时性死区，变量不提升，声明后使用<br>
+4.申明时必须赋值<br>
+5.申明为简单数据类型时值不可改变，如果是对象，则引用不可改变，内部数据可以改变</p>
+</blockquote>
+<pre><code class="language-javascript">		const a = [];
+        a.push('Hello'); // 可执行
+        console.log(a);  //['Hello']
+        a.length = 0;    // 可执行
+        console.log(a);  //[]
+        a=[]//报错Assignment to constant variable.
+</code></pre>
+<p>上面代码中，常量a是一个数组，这个数组本身是可写的，但是如果将另一个数组赋值给a，就会报错。</p>
+<hr>
+<h2 id="变量的解构赋值">变量的解构赋值</h2>
+<p><a href="http://es6.ruanyifeng.com/#docs/destructuring">链接</a></p>
+<h3 id="概念">概念</h3>
+<blockquote>
+<p>一种匹配模式，只要等号两步模式相同，则左边的变量就可以被赋予对应的值</p>
+</blockquote>
+<h3 id="解构赋值主要分为">解构赋值主要分为</h3>
+<h4 id="1数组的解构赋值">1.数组的解构赋值</h4>
+<pre><code class="language-javascript">let [a,b,c]=[1,2,3];
+console.log(a,b,c);    //1  2  3
+
+let [a, [[b], c]] = [1, [[2], 3]];
+console.log(a, b, c);    //1  2  3
+
+let [, , c] = [1, 2, 3];
+console.log(c);    // 3
+
+let [x]=[];
+console.log(x); //undefined
+</code></pre>
+<h5 id="带有默认值的解构赋值">带有默认值的解构赋值</h5>
+<pre><code class="language-javascript">let [a='1']=[];
+console.log(a);  //1
+
+let [a='1']=[2];
+console.log(a);  //2
+</code></pre>
+<h4 id="2对象的解构赋值">2.对象的解构赋值</h4>
+<pre><code class="language-javascript">let { a, b } = { a: 1, b: 'bb' };
+console.log(typeof a, b);      //number bb
+
+let { a: b, c } = { a: 1, c: 2 };  //这种模式，a为属性名
+console.log(b, c);  //1
+console.log(a);  //a is not defined
+</code></pre>
+<h4 id="3基本类型的解构赋值">3.基本类型的解构赋值</h4>
+<p><strong>注</strong>null 和 undefined 不能进行解构赋值</p>
+<pre><code class="language-javascript">let [a, b, c, d] = '1234';
+console.log(a, b, c, d);  //1 2 3 4
+</code></pre>
+<h5 id="length属性解构赋值">length属性解构赋值</h5>
+<pre><code class="language-javascript">let { length: len } = '123a';
+console.log(len);  //4   字符长度 
+
+
+let {toString: a1} = 1;
+let {toString: a2} = true;
+console.log(a1 === Number.prototype.toString);	//true
+console.log(a2 === Boolean.prototype.toString);	//true
+</code></pre>
+<hr>
+<h2 id="set数据结构">set数据结构</h2>
+<h3 id="基本用法-2">基本用法</h3>
+<blockquote>
+<p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。<br>
+Set 本身是一个构造函数，用来生成 Set 数据结构。</p>
+</blockquote>
+<h4 id="创建一个set">创建一个set</h4>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet);  //{1, 2, 3}
+console.log(typeof newSet);  //object
+</code></pre>
+<h4 id="set的属性">set的属性</h4>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.size);  //3
+</code></pre>
+<h4 id="set中的方法">set中的方法</h4>
+<h5 id="1-setaddvalue-添加数据">1-set.add(value) 添加数据</h5>
+<blockquote>
+<p>添加一个数据，返回Set结构本身。所以也可以链式添加数据</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.add(4).add(5));  //{1, 2, 3, 4, 5}
+</code></pre>
+<h5 id="2-setdeletevalue-删除数据">2-set.delete(value) 删除数据</h5>
+<blockquote>
+<p>删除指定数据，返回布尔值，表示是否删除成功</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.delete(1));  //true
+console.log(newSet);  //{2, 3}
+</code></pre>
+<h5 id="3-sethasvalue-判断值是否存在">3-set.has(value) 判断值是否存在</h5>
+<blockquote>
+<p>判断该值是否为Set的成员，反回一个布尔值</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.has(1));  //true
+console.log(newSet.has(6));  //false
+</code></pre>
+<h5 id="4-setclear-清除数据">4-set.clear() 清除数据</h5>
+<blockquote>
+<p>清除所有数据，没有返回值。</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+newSet.clear();  
+console.log(newSet);  //{}
+</code></pre>
+<h4 id="遍历操作">遍历操作</h4>
+<blockquote>
+<p><code>keys</code>方法、<code>values</code>方法、<code>entries</code>方法返回的都是**<code>遍历器对象</code>**。由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以<code>keys</code>方法和<code>values</code>方法的行为完全一致。</p>
+</blockquote>
+<p><strong>注</strong></p>
+<blockquote>
+<p>遍历器对象可用<code>for..of</code>获取</p>
+</blockquote>
+<h5 id="1-keys-返回键名">1-keys() 返回键名</h5>
+<pre><code class="language-javascript">const newSet=new Set([1,2,3]);
+console.log(newSet.keys());     //SetIterator {1, 2, 3}
+console.log(newSet.values());   //SetIterator {1, 2, 3}
+</code></pre>
+<h5 id="2-values-返回键值">2-values() 返回键值</h5>
+<blockquote>
+<p>效果同上</p>
+</blockquote>
+<h5 id="3-entries-返回键值对">3-entries() 返回键值对</h5>
+<pre><code class="language-javascript">const newSet = new Set([1, 2, 3]);
+        for (let item of newSet.entries()) {
+            console.log(item);
+            };
+        /*
+        [1, 1]
+        [2, 2]
+        [3, 3]
+        */
+</code></pre>
+<h5 id="4-foreach-使用回调函数遍历每个成员">4-forEach() 使用回调函数遍历每个成员</h5>
+<blockquote>
+<p>回调参数，第一个是值，第二个是键，第三个是数据本身</p>
+</blockquote>
+<pre><code class="language-javascript">const newSet = new Set([1, 2, 3, 'a']);
+newSet.forEach(function (key, value, Set) {
+    console.log(value + 1);
+});
+// 2  3  4  a1
+
+console.log(newSet);   //{1, 2, 3, &quot;a&quot;}  newSet没有被修改
+</code></pre>
+<hr>
+<h2 id="map数据结构">Map数据结构</h2>
+<h3 id="含义和基本用法">含义和基本用法</h3>
+<p>JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构），但是传统上只能用字符串当作键。这给它的使用带来了很大的限制。</p>
+<pre><code class="language-javascript">const data = {};
+const element = document.getElementById('myDiv');
+
+data[element] = 'metadata';
+data['[object HTMLDivElement]'] // &quot;metadata&quot;
+</code></pre>
+<p>上面代码原意是将一个 DOM 节点作为对象<code>data</code>的键，但是由于对象只接受字符串作为键名，所以<code>element</code>被自动转为字符串<code>[object HTMLDivElement]</code>。</p>
+<p>为了解决这个问题，ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适。</p>
+<pre><code class="language-javascript">const m = new Map();
+const o = {p: 'Hello World'};
+
+m.set(o, 'content')
+m.get(o) // &quot;content&quot;
+
+m.has(o) // true
+m.delete(o) // true
+m.has(o) // false
+</code></pre>
+<p>上面代码使用 Map 结构的<code>set</code>方法，将对象<code>o</code>当作<code>m</code>的一个键，然后又使用<code>get</code>方法读取这个键，接着使用<code>delete</code>方法删除了这个键。</p>
+<blockquote>
+<p><a href="http://es6.ruanyifeng.com/?search=set&amp;x=0&amp;y=0#docs/set-map">上面这段来源于阮一峰 ES 6 标准入门</a></p>
+</blockquote>
+<hr>
+<h4 id="创建一个map">创建一个Map</h4>
+<pre><code class="language-javascript">const map = new Map([
+    ['a', 1],
+    ['b', 2]
+]);
+
+console.log(map);   // {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2}
+</code></pre>
+<h4 id="map的属性">Map的属性</h4>
+<pre><code class="language-javascript">const map = new Map([
+    ['a', 1],
+    ['b', 2]
+]);
+console.log(map.size);  //2
+</code></pre>
+<h4 id="map中的方法">Map中的方法</h4>
+<h5 id="1-mapsetkey-value-添加数据">1-Map.set(key, value) 添加数据</h5>
+<blockquote>
+<p>添加键名为<code>key</code>键值为<code>value</code>的数据，然后返回整个 <code>Map</code>。如果<code>key</code>已经存在，则键值会被更新，否则就新生成数据。<br>
+<strong>可以使用链式添加</strong></p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['m1', 'm']
+]);
+map.set('a1', 1).set('b1', '2').set('c1', '3');
+console.log(map);   
+//{&quot;m1&quot; =&gt; &quot;m&quot;, &quot;a1&quot; =&gt; 1, &quot;b1&quot; =&gt; &quot;2&quot;, &quot;c1&quot; =&gt; &quot;3&quot;}
+</code></pre>
+<h5 id="2-mapgetkey-获取数据">2-Map.get(key)  获取数据</h5>
+<blockquote>
+<p>读取key对应的键值，如果找不到 key，返回undefined。</p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.get('a1'));   //1
+console.log(map.get('d'));   //undefined
+</code></pre>
+<h5 id="3-mapdeletekey-删除数据">3-Map.delete(key) 删除数据</h5>
+<blockquote>
+<p>删除某个键，方法返回一个布尔值，判断是否删除成功</p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.delete('a1'));   //true
+console.log(map.delete('d'));   //false
+console.log(map);   //{&quot;b1&quot; =&gt; &quot;2&quot;, &quot;c1&quot; =&gt; &quot;3&quot;}
+</code></pre>
+<h5 id="4-maphaskey-判断数据是否存在">4-Map.has(key)  判断数据是否存在</h5>
+<blockquote>
+<p>方法返回一个布尔值，判断数据是否存在</p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.has('a1'));   //true
+console.log(map.has('d'));   //false
+</code></pre>
+<h5 id="5-mapclear-清除数据">5-Map.clear() 清除数据</h5>
+<blockquote>
+<p>清除所有数据，没有返回值。</p>
+</blockquote>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+map.clear();
+console.log(map);   //{}
+</code></pre>
+<h4 id="遍历操作-2">遍历操作</h4>
+<p><strong>注</strong></p>
+<blockquote>
+<p>遍历器对象可用<code>for..of</code>获取</p>
+</blockquote>
+<h5 id="6-mapkeys-返回键名">6-Map.keys() 返回键名</h5>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.keys());  
+ //MapIterator {&quot;a1&quot;, &quot;b1&quot;, &quot;c1&quot;}
+</code></pre>
+<h5 id="7-mapvalues-返回键值">7-Map.values() 返回键值</h5>
+<pre><code class="language-javascript">console.log(map.values());   
+//MapIterator {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;}
+</code></pre>
+<h5 id="8-mapentries-返回键值对">8-Map.entries() 返回键值对</h5>
+<pre><code class="language-javascript"> const map = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+console.log(map.entries());   //MapIterator {&quot;a1&quot; =&gt; &quot;1&quot;, &quot;b1&quot; =&gt; &quot;2&quot;, &quot;c1&quot; =&gt; &quot;3&quot;}
+
+// 遍历器对象获取数据
+for (let item of map.entries()) {
+    console.log(item);
+};
+//['a1', '1'] ['b1', '2'] ['c1', '3']
+</code></pre>
+<h5 id="9-mapforeach-使用回调函数遍历每个成员">9-Map.forEach() 使用回调函数遍历每个成员</h5>
+<blockquote>
+<p>回调参数，第一个是值，第二个是键，第三个是数据本身</p>
+</blockquote>
+<pre><code class="language-javascript">const map1 = new Map([
+    ['a1', '1'],
+    ['b1', '2'],
+    ['c1', '3']
+]);
+map1.forEach(function (value, key, map) {
+    console.log(key);  //a1 b1 c1
+})
+</code></pre>
+<h5 id="map-中key值一些注意点">Map 中key值一些注意点</h5>
+<p>1.NaN===NaN</p>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1']
+]);
+map.set(NaN, 1).set(NaN, 2);
+console.log(map);   
+//{&quot;a1&quot; =&gt; &quot;1&quot;, NaN =&gt; 2}  map中NaN===NaN
+</code></pre>
+<p>2.空对象不相等，比较的是内存的地址</p>
+<pre><code class="language-javascript">const map = new Map([
+    ['a1', '1']
+]);
+map.set({}, '1').set({}, '2');
+console.log(map);   
+//{&quot;a1&quot; =&gt; &quot;1&quot;, Object {} =&gt; &quot;1&quot;, Object {} =&gt; &quot;2&quot;}
+console.log({} === {}); //false
+</code></pre>
+<hr>
+<h2 id="iterator和forof循环">Iterator和for...of循环</h2>
+<p><a href="http://es6.ruanyifeng.com/#docs/iterator">阮一峰Iterator章节</a></p>
+<blockquote>
+<p>一个数据结构只要具有<code>Symbol.iterator</code>属性，就可以认为是“可遍历的”（iterable）。<br>
+在ES6中，有三类数据结构原生具备Iterator接口：</p>
+<ul>
+<li>1-数组、</li>
+<li>2-某些类似数组的对象（存在数值键名和length属性））、</li>
+<li>3-Set和Map结构</li>
+<li>4-字符串</li>
+</ul>
+<p><strong>注</strong> — 对象（Object）没有默认部署Iterator接口</p>
+</blockquote>
+<pre><code class="language-javascript">let str = 'abc';
+const a1 = str[Symbol.iterator]();
+console.log(a1.next());     //{value: &quot;a&quot;, done: false}
+console.log(a1.next());     //{value: &quot;b&quot;, done: false}
+console.log(a1.next());     //{value: &quot;c&quot;, done: false}
+console.log(a1.next());     //{value: undefined, done: true}
+</code></pre>
+<h4 id="iterator的遍历过程">Iterator的遍历过程</h4>
+<p>（1）创建一个指针对象，指向当前数据结构的起始位置。也就是说，遍历器对象本质上，就是一个指针对象。<br>
+（2）第一次调用指针对象的<code>next</code>方法，可以将指针指向数据结构的第一个成员。<br>
+（3）第二次调用指针对象的<code>next</code>方法，指针就指向数据结构的第二个成员。<br>
+（4）不断调用指针对象的<code>next</code>方法，直到它指向数据结构的结束位置。<br>
+每一次调用<code>next</code>方法，都会返回数据结构的当前成员的信息。具体来说，就是返回一个包含<code>value</code>和<code>done</code>两个属性的对象。其中，<code>value</code>属性是当前成员的值，<code>done</code>属性是一个布尔值，表示遍历是否结束。</p>
+<h5 id="模拟next方法返回值">模拟next方法返回值</h5>
+<pre><code class="language-javascript">const arr = [1, 2, 3];
+function iterator(arr) {
+    let index = 0;
+    return {
+        next: function () {
+            return index &lt; arr.length ?
+                { value: arr[index++], done: false } :
+                { value: undefined, done: true };
+        }
+    }
+};
+
+const it = iterator(arr);   //
+console.log(it.next());     //{value: 1, done: false}
+console.log(it.next());     //{value: 2, done: false}
+console.log(it.next());     //{value: 3, done: false}
+console.log(it.next());     //{value: undefined, done: true}
+</code></pre>
+<h4 id="具备iterator接口的数据结构特性">具备iterator接口的数据结构特性</h4>
+<h5 id="解构赋值">解构赋值</h5>
+<pre><code class="language-javascript">const set = new Set(['a', 'b', 'c']);
+let [x, y] = set;
+console.log(x, y);      //a b
+</code></pre>
+<h5 id="扩展运算符">扩展运算符</h5>
+<pre><code class="language-javascript">let str = 'hellow';
+let arrStr = [...str];
+console.log(arrStr);    // [&quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;]
+
+//数组去重
+const arr2 = ['a', 1, 2, 3, 2, 1, 'a', '2'];
+console.log([...new Set(arr2)]);    //[&quot;a&quot;, 1, 2, 3, &quot;2&quot;]
+</code></pre>
+<h4 id="forof循环">for...of循环</h4>
+<blockquote>
+<p><code>for...of</code>循环内部调用的是数据结构的<code>Symbol.iterator</code>方法</p>
+</blockquote>
+<p><code>for...of</code>循环可以代替数组实例的<code>forEach</code>方法。</p>
+<pre><code class="language-javascript">const arr = ['red', 'green', 'blue'];
+
+arr.forEach(function (element, index) {
+  console.log(element); // red green blue
+  console.log(index);   // 0 1 2
+});
+</code></pre>
+<p>#####遍历 Set 结构和 Map 结构</p>
+<blockquote>
+<p>**1-**遍历的顺序是按照各个成员被添加进数据结构的顺序。<br>
+**2-**Set 结构遍历时，返回的是一个值<br>
+<strong>3-</strong> Map 结构遍历时，返回的是一个数组，该数组的两个成员分别为当前 Map 成员的键名和键值。</p>
+</blockquote>
+<pre><code class="language-javascript">//set
+const newSet = new Set([1, 2, 3]);
+for (let i of newSet) {
+    console.log(i);     //1  2  3
+};
+
+//map
+const newMap = new Map([
+    [1, 2],
+    ['a', 3],
+    ['c', 4]
+]);
+for (let i of newMap) {
+    console.log(i);     // [1, 2]   [&quot;a&quot;, 3]    [&quot;c&quot;, 4]
+};
+
+//使用解构赋值
+const newMap = new Map([
+    [1, 2],
+    ['a', 3],
+    ['c', 4]
+]);
+for (let [key, value] of newMap) {
+    console.log(key);     // 1  a   c
+    console.log(value);     // 2  3  4
+}
+</code></pre>
+<h4 id="与其他遍历语法的比较">与其他遍历语法的比较</h4>
+<blockquote>
+<p><a href="http://es6.ruanyifeng.com/#docs/iterator#%E4%B8%8E%E5%85%B6%E4%BB%96%E9%81%8D%E5%8E%86%E8%AF%AD%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83">下面这段来源于阮一峰 ES 6 标准入门</a></p>
+</blockquote>
+<p>以数组为例，JavaScript 提供多种遍历语法。最原始的写法就是<code>for</code>循环。</p>
+<pre><code class="language-javascript">for (var index = 0; index &lt; myArray.length; index++) {
+  console.log(myArray[index]);
+}
+</code></pre>
+<p>这种写法比较麻烦，因此数组提供内置的<code>forEach</code>方法。</p>
+<pre><code class="language-javascript">myArray.forEach(function (value) {
+  console.log(value);
+});
+</code></pre>
+<p>这种写法的问题在于，无法中途跳出<code>forEach</code>循环，<code>break</code>命令或<code>return</code>命令都不能奏效。</p>
+<p><code>for...in</code>循环可以遍历数组的键名。</p>
+<pre><code class="language-javascript">for (var index in myArray) {
+  console.log(myArray[index]);
+}
+</code></pre>
+<p><code>for...in</code>循环有几个缺点。</p>
+<ul>
+<li>数组的键名是数字，但是<code>for...in</code>循环是以字符串作为键名“0”、“1”、“2”等等。</li>
+<li><code>for...in</code>循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。</li>
+<li>某些情况下，<code>for...in</code>循环会以任意顺序遍历键名。</li>
+</ul>
+<p>总之，<code>for...in</code>循环主要是为遍历对象而设计的，不适用于遍历数组。</p>
+<p><code>for...of</code>循环相比上面几种做法，有一些显著的优点。</p>
+<pre><code class="language-javascript">for (let value of myArray) {
+  console.log(value);
+}
+</code></pre>
+<ul>
+<li>有着同<code>for...in</code>一样的简洁语法，但是没有<code>for...in</code>那些缺点。</li>
+<li>不同用于<code>forEach</code>方法，它可以与<code>break</code>、<code>continue</code>和<code>return</code>配合使用。</li>
+<li>提供了遍历所有数据结构的统一操作接口。</li>
+</ul>
+<p>下面是一个使用break语句，跳出<code>for...of</code>循环的例子。</p>
+<pre><code class="language-javascript">const a1 = [1, 2, 3, 4, 5, 6, 7, 8, 8, 9]
+for (var n of a1) {
+    if (n &gt; 4)
+        break;
+    console.log(n);     //1  2  3  4
+}
+</code></pre>
+<hr>
+<h2 id="class语法">Class语法</h2>
+<hr>
+<h2 id="symbol">Symbol</h2>
+<h3 id="1-什么是-symbol">1-什么是 Symbol ?</h3>
+<p>ES5 的对象属性名都是字符串，这容易造成属性名的冲突。这就是 ES6 引入<code>Symbol</code>的原因。</p>
+<blockquote>
+<ul>
+<li>Symbol，表示独一无二的值。它是 JS 中的第七种数据类型。</li>
+</ul>
+</blockquote>
+<p><strong>基本的数据类型</strong>： Null Undefined Number Boolean String Symbol<br>
+**引用数据类型：**Object</p>
+<h4 id="创建一个symbol">创建一个<code>Symbol</code></h4>
+<p>**注：**Symbol 函数前不能使用 new 否则会报错，原因在于 Symbol 是一个原始类型的值，不是对象。</p>
+<pre><code class="language-javascript">let s1 = Symbol();
+let s2 = Symbol();
+console.log(typeof s1); //symbol
+console.log(s1 === s2); //false
+</code></pre>
+<h5 id="-symbol参数">- Symbol参数</h5>
+<blockquote>
+<p>函数接收一个字符串作为参数，表示对Symbol的描述，主要是为了在控制台显示，或者转为字符串的时候，比较容易区分</p>
+</blockquote>
+<pre><code class="language-javascript">let s3 = Symbol('a1');
+let s4 = Symbol('a2');
+console.log(s3, s4);    //Symbol(a1) Symbol(a2)
+</code></pre>
+<p>注意，<code>Symbol</code>函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的<code>Symbol</code>函数的返回值是不相等的。</p>
+<pre><code class="language-javascript">// 没有参数的情况
+var s1 = Symbol();
+var s2 = Symbol();
+
+s1 === s2 // false
+
+// 有参数的情况
+var s1 = Symbol('foo');
+var s2 = Symbol('foo');
+
+s1 === s2 // false
+</code></pre>
+<h3 id="2-symbol-数据类型的转换">2-Symbol 数据类型的转换</h3>
+<p>-1 转换成字符</p>
+<pre><code class="language-javascript">console.log(String(Symbol('a1'))); // Symbol(a1)
+console.log(Symbol('a2').toString()); // Symbol(a2)
+</code></pre>
+<p>-2 转换成布尔值</p>
+<pre><code class="language-javascript">console.log(!!Symbol()); // true
+</code></pre>
+<p>-3 TypeError: 不能转换成数字</p>
+<pre><code class="language-javascript">console.log(Number(Symbol()));  
+</code></pre>
+<p>-4 Symbol 值不能与其他类型的值进行运算</p>
+<pre><code class="language-javascript">console.log(Symbol('1') * 100);  //报错
+</code></pre>
+<h3 id="3-作为对象的属性名">3-作为对象的属性名</h3>
+<blockquote>
+<p>需要使用<code>[]</code>，设置和读取</p>
+</blockquote>
+<pre><code class="language-javascript">let s1 = Symbol('a1');
+const obj = {};
+obj[s1] = 'hello';
+console.log(obj);       //Object {Symbol(a1): &quot;hello&quot;}
+console.log(obj[s1]);   //hello
+
+// 第二种写法
+var a = {
+  [s1]: 'Hello!'
+};
+</code></pre>
+<p>Symbol 作为属性名，该属性不会出现在<code>for...in</code>、<code>for...of</code>循环中，也不会被<code>Object.keys()</code>、<code>Object.getOwnPropertyNames()</code>、<code>JSON.stringify()</code>返回。<br>
+但是，它也不是私有属性，有一个<code>Object.getOwnPropertySymbols</code>方法，可以获取指定对象的所有 Symbol 属性名。</p>
+<pre><code class="language-javascript">const cs1 = {
+    [Symbol()]: 0,
+    [Symbol()]: 1,
+    a: 2,
+    b: 3
+};
+
+console.log(cs1);   // {a: 2, b: 3, Symbol(): 0, Symbol(): 1}
+console.log(cs1['Symbol()']);   //undefined 无法获取
+
+for (let i in cs1) {
+    console.log(i);
+}
+//a  b  无法获取
+
+
+console.log(Object.getOwnPropertySymbols(cs1));         //[Symbol(), Symbol()]
+console.log(cs1[Object.getOwnPropertySymbols(cs1)[0]]); //0
+</code></pre>
+<hr>
+<h2 id="字符串的扩展">字符串的扩展</h2>
+<h3 id="模板字符串">模板字符串</h3>
+<pre><code class="language-javascript">let flag = true;
+let data = {
+    name: &quot;doupo&quot;,
+    age: &quot;18&quot;
+}
+let html = `&lt;ul&gt;
+              &lt;li&gt;
+                &lt;span&gt;${'首页'}&lt;/span&gt;        //添加字符
+                &lt;span&gt;${data.name}&lt;/span&gt;   //外部数据
+                &lt;span class=&quot;${flag ? 'show' : 'hide'}&quot;&gt;&lt;/span&gt; //动态class
+              &lt;/li&gt;
+            &lt;/ul&gt;`;
+
+console.log(html);
+    /*
+        &lt;ul&gt;
+              &lt;li&gt;
+                &lt;span&gt;首页&lt;/span&gt;        &lt;!--添加字符--&gt;
+                &lt;span&gt;doupo&lt;/span&gt;
+                &lt;span class=&quot;show&quot;&gt;&lt;/span&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+    */
+</code></pre>
+<h3 id="字符串新增方法">字符串新增方法</h3>
+<h4 id="repeat方法">repeat方法</h4>
+<blockquote>
+<p>将原字符串重复n次返回<br>
+参数为0返回空字符</p>
+</blockquote>
+<pre><code class="language-javascript">let a = 'a1';
+console.log(a.repeat(3));   //a1a1a1
+</code></pre>
+<h4 id="includes-startswith-endswith">includes() startsWith() endsWith()</h4>
+<blockquote>
+<p>includes()：返回布尔值，查找参数字符是否存在<br>
+startsWith()：返回布尔值，从头部开始查找参数字符<br>
+endsWith()：返回布尔值，从尾部开始查找参数字符</p>
+</blockquote>
+<pre><code class="language-javascript">let str1 = &quot;doupo&quot;;
+console.log(str1.includes('dou'));  //true
+console.log(str1.includes('du'));  //false
+console.log(str1.includes('o', 3));  //true  
+
+console.log(str1.startsWith('dou'));  //true  头部开始搜索
+console.log(str1.startsWith('ou'));  //false  
+console.log(str1.startsWith('ou', 1));  //true  
+
+console.log(str1.endsWith('po'));  //true  尾部开始搜索
+console.log(str1.endsWith('p', str1.length - 1));  //true  
+</code></pre>
+<p><code>includes() startsWith()</code>这两个方法使用第二个参数的时候，表示是从参数开始位置==&gt;字符结尾	（正）<br>
+<code>endsWith()</code>表示是从参数位置==&gt;字符开始（倒）</p>
+<h4 id="字符串补全">字符串补全</h4>
+<blockquote>
+<p><code>padStart()</code>用于头部补全，<code>padEnd()</code>用于尾部补全</p>
+</blockquote>
+<pre><code class="language-javascript">let str1 = 'abcd';
+console.log(str1.padStart(6, '123456'));     //12abcd  
+console.log(str1.padStart(3, '123456'));     //abcd  //字符原长度大于等于参数的长度，就返回原字符  
+console.log(str1.padStart(6, '1'));     //11abcd 
+console.log(str1.padStart(6));     //‘  abcd’ 第二个参数为空，默认使用空格补全
+
+// 尾部补全方法同上
+</code></pre>
+<h2 id="数组的扩展">数组的扩展</h2>
+<h4 id="arrayfrom-类数组转化为数组">Array.from() 类数组转化为数组</h4>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;script&gt;
+        let arrayLike = {
+            '0': 'a',
+            '1': 'b',
+            '2': 'c',
+            length:3
+        };
+        let arr2 = Array.from(arrayLike);
+        console.log(arr2);  // ['a', 'b', 'c']
+
+        let domlist=document.querySelectorAll('li');
+        console.log(domlist);   // [li, li, li]length: 3  0: li 1: li 2: li __proto__: NodeList
+        console.log(Array.from(domlist));   //[li, li, li] 0: li 1: li 2: lilength: 3 __proto__: Array(0)
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h4 id="arrayof">Array.of()</h4>
+<blockquote>
+<p>将一组值，转换为数组</p>
+</blockquote>
+<pre><code class="language-javascript">let arr1 = Array.of(1, 2, 3);
+console.log(arr1);  //[1, 2, 3]
+</code></pre>
+<h4 id="find-findindex-查找">find()  findIndex() 查找</h4>
+<blockquote>
+<p>都是找出第一个符合条件的数组成员<br>
+<code>findIndex()</code>返回的是下标</p>
+</blockquote>
+<pre><code class="language-javascript">const arr = [-1, -2, 3, 4];
+let res = arr.find(function (a) {
+    return a &gt; 0;
+});
+console.log(res);   //3 
+
+const arr2 = [1, -2, 3, 4];
+let res2 = arr2.findIndex(function (a) {
+    return a &lt; 0;
+});
+console.log(res2);  //1 下标1
+</code></pre>
+<h4 id="fill-填充">fill() 填充</h4>
+<pre><code class="language-javascript">const arr = [-1, -2, 3, 4];
+console.log(arr.fill('a')); //[&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;]
+console.log(arr.fill('a', 1, 3)); //[-1, &quot;a&quot;, &quot;a&quot;, 4]
+// 第二个和第三个参数，表示起始和结束位置，不包含结束位置
+</code></pre>
+<hr>
+<h2 id="对象的扩展">对象的扩展</h2>
+<h4 id="对象的简洁表示法">对象的简洁表示法</h4>
+<pre><code class="language-javascript">// 属性简写///
+let str1 = 'doupo';
+let obj1 = {
+    str1: str1
+}
+console.log(obj1);  //{str1: &quot;doupo&quot;}
+//简写
+let obj2 = { str1 };
+console.log(obj2);  //{str1: &quot;doupo&quot;}
+
+//方法简写///
+let obj3 = {
+    fun1: function () {
+        console.log('1');
+    },
+    fun2() {
+        console.log('2');
+    }
+};
+
+obj3.fun1();    //1
+obj3.fun2();    //2
+</code></pre>
+<h4 id="objectis">Object.is()</h4>
+<blockquote>
+<p>比较两个值是否严格相等</p>
+</blockquote>
+<pre><code class="language-javascript">let obj1 = {};
+let obj2 = {};
+console.log(Object.is(obj1, obj2));   //false
+console.log(Object.is(NaN, NaN));   //true
+console.log(Object.is(+0, -0));     //false
+</code></pre>
+<h4 id="objectassign">Object.assign()</h4>
+<blockquote>
+<p>用于对象的合并，将源对象的所有可枚举属性，复制到目标对象。<br>
+<code>Object.assign</code>方法的第一个参数是目标对象，后面的参数都是源对象</p>
+</blockquote>
+<pre><code class="language-javascript">let obj1 = { a: 1 };
+let obj2 = { a: 2, b: 3 };
+let obj3 = { c: 'abc' };
+Object.assign(obj1, obj2, obj3);
+console.log(obj1);  //{a: 2, b: 3, c: &quot;abc&quot;}  如果有同名属性，后面覆盖前面
+</code></pre>
+<p><code>Object.assign</code>方法实行的是浅拷贝，而不是深拷贝。源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。<br>
+这个对象的任何变化，都会反映到目标对象上面</p>
+<pre><code class="language-javascript">let obj1 = { a: { b: 1 } };
+let obj2 = Object.assign({}, obj1);
+obj2.a.b = 2;
+console.log(obj1.a.b) // 2
+</code></pre>
+<hr>
+<h2 id="函数扩展">函数扩展</h2>
+<h4 id="1-为函数参数指定默认值">1-为函数参数指定默认值</h4>
+<pre><code class="language-javascript">function fn(a, b = 'World') {
+    // 参数变量a,b是默认声明
+    //let a = 'hi';          //报错提示已经被声明
+    console.log(a + b);
+}
+fn();           //undefinedWorld
+fn('Hello');    //HelloWorld
+</code></pre>
+<h4 id="2-函数的-rest-参数">2-函数的 rest 参数</h4>
+<p>rest 参数形式为（“...变量名”），用于获取函数的多余参数，这样就不需要使用arguments对象了。rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。</p>
+<pre><code class="language-javascript">function sum() {
+    var args = arguments;
+    var res = 0;
+    for (var i = 0; i &lt; args.length; i++) {
+        res += args[i];
+    }
+    console.log(res);
+}
+sum(1, 2, 3, 4, 5); //15
+
+function sum(a, b, ...arr) {
+//传递其他参数需要放在rest参数前，否则会报错
+    var res = a;
+    for (var i = 0; i &lt; arr.length; i++) {
+        res += arr[i];
+    }
+    res += b;
+    console.log(res);
+}
+sum(10, 'c', 1, 2, 3, 4, 5); //25c
+</code></pre>
+<h4 id="3-箭头函数">3-箭头函数</h4>
+<blockquote>
+<p>ES6允许使用“箭头”（=&gt;）定义函数</p>
+</blockquote>
+<pre><code class="language-javascript">let fn = a =&gt; a;
+//等同于
+let fn2 = function (a) {
+    return a;
+};
+</code></pre>
+<blockquote>
+<p>如果箭头函数不需要参数或需要多个参数，可以使用()</p>
+</blockquote>
+<pre><code class="language-javascript">var f = () =&gt; 5;
+// 等同于
+var f = function () { return 5 };
+
+var sum = (num1, num2) =&gt; num1 + num2;
+// 等同于
+var sum = function (num1, num2) {
+    return num1 + num2;
+};
+</code></pre>
+<blockquote>
+<p>箭头函数简化sort排序</p>
+</blockquote>
+<pre><code class="language-javascript">var arr = [3, 1, 3, 5, 2];
+
+arr.sort(function (a, b){
+   return a - b;
+});
+
+//箭头函数
+arr.sort((a, b) =&gt; a - b);
+</code></pre>
+<h3 id="使用注意点">使用注意点</h3>
+<p>（1）函数体内的<code>this</code>对象，就是定义时所在的对象，而不是使用时所在的对象。</p>
+<p>（2）不可以当作构造函数，也就是说，不可以使用<code>new</code>命令，否则会抛出一个错误。</p>
+<p>（3）不可以使用<code>arguments</code>对象，该对象在函数体内不存在。如果要用，可以用Rest参数代替。</p>
+<p>（4）不可以使用<code>yield</code>命令，因此箭头函数不能用作Generator函数。</p>
+<hr>
+<h2 id="promise">Promise</h2>
+<p><code>Promise</code>对象代表一个异步操作，有三种状态：<code>Pending</code>（进行中）、<code>Resolved</code>（已完成，又称 Fulfilled）和<code>Rejected</code>（已失败）</p>
+<p>Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject。</p>
+<p><code>resolve</code>函数将状态从“未完成”变为“成功”（即从Pending变为Resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去<br>
+<code>reject</code>函数将状态从“未完成”变为“失败”（即从Pending变为Rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去</p>
+<p>Promise实例生成以后，可以用<code>then</code>方法分别指定<code>Resolved</code>状态和<code>Reject</code>状态的回调函数。</p>
+<h5 id="promiseprototypethen-状态改变回调">Promise.prototype.then() 状态改变回调</h5>
+<p><code>then</code>方法的第一个参数是Resolved状态的回调函数，第二个参数（可选）是Rejected状态的回调函数。<br>
+<strong>不建议这样写，推荐使用失败回调catch</strong></p>
+<pre><code class="language-javascript">loadImage('http://doupo.me/imaes/profile_img.jpg').then(function (img) {
+    document.body.appendChild(img)
+}, function (err) {
+    console.log(err);
+});
+</code></pre>
+<h5 id="promiseprototypecatch失败回调">Promise.prototype.catch()		失败回调</h5>
+<pre><code class="language-javascript">var imgArry = ['http://doupo.me/images/profile_img.jpg', 'http://doupo.me/images/same_text_time_icon.jpg'];
+function loadImage(url) {
+    return new Promise(function (resolve, reject) {
+        var image = new Image();
+
+        image.onload = function () {
+            resolve(image);
+            //成功 传出image
+        };
+
+        image.onerror = function () {
+            reject(new Error('加载失败 ' + url));
+            //失败-传出错误信息
+        };
+
+        image.src = url;
+    });
+}
+
+loadImage(imgArry[0]).then(function (img) {
+    document.body.appendChild(img);
+    //成功，将图片显示在body中
+}).catch(function (err) {
+    console.log(err);
+    //失败，打印错误信息
+});
+</code></pre>
+<h5 id="promiseall">Promise.all()</h5>
+<p>Promise.all方法用于将多个Promise实例，包装成一个新的Promise实例，接受一个数组作为参数，数组成员为Promise对象实例<br>
+<strong>注</strong>只有全部实例状态都为成功（全部成功后将所有实例的返回值组成一个数组传递给回调函数），才返回成功，否则返回失败（返回第一个出错的返回值）</p>
+<pre><code class="language-javascript">var imgArry = ['http://doupo.me/images/profile_img.jpg', 'http://doupo.me/images/same_text_time_icon.jpg'];
+function loadImage(url) {
+    return new Promise(function (resolve, reject) {
+        var image = new Image();
+
+        image.onload = function () {
+            resolve(image);
+        };
+
+        image.onerror = function () {
+            reject(new Error('加载失败 ' + url));
+        };
+
+        image.src = url;
+    });
+}
+
+let newPlist = Promise.all([loadImage(imgArry[0]), loadImage(imgArry[1])]);
+newPlist.then(function (img) {
+    //此处img为两个实例返回的数组
+    for (var i of img) {
+        document.body.appendChild(i);
+    };
+}).catch(function (err) {
+    console.log(err);
+});
+</code></pre>
+<h3 id="promiseresolve">Promise.resolve()</h3>
+<blockquote>
+<p>将现有对象转为Promise对象</p>
+</blockquote>
+<h5 id="1-参数为promise实例">1-参数为Promise实例</h5>
+<blockquote>
+<p>将不做任何修改，返回这个实例</p>
+</blockquote>
+<pre><code class="language-javascript">Promise.resolve(loadImage(imgArry[0])).then(function(img){
+            document.body.appendChild(img);
+       })
+</code></pre>
+<h5 id="2-参数是一个thenable对象">2-参数是一个thenable对象</h5>
+<blockquote>
+<p><code>thenable</code>对象指的是具有<code>then</code>方法的对象<br>
+将对象转为Promise对象，然后立即执行<code>thenable</code>对象的<code>then</code>方法</p>
+</blockquote>
+<pre><code class="language-javascript">var imgArry = ['http://doupo.me/images/profile_img.jpg', 'http://doupo.me/images/same_text_time_icon.jpg'];
+Promise.resolve({
+    then(resolve, reject) {
+        var image = new Image();
+        image.src = imgArry[0];
+        image.onload = function () {
+            resolve(image)
+        }
+    }
+}).then(function (img) {
+    document.body.appendChild(img);
+});
+</code></pre>
+<h5 id="不传参或者基本数据类型">不传参或者基本数据类型</h5>
+<p>参数是一个基本数据类型或者不传参数，那么返回一个状态为<code>resolved</code>的Promise对象</p>
+<pre><code class="language-javascript">Promise.resolve('hi').then(function (str) {
+    console.log(str);    //hi
+});
+</code></pre>
+<hr>
+<h2 id="generator">Generator</h2>
+<hr>
+<h2 id="async-函数">async 函数</h2>
+<hr>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#ecmascript-6">ECMAScript 6</a>
+<ul>
+<li><a href="#let%E5%92%8Cconst%E5%91%BD%E4%BB%A4">let和const命令</a>
+<ul>
+<li><a href="#let%E5%91%BD%E4%BB%A4">let命令</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">基本用法</a></li>
+<li><a href="#%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87">不存在变量提升</a></li>
+<li><a href="#%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA">暂时性死区</a></li>
+<li><a href="#%E4%B8%8D%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E">不允许重复声明</a></li>
+</ul>
+</li>
+<li><a href="#const%E5%91%BD%E4%BB%A4">const命令</a>
+<ul>
+<li><a href="#const%E5%A3%B0%E6%98%8E%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%AF%BB%E7%9A%84%E5%B8%B8%E9%87%8F-%E4%B8%80%E6%97%A6%E5%A3%B0%E6%98%8E%E5%B8%B8%E9%87%8F%E7%9A%84%E5%80%BC%E5%B0%B1%E4%B8%8D%E8%83%BD%E6%94%B9%E5%8F%98">const声明一个只读的常量。一旦声明，常量的值就不能改变。</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC">变量的解构赋值</a>
+<ul>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E4%B8%BB%E8%A6%81%E5%88%86%E4%B8%BA">解构赋值主要分为</a>
+<ul>
+<li><a href="#1%E6%95%B0%E7%BB%84%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC">1.数组的解构赋值</a>
+<ul>
+<li><a href="#%E5%B8%A6%E6%9C%89%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC">带有默认值的解构赋值</a></li>
+</ul>
+</li>
+<li><a href="#2%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC">2.对象的解构赋值</a></li>
+<li><a href="#3%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC">3.基本类型的解构赋值</a>
+<ul>
+<li><a href="#length%E5%B1%9E%E6%80%A7%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC">length属性解构赋值</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#set%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">set数据结构</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-2">基本用法</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAset">创建一个set</a></li>
+<li><a href="#set%E7%9A%84%E5%B1%9E%E6%80%A7">set的属性</a></li>
+<li><a href="#set%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95">set中的方法</a>
+<ul>
+<li><a href="#1-setaddvalue-%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE">1-set.add(value) 添加数据</a></li>
+<li><a href="#2-setdeletevalue-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE">2-set.delete(value) 删除数据</a></li>
+<li><a href="#3-sethasvalue-%E5%88%A4%E6%96%AD%E5%80%BC%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8">3-set.has(value) 判断值是否存在</a></li>
+<li><a href="#4-setclear-%E6%B8%85%E9%99%A4%E6%95%B0%E6%8D%AE">4-set.clear() 清除数据</a></li>
+</ul>
+</li>
+<li><a href="#%E9%81%8D%E5%8E%86%E6%93%8D%E4%BD%9C">遍历操作</a>
+<ul>
+<li><a href="#1-keys-%E8%BF%94%E5%9B%9E%E9%94%AE%E5%90%8D">1-keys() 返回键名</a></li>
+<li><a href="#2-values-%E8%BF%94%E5%9B%9E%E9%94%AE%E5%80%BC">2-values() 返回键值</a></li>
+<li><a href="#3-entries-%E8%BF%94%E5%9B%9E%E9%94%AE%E5%80%BC%E5%AF%B9">3-entries() 返回键值对</a></li>
+<li><a href="#4-foreach-%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E9%81%8D%E5%8E%86%E6%AF%8F%E4%B8%AA%E6%88%90%E5%91%98">4-forEach() 使用回调函数遍历每个成员</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#map%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">Map数据结构</a>
+<ul>
+<li><a href="#%E5%90%AB%E4%B9%89%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">含义和基本用法</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAmap">创建一个Map</a></li>
+<li><a href="#map%E7%9A%84%E5%B1%9E%E6%80%A7">Map的属性</a></li>
+<li><a href="#map%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95">Map中的方法</a>
+<ul>
+<li><a href="#1-mapsetkey-value-%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE">1-Map.set(key, value) 添加数据</a></li>
+<li><a href="#2-mapgetkey-%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE">2-Map.get(key)  获取数据</a></li>
+<li><a href="#3-mapdeletekey-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE">3-Map.delete(key) 删除数据</a></li>
+<li><a href="#4-maphaskey-%E5%88%A4%E6%96%AD%E6%95%B0%E6%8D%AE%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8">4-Map.has(key)  判断数据是否存在</a></li>
+<li><a href="#5-mapclear-%E6%B8%85%E9%99%A4%E6%95%B0%E6%8D%AE">5-Map.clear() 清除数据</a></li>
+</ul>
+</li>
+<li><a href="#%E9%81%8D%E5%8E%86%E6%93%8D%E4%BD%9C-2">遍历操作</a>
+<ul>
+<li><a href="#6-mapkeys-%E8%BF%94%E5%9B%9E%E9%94%AE%E5%90%8D">6-Map.keys() 返回键名</a></li>
+<li><a href="#7-mapvalues-%E8%BF%94%E5%9B%9E%E9%94%AE%E5%80%BC">7-Map.values() 返回键值</a></li>
+<li><a href="#8-mapentries-%E8%BF%94%E5%9B%9E%E9%94%AE%E5%80%BC%E5%AF%B9">8-Map.entries() 返回键值对</a></li>
+<li><a href="#9-mapforeach-%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E9%81%8D%E5%8E%86%E6%AF%8F%E4%B8%AA%E6%88%90%E5%91%98">9-Map.forEach() 使用回调函数遍历每个成员</a></li>
+<li><a href="#map-%E4%B8%ADkey%E5%80%BC%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9">Map 中key值一些注意点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#iterator%E5%92%8Cforof%E5%BE%AA%E7%8E%AF">Iterator和for...of循环</a><br>
+*
+<ul>
+<li><a href="#iterator%E7%9A%84%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B">Iterator的遍历过程</a>
+<ul>
+<li><a href="#%E6%A8%A1%E6%8B%9Fnext%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E5%80%BC">模拟next方法返回值</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B7%E5%A4%87iterator%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%89%B9%E6%80%A7">具备iterator接口的数据结构特性</a>
+<ul>
+<li><a href="#%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC">解构赋值</a></li>
+<li><a href="#%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6">扩展运算符</a></li>
+</ul>
+</li>
+<li><a href="#forof%E5%BE%AA%E7%8E%AF">for...of循环</a></li>
+<li><a href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E9%81%8D%E5%8E%86%E8%AF%AD%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83">与其他遍历语法的比较</a></li>
+</ul>
+</li>
+<li><a href="#class%E8%AF%AD%E6%B3%95">Class语法</a></li>
+<li><a href="#symbol">Symbol</a>
+<ul>
+<li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AF-symbol">1-什么是 Symbol ?</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAsymbol">创建一个<code>Symbol</code></a>
+<ul>
+<li><a href="#-symbol%E5%8F%82%E6%95%B0">- Symbol参数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-symbol-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2">2-Symbol 数据类型的转换</a></li>
+<li><a href="#3-%E4%BD%9C%E4%B8%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%8D">3-作为对象的属性名</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95">字符串的扩展</a>
+<ul>
+<li><a href="#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2">模板字符串</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95">字符串新增方法</a>
+<ul>
+<li><a href="#repeat%E6%96%B9%E6%B3%95">repeat方法</a></li>
+<li><a href="#includes-startswith-endswith">includes() startsWith() endsWith()</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A5%E5%85%A8">字符串补全</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E7%BB%84%E7%9A%84%E6%89%A9%E5%B1%95">数组的扩展</a><br>
+*
+<ul>
+<li><a href="#arrayfrom-%E7%B1%BB%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BA%E6%95%B0%E7%BB%84">Array.from() 类数组转化为数组</a></li>
+<li><a href="#arrayof">Array.of()</a></li>
+<li><a href="#find-findindex-%E6%9F%A5%E6%89%BE">find()  findIndex() 查找</a></li>
+<li><a href="#fill-%E5%A1%AB%E5%85%85">fill() 填充</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95">对象的扩展</a><br>
+*
+<ul>
+<li><a href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%AE%80%E6%B4%81%E8%A1%A8%E7%A4%BA%E6%B3%95">对象的简洁表示法</a></li>
+<li><a href="#objectis">Object.is()</a></li>
+<li><a href="#objectassign">Object.assign()</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95">函数扩展</a><br>
+*
+<ul>
+<li><a href="#1-%E4%B8%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%8C%87%E5%AE%9A%E9%BB%98%E8%AE%A4%E5%80%BC">1-为函数参数指定默认值</a></li>
+<li><a href="#2-%E5%87%BD%E6%95%B0%E7%9A%84-rest-%E5%8F%82%E6%95%B0">2-函数的 rest 参数</a></li>
+<li><a href="#3-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0">3-箭头函数</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9">使用注意点</a></li>
+</ul>
+</li>
+<li><a href="#promise">Promise</a><br>
+*<br>
+*<br>
+* <a href="#promiseprototypethen-%E7%8A%B6%E6%80%81%E6%94%B9%E5%8F%98%E5%9B%9E%E8%B0%83">Promise.prototype.then() 状态改变回调</a><br>
+* <a href="#promiseprototypecatch%E5%A4%B1%E8%B4%A5%E5%9B%9E%E8%B0%83">Promise.prototype.catch()		失败回调</a><br>
+* <a href="#promiseall">Promise.all()</a>
+<ul>
+<li><a href="#promiseresolve">Promise.resolve()</a><br>
+*
+<ul>
+<li><a href="#1-%E5%8F%82%E6%95%B0%E4%B8%BApromise%E5%AE%9E%E4%BE%8B">1-参数为Promise实例</a></li>
+<li><a href="#2-%E5%8F%82%E6%95%B0%E6%98%AF%E4%B8%80%E4%B8%AAthenable%E5%AF%B9%E8%B1%A1">2-参数是一个thenable对象</a></li>
+<li><a href="#%E4%B8%8D%E4%BC%A0%E5%8F%82%E6%88%96%E8%80%85%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">不传参或者基本数据类型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#generator">Generator</a></li>
+<li><a href="#async-%E5%87%BD%E6%95%B0">async 函数</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/zheng-ze-biao-da-shi/">
+              <h3 class="post-title">
+                正则表达式
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

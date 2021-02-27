@@ -1,0 +1,444 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Js中this,call,apply,bind | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Js中this,call,apply,bind | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="this
+this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象
+window是js中的全局对象，我们创建的变量实际上是给window添加属性
+例1：
+func..." />
+    <meta name="keywords" content="js" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Js中this,call,apply,bind
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/js/" class="post-tag">
+                  # js
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h4 id="this">this</h4>
+<p><strong>this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象</strong><br>
+<strong>window是js中的全局对象，我们创建的变量实际上是给window添加属性</strong></p>
+<h5 id="例1">例1：</h5>
+<pre><code class="language-javascript">function athis(){
+  console.log(this);
+}
+athis(); //window
+
+//如果是点击执行：
+var oa1=document.getElementById('a1'); 
+oa1.onclick=athis; //指向id为a1的元素 object HTMLDivElement
+</code></pre>
+<h5 id="例2">例2：</h5>
+<pre><code class="language-javascript">	var user='hhh';
+var o = {
+    user:&quot;追梦子&quot;,
+    fn:function(){
+        console.log(this.user)  //追梦子
+        return function(){
+          console.log(this.user)  //指向window =&gt; hhh
+        }
+    }
+}
+console.log(o.fn()());
+
+if =&gt; console.log(o.fn())
+返回： //追梦子 和 function(){console.log(this.user)
+</code></pre>
+<blockquote>
+<p><code>o.fn()</code>返回<code>追梦子 和 function(){console.log(this.user)</code>;<br>
+如果执行<code>o.fn()()</code>；则返回的函数是由<code>window</code>调用；<br>
+返回全局变量<code>var user='hhh';</code></p>
+</blockquote>
+<h4 id="注意3点">注意3点</h4>
+<h5 id="情况1">情况1：</h5>
+<p>如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window</p>
+<h5 id="情况2">情况2：</h5>
+<p>如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。</p>
+<h5 id="情况3">情况3：</h5>
+<p>如果一个函数中有this，这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象</p>
+<h5 id="例3">例3：</h5>
+<pre><code class="language-javascript">var o = {
+    a:10,
+    b:{
+        a:12,  //如果这里没有给a定义值，则返回undefined
+        fn:function(){
+            console.log(this.a); //12
+        }
+    }
+}
+o.b.fn();
+
+var o = {
+    a:10,
+    b:{
+        //a:12,
+        fn:function(){
+            console.log(this.a); //undefined
+        }
+    }
+}
+o.b.fn();
+</code></pre>
+<h5 id="例4">例4：</h5>
+<pre><code class="language-javascript">var x = 20;
+    var a = {
+        x: 15,
+        fn: function () {
+            var x = 30;
+            return function () {
+                return this.x;
+            };
+        }
+    };
+
+    console.log(a.fn());  //function(){return this.x;}
+    console.log((a.fn())()); //20
+    console.log(a.fn()());  //20
+    console.log(a.fn()() == (a.fn())()); //true
+    console.log(a.fn().call(this));  //20
+    console.log(a.fn().call(a));   //15
+	
+	return后的函数指向window
+	最后一个把this指向了a对象，所以输出的是a.x就为15
+</code></pre>
+<h5 id="例5">例5：</h5>
+<pre><code class="language-javascript">  var o = {
+    e:10,
+    b:{
+        e:12,
+        fn:function(){
+            console.log(this.e); //undefined
+            console.log(this); //window
+        }
+    }
+}
+var j = o.b.fn;
+j();
+</code></pre>
+<blockquote>
+<p>this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁。<br>
+例子5中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window，这&gt;和例子3是不一样的，例子3是直接执行了fn</p>
+</blockquote>
+<h4 id="构造函数版this">构造函数版this</h4>
+<h5 id="例1-2">例1</h5>
+<pre><code class="language-javascript">function Fn(){
+    this.user = &quot;222&quot;;
+}
+var a = new Fn();
+console.log(a.user); //222
+</code></pre>
+<p>#####<a href="http://www.cnblogs.com/pssp/p/5216085.html">分析</a></p>
+<blockquote>
+<p>这里之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将这个this指向对象a，为什么我说a是对象，因为用了new关键字就是创建一个对象实例，理解这句话可以想想我们的例子3，我们这里用变量a创建了一个Fn的实例（相当于复制了一份Fn到对象a里面），此时仅仅只是创建，并没有执行，而调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象Fn中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份。</p>
+</blockquote>
+<h5 id="当this碰到return">当this碰到return</h5>
+<p><strong>如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例</strong><br>
+注：虽然null也是对象，this还是指向那个函数的实例，因为null比较特殊</p>
+<pre><code class="language-javascript">//1空对象
+function fn()  
+{  
+    this.user = '追梦子';  
+    return {};  
+}
+var a = new fn;  
+console.log(a.user); //undefined
+
+//2.返回对象
+function fn()  
+{  
+    this.user = '追梦子';  
+    return {user:'111'};  
+}
+var a = new fn;  
+console.log(a.user); //111
+
+//3.undefined和字母数字之类
+function fn()  
+{  
+    this.user = '222';  
+    return undefined;
+}
+var a = new fn;  
+console.log(a.user); //222
+</code></pre>
+<h4 id="call">call</h4>
+<p><strong>如果<code>call</code>和<code>apply</code>的第一个参数写的是<code>null</code>，那么<code>this</code>指向的是<code>window</code>对象</strong></p>
+<blockquote>
+<p>1.替换函数运行环境中的this<br>
+2.传递参数<br>
+3.运行函数</p>
+</blockquote>
+<pre><code class="language-javascript">var a = {
+    user:&quot;call&quot;,
+    fn:function(e,ee){
+        console.log(this.user); //call
+        console.log(e+ee); //3
+    }
+}
+var b = a.fn;
+b.call(a,1,2);
+
+//call方法将原本指向window的this指向了a；
+
+var a = {
+    user:&quot;call&quot;,
+    fn:function(e,ee){
+        console.log(this.user); //undefined
+        console.log(e+ee); //3
+    }
+}
+var b = a.fn;
+b(1,2);
+//没有使用call，window下没有user返回undefined
+</code></pre>
+<h4 id="apply">apply</h4>
+<blockquote>
+<p>方法使用和call一样，需要注意的是第二个参数为数组</p>
+</blockquote>
+<pre><code class="language-javascript">var a = {
+    user:&quot;apply&quot;,
+    fn:function(e,ee){
+        console.log(this.user); //apply
+        console.log(e+ee); //6a
+    }
+}
+var b = a.fn;
+b.apply(a,[6,'a']);
+</code></pre>
+<h4 id="bind">bind</h4>
+<p><strong>返回的是一个修改过后的函数</strong></p>
+<h5 id="例1-3">例1</h5>
+<pre><code class="language-javascript">var a = {
+    user:&quot;bind&quot;,
+    fn:function(){
+        console.log(this.user); 
+    }
+}
+var b = a.fn;
+var c = b.bind(a);
+console.log(c)  //function (){console.log(this.user);}
+c(); //bind
+</code></pre>
+<h5 id="例2-2">例2</h5>
+<pre><code class="language-javascript">var a = {
+    user:&quot;bind&quot;,
+    fn:function(e,d,f){
+        console.log(this.user); //bind
+        console.log(e,d,f); //10 1 2
+    }
+}
+var b = a.fn;
+var c = b.bind(a,6,7,8);
+c();
+
+// var c = b.bind(a,10,4);
+// c(2);
+
+//var c = b.bind(a);
+//c(2,3,4);
+
+//var c = b.bind(a,22);  
+//优先级高,参数超出取前，参数不够undefined
+//c(2,3,4,5); //22,2,3
+
+console.log(c);  //function (e,d,f){ console.log(this.user);  console.log(e,d,f); }
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#this">this</a>
+<ul>
+<li><a href="#%E4%BE%8B1">例1：</a></li>
+<li><a href="#%E4%BE%8B2">例2：</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B3%A8%E6%84%8F3%E7%82%B9">注意3点</a>
+<ul>
+<li><a href="#%E6%83%85%E5%86%B51">情况1：</a></li>
+<li><a href="#%E6%83%85%E5%86%B52">情况2：</a></li>
+<li><a href="#%E6%83%85%E5%86%B53">情况3：</a></li>
+<li><a href="#%E4%BE%8B3">例3：</a></li>
+<li><a href="#%E4%BE%8B4">例4：</a></li>
+<li><a href="#%E4%BE%8B5">例5：</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%89%88this">构造函数版this</a>
+<ul>
+<li><a href="#%E4%BE%8B1-2">例1</a></li>
+<li><a href="#%E5%BD%93this%E7%A2%B0%E5%88%B0return">当this碰到return</a></li>
+</ul>
+</li>
+<li><a href="#call">call</a></li>
+<li><a href="#apply">apply</a></li>
+<li><a href="#bind">bind</a>
+<ul>
+<li><a href="#%E4%BE%8B1-3">例1</a></li>
+<li><a href="#%E4%BE%8B2-2">例2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/node-xue-xi/">
+              <h3 class="post-title">
+                node学习
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

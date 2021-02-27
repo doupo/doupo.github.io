@@ -1,0 +1,500 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ajax数据交互 | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="ajax数据交互 | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="@(js学习笔记)
+ajax数据交互
+[toc]
+获取数据的步骤
+ajax获取一个Txt的案例
+&lt;body&gt;
+	&lt;input type=&quot;button&quot; value=&quot;按钮&quot; id=..." />
+    <meta name="keywords" content="js" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              ajax数据交互
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/js/" class="post-tag">
+                  # js
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>@(js学习笔记)</p>
+<h2 id="ajax数据交互">ajax数据交互</h2>
+<p>[toc]</p>
+<h3 id="获取数据的步骤">获取数据的步骤</h3>
+<h4 id="ajax获取一个txt的案例">ajax获取一个Txt的案例</h4>
+<pre><code>&lt;body&gt;
+	&lt;input type=&quot;button&quot; value=&quot;按钮&quot; id=&quot;btn&quot; /&gt;
+&lt;/body&gt;
+</code></pre>
+<pre><code class="language-javascript">&lt;script&gt;
+window.onload = function() {
+	
+	var oBtn = document.getElementById('btn');
+	
+	
+	oBtn.onclick = function() {
+		
+		//打开浏览器
+		var xhr = new XMLHttpRequest();
+		//在地址栏输入地址
+		xhr.open('get','1.txt',true);
+		//提交
+		xhr.send();
+		
+		//等待服务器返回内容
+		xhr.onreadystatechange = function() {
+			
+			if ( xhr.readyState == 4 ) {
+				alert( xhr.responseText );
+			}
+			
+		}
+		
+	}
+}
+&lt;/script&gt;
+</code></pre>
+<h4 id="xmlhttprequest兼容性">XMLHttpRequest兼容性</h4>
+<blockquote>
+<p>ie7以下不支持</p>
+<ul>
+<li>解决方法<br>
+<strong>ie6以下new ActiveXObject('Microsoft.XMLHTTP')</strong></li>
+</ul>
+</blockquote>
+<pre><code class="language-javascript">if (window.XMLHttpRequest) {
+					xhr = new XMLHttpRequest();
+				} else {
+					xhr = new ActiveXObject('Microsoft.XMLHTTP');
+			}
+//或者
+
+try {
+			xhr = new XMLHttpRequest();
+		} catch (e) {
+			xhr = new ActiveXObject('Microsoft.XMLHTTP');
+		}
+</code></pre>
+<h3 id="open-方法">open() 方法</h3>
+<p>open(method,url,async);</p>
+<blockquote>
+<ul>
+<li>参数1: 数据 传输方式</li>
+<li>参数2.文件在服务器上的位置</li>
+<li>参数3.是否异步<br>
+- <strong>true</strong>：异步:非阻塞 前面的代码不会影响后面代码的执行<br>
+- <strong>false</strong>：同步:阻塞 前面的代码会影响后面代码的执行</li>
+</ul>
+</blockquote>
+<h3 id="send-方法">send() 方法</h3>
+<blockquote>
+<p>将请求发送到服务器。</p>
+</blockquote>
+<h3 id="json方法-字符数组互相转换">JSON方法  字符数组互相转换</h3>
+<p>不兼容IE7以下，可以下载官方js，引用解决<br>
+<a href="http://json.org/">下载地址</a><br>
+<a href="https://github.com/douglascrockford/JSON-js">github</a></p>
+<h4 id="stringify-和-parse">stringify 和 parse</h4>
+<blockquote>
+<ul>
+<li>stringify : 可以把一个对象转成对应字符串</li>
+<li>parse : 可以把字符串转成对应对象<br>
+<strong>注：parse 转换json，属性必须加双引号<code>var s2 = '{&quot;left&quot;:200}';</code>如：left</strong></li>
+</ul>
+</blockquote>
+<pre><code class="language-javascript">//stringify : 可以把一个对象转成对应字符串
+
+var arr = [1,2,3];
+var j = {left:100};
+alert( JSON.stringify(arr) );   //返回  [1,2,3]
+alert(typeof JSON.stringify(arr) );   //返回类型  string
+
+
+//parse : 可以把字符串转成对应对象
+var s1 = '[100,200,300]';
+var a1 = JSON.parse(s1);
+alert(a1[0])     //返回 100
+
+var s2 = '{&quot;left&quot;:200}';
+var a2 = JSON.parse(s2);
+alert(a2.left)  //返回 200
+</code></pre>
+<h3 id="请求状态监控">请求状态监控</h3>
+<h4 id="onreadystatechange事件">onreadystatechange事件</h4>
+<h5 id="readystate属性请求状态">readyState属性：请求状态</h5>
+<blockquote>
+<p>0	（初始化）还没有调用open()方法<br>
+1	（载入）已调用send()方法，正在发送请求<br>
+2	（载入完成）send()方法完成，已收到全部响应内容<br>
+3	（解析）正在解析响应内容<br>
+4	（完成）响应内容解析完成，可以在客户端调用了</p>
+</blockquote>
+<h5 id="status属性服务器请求资源的状态">status属性：服务器(请求资源)的状态</h5>
+<blockquote>
+<p>返回的内容<br>
+<code>responseText</code>：返回以文本形式存放的内容<br>
+<code>responseXML</code>：返回XML形式的内容</p>
+</blockquote>
+<pre><code class="language-javascript">// 当readyState改变的时候触发
+		xhr.onreadystatechange = function() {
+			
+			// 如果状态值为4  响应内容解析完成，可以在客户端调用了
+			if ( xhr.readyState == 4 ) {
+
+				// 服务端正常，执行
+				if ( xhr.status == 200 ) {
+					alert( xhr.responseText );
+				} else {
+					// 反之弹出错误
+					alert('出错了,Err：' + xhr.status);
+				}
+			}
+			
+		}
+</code></pre>
+<h3 id="应用中get和post方法区别-发送数据">应用中get和post方法区别   发送数据</h3>
+<pre><code>&lt;body&gt;
+	&lt;!-- 表单：数据的提交
+    	action : 数据提交的地址，默认是当前页面
+        method : 数据提交的方式，默认是get方式
+        	1.get     **1.get.php?username=你好&amp;age=14**
+            	把数据名称和数据值用=连接，如果有多个的话，那么他会把多个数据组合用&amp;进行连接，然后把数据放到url?后面传到指定页面
+            2.post
+        enctype : 提交的数据格式，默认application/x-www-form-urlencoded --&gt;
+    &lt;form action=&quot;1.get.php&quot;&gt;
+    	&lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;
+        &lt;input type=&quot;text&quot; name=&quot;age&quot; /&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;提交&quot; /&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+<blockquote>
+<p>get在open()中传输数据，大小有限制<strong>post无限制传输数据大小</strong></p>
+<ul>
+<li>缓存 在url？后面连接一个随机数，时间戳   尾部需加&amp;</li>
+<li>乱码 编码encodeURI  <strong>用于兼容IE</strong></li>
+</ul>
+</blockquote>
+<pre><code class="language-javascript">//get
+xhr.open('get','2.get.php?username='+encodeURI('刘伟')+'&amp;age=30&amp;' + new Date().getTime(),true);
+		xhr.send();
+
+//post
+xhr.open('post','2.post.php',true);
+		//post方式，数据放在send()里面作为参数传递
+		xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');//申明发送的数据类型
+		//post没有缓存问题
+		//无需编码
+		xhr.send('username=刘伟&amp;age=30');
+</code></pre>
+<h3 id="cookie-存储数据">cookie : 存储数据</h3>
+<pre><code class="language-javascript">&lt;script&gt;
+/*
+cookie : 存储数据，当用户访问了某个网站（网页）的时候，我们就可以通过cookie来像访问者电脑上存储数据
+	1.不同的浏览器存放的cookie位置不一样，也是不能通用的
+	2.cookie的存储是以域名形式进行区分的
+	3.cookie的数据可以设置名字的
+	4.一个域名下存放的cookie的个数是有限制的，不同的浏览器存放的个数不一样
+	5.每个cookie存放的内容大小也是有限制的，不同的浏览器存放大小不一样
+	
+	我们通过document.cookie来获取当前网站下的cookie的时候，得到的字符串形式的值，他包含了当前网站下所有的cookie。他会把所有的cookie通过一个分号+空格的形式串联起来
+	
+	如果我们想长时间存放一个cookie。需要在设置这个cookie的时候同时给他设置一个过期的时间
+	cookie默认是临时存储的，当浏览器关闭进程的时候自动销毁
+*/
+
+//document.cookie = '名字=值';
+
+/*document.cookie = 'username=leo';
+document.cookie = 'age=32';*/
+
+//document.cookie = '名称=值;expires=' + 字符串格式的时间;
+
+var oDate = new Date();
+
+oDate.setDate( oDate.getDate() + 5 );
+
+//alert(typeof oDate)
+//alert(typeof oDate.toGMTString());
+
+//内容最好编码存放,encodeURI
+
+//alert( encodeURI('你好') );
+//alert( decodeURI('%E4%BD%A0%E5%A5%BD') )
+
+/*document.cookie = 'username='+ encodeURI('leo\n你好') +';expires=' + oDate.toGMTString();
+document.cookie = 'age=32';*/
+
+//document.cookie
+//alert(decodeURI(document.cookie));	//username=leo; age=32
+
+/*document.cookie = 'username=leo;expires=' + oDate.toGMTString();
+document.cookie = 'age=32';*/
+
+function setCookie(key, value, t) {
+	var oDate = new Date();
+	oDate.setDate( oDate.getDate() + t );
+	document.cookie = key + '=' + value + ';expires=' + oDate.toGMTString();
+}
+
+function getCookie(key) {
+	var arr1 = document.cookie.split('; ');
+	for (var i=0; i&lt;arr1.length; i++) {
+		var arr2 = arr1[i].split('=');
+		if ( arr2[0] == key ) {
+			return decodeURI(arr2[1]);
+		}
+	}
+}
+
+function removeCookie(key) {
+	setCookie(key, '', -1);
+}
+
+
+//setCookie('sex','男', 10);
+//alert( getCookie('age') );
+removeCookie('username');
+removeCookie('age');
+removeCookie('sex');
+
+alert(document.cookie)
+&lt;/script&gt;
+</code></pre>
+<p>记录用户名</p>
+<pre><code class="language-javascript">&lt;script&gt;
+window.onload = function() {
+	
+	var oUsername = document.getElementById('username');
+	var oLogin = document.getElementById('login');
+	var oDel = document.getElementById('del');
+	
+	if ( getCookie('username') ) {
+		oUsername.value = getCookie('username');
+	}
+	
+	oLogin.onclick = function() {
+		
+		alert('登陆成功');
+		setCookie('username', oUsername.value, 5);
+		
+	}
+	
+	oDel.onclick = function() {
+		removeCookie('username');
+		oUsername.value = '';
+	}
+	
+}
+
+function setCookie(key, value, t) {
+	var oDate = new Date();
+	oDate.setDate( oDate.getDate() + t );
+	document.cookie = key + '=' + value + ';expires=' + oDate.toGMTString();
+}
+
+function getCookie(key) {
+	var arr1 = document.cookie.split('; ');
+	for (var i=0; i&lt;arr1.length; i++) {
+		var arr2 = arr1[i].split('=');
+		if ( arr2[0] == key ) {
+			return decodeURI(arr2[1]);
+		}
+	}
+}
+
+function removeCookie(key) {
+	setCookie(key, '', -1);
+}
+
+
+&lt;body&gt;
+	&lt;input type=&quot;text&quot; id=&quot;username&quot; /&gt;
+    &lt;input type=&quot;button&quot; value=&quot;登陆&quot; id=&quot;login&quot; /&gt;
+    &lt;input type=&quot;button&quot; value=&quot;删除&quot; id=&quot;del&quot; /&gt;
+&lt;/body&gt;
+
+
+&lt;/script&gt;
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#ajax%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92">ajax数据交互</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E7%9A%84%E6%AD%A5%E9%AA%A4">获取数据的步骤</a>
+<ul>
+<li><a href="#ajax%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AAtxt%E7%9A%84%E6%A1%88%E4%BE%8B">ajax获取一个Txt的案例</a></li>
+<li><a href="#xmlhttprequest%E5%85%BC%E5%AE%B9%E6%80%A7">XMLHttpRequest兼容性</a></li>
+</ul>
+</li>
+<li><a href="#open-%E6%96%B9%E6%B3%95">open() 方法</a></li>
+<li><a href="#send-%E6%96%B9%E6%B3%95">send() 方法</a></li>
+<li><a href="#json%E6%96%B9%E6%B3%95-%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2">JSON方法  字符数组互相转换</a>
+<ul>
+<li><a href="#stringify-%E5%92%8C-parse">stringify 和 parse</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E7%8A%B6%E6%80%81%E7%9B%91%E6%8E%A7">请求状态监控</a>
+<ul>
+<li><a href="#onreadystatechange%E4%BA%8B%E4%BB%B6">onreadystatechange事件</a>
+<ul>
+<li><a href="#readystate%E5%B1%9E%E6%80%A7%E8%AF%B7%E6%B1%82%E7%8A%B6%E6%80%81">readyState属性：请求状态</a></li>
+<li><a href="#status%E5%B1%9E%E6%80%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E8%B5%84%E6%BA%90%E7%9A%84%E7%8A%B6%E6%80%81">status属性：服务器(请求资源)的状态</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%BA%94%E7%94%A8%E4%B8%ADget%E5%92%8Cpost%E6%96%B9%E6%B3%95%E5%8C%BA%E5%88%AB-%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE">应用中get和post方法区别   发送数据</a></li>
+<li><a href="#cookie-%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE">cookie : 存储数据</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

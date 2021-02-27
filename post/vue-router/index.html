@@ -1,0 +1,600 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>vue-router | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="vue-router | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="@(js学习笔记)
+vue进阶
+[toc]
+滚动行为
+
+切换到新路由时，想要保持原先的滚动位置;或者定位到锚点位置
+history 模式下可用
+
+记录滚动位置
+scrollBehavior方法
+参数：
+to == &gt;前往的页面
+fro..." />
+    <meta name="keywords" content="vue,framework" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              vue-router
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/vue/" class="post-tag">
+                  # vue
+                </a>
+              
+                <a href="https://doupo.github.io/tag/framework/" class="post-tag">
+                  # framework
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>@(js学习笔记)</p>
+<h2 id="vue进阶">vue进阶</h2>
+<p>[toc]</p>
+<h3 id="滚动行为">滚动行为</h3>
+<blockquote>
+<p>切换到新路由时，想要保持原先的滚动位置;或者定位到锚点位置<br>
+<strong>history 模式下可用</strong></p>
+</blockquote>
+<h4 id="记录滚动位置">记录滚动位置</h4>
+<p><code>scrollBehavior</code>方法<br>
+参数：<br>
+<code>to</code> == &gt;前往的页面<br>
+<code>from</code> == &gt;触发的页面<br>
+<code>savePosition</code> == &gt;滚动条位置</p>
+<pre><code class="language-javascript">scrollBehavior(to, from, savePosition){
+    if(savePosition){
+      return savePosition;
+    }else {
+      return {x:0,y:0}
+    }
+    // 记录滚动条位置，浏览器前进后退触发
+  }
+</code></pre>
+<h4 id="滚动到锚点">滚动到锚点</h4>
+<pre><code class="language-javascript">scrollBehavior (to, from, savedPosition) {
+  if (to.hash) {
+    return {
+      selector: to.hash
+    }
+  }
+}
+</code></pre>
+<hr>
+<h3 id="动态路径">动态路径</h3>
+<h4 id="配置">配置</h4>
+<blockquote>
+<p>匹配到的所有路由，全部映射到同个组件</p>
+</blockquote>
+<p><strong>我们有一个 User 组件，对于所有 ID 各不相同的用户</strong></p>
+<p><strong>路径：</strong>/user/:userID<br>
+<code>userID</code>为动态路径参数；动态路径参数 以冒号开头</p>
+<p>**获取参数：**路由信息对象的params</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">path</th>
+<th style="text-align:center">生成路径</th>
+<th style="text-align:center">$route.params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">/user/:userID?</td>
+<td style="text-align:center">/user/1</td>
+<td style="text-align:center">{ userID: 1 }</td>
+</tr>
+<tr>
+<td style="text-align:center">/user/:userID?/:page?</td>
+<td style="text-align:center">/user/1/2</td>
+<td style="text-align:center">{ userID: 1 ,page:2}</td>
+</tr>
+</tbody>
+</table>
+<h4 id="监测路由参数的变化">监测路由参数的变化</h4>
+<blockquote>
+<p>当使用路由参数时，组件实例会被复用。<br>
+两个路由都渲染同个组件，生命周期钩子不会再被调用<br>
+地址发生改变，会生成新的<code>$route</code><br>
+所以需要监测<code>$route</code>变化作出响应...</p>
+</blockquote>
+<pre><code class="language-javascript">watch:{
+      $route(){
+        //对路由变化作出响应...
+      }
+    }
+</code></pre>
+<h4 id="query传参">query传参</h4>
+<blockquote>
+<p>嵌套路由中父路由向子路由里面传递参数</p>
+</blockquote>
+<p><code>&lt;router-link exact :to=&quot;{path:'',query:{name:'me',id:123}}&quot;&gt;我&lt;/router-link&gt;</code><br>
+传递name和id参数相当与在 url 地址后面拼接参数<br>
+显示为：<strong>?name=me&amp;id=123</strong></p>
+<p>子路由使用：<code>{{this.$route.query}}</code></p>
+<h4 id="路由信息对象">路由信息对象</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$route</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$route.path</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">当前路由的路径</td>
+</tr>
+<tr>
+<td style="text-align:center">$route.params</td>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">动态路由参数</td>
+</tr>
+<tr>
+<td style="text-align:center">$route.query</td>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">URL查询参数</td>
+</tr>
+<tr>
+<td style="text-align:center">$route.hash</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">当前路由的 hash 值</td>
+</tr>
+<tr>
+<td style="text-align:center">$route.fullPath</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">查询参数和 hash 的完整路径</td>
+</tr>
+<tr>
+<td style="text-align:center">$route.matched</td>
+<td style="text-align:center">Array</td>
+<td style="text-align:center">当前路由的所有嵌套路径片段的路由记录</td>
+</tr>
+<tr>
+<td style="text-align:center">$route.name</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">当前路由的名称</td>
+</tr>
+<tr>
+<td style="text-align:center">$route.meta</td>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">路由配置中手动添加的数据</td>
+</tr>
+</tbody>
+</table>
+<h4 id="路由元信息">路由元信息</h4>
+<blockquote>
+<p>在路由配置中meta可以配置一些数据，用在路由信息中</p>
+</blockquote>
+<pre><code class="language-javascript">//设置
+{
+      path: '/hello',
+      name: 'hello',
+      component: hello,
+      meta:{
+        index:3
+      }
+    }
+
+//访问
+$route.meta
+</code></pre>
+<hr>
+<h3 id="过渡动效">过渡动效</h3>
+<blockquote>
+<p>Vue 在插入、更新或者移除 DOM 时</p>
+</blockquote>
+<p><a href="http://cn.vuejs.org/v2/guide/transitions.html">官方文档</a></p>
+<h3 id="css过渡写法">css过渡写法</h3>
+<h4 id="语法">语法</h4>
+<p><code>&lt;transition&gt;</code> 组件<br>
+**name：**设置需要使用的过渡class<br>
+**mode：**过渡模式</p>
+<ul>
+<li><code>out-in</code> 当前元素先执行，触发元素后</li>
+<li><code>in-out</code>触发元素先执行，当前元素后</li>
+<li>未设置就是同时执行</li>
+</ul>
+<pre><code class="language-javascript">&lt;transition&gt;
+  &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/transition&gt;
+</code></pre>
+<h4 id="过渡的class">过渡的class</h4>
+<p><img src="./transition.png" alt="Alt text" loading="lazy"><br>
+v-enter：进入状态<br>
+v-enter-active：定义输入转换的持续时间<br>
+v-enter-to：结束状态</p>
+<p>v-leave：离开状态开始<br>
+v-leave-active：定义输入转换的持续时间<br>
+v-leave-to：离开状态结束</p>
+<h5 id="自定义class">自定义class</h5>
+<p><strong>替换v</strong><br>
+v-enter ==&gt; op-enter<br>
+<strong>使用</strong><br>
+transition name=&quot;op&quot;</p>
+<h5 id="示例">示例</h5>
+<pre><code class="language-css">  .op-enter{
+    opacity: 0;
+  }
+  .op-enter-to{
+    opacity: 1;
+  }
+  .op-enter-active{
+    transition: 1s;
+  }
+
+  .op-leave{
+    opacity: 1;
+  }
+  .op-leave-to{
+    opacity: 0;
+  }
+  .op-leave-active{
+    transition: 1s;
+  }
+</code></pre>
+<h4 id="基于路由的动态过渡">基于路由的动态过渡</h4>
+<blockquote>
+<p>当前路由与目标路由的变化关系，动态设置过渡效果</p>
+</blockquote>
+<p><strong>监控$route信息</strong></p>
+<ul>
+<li>需要动态绑定 :name</li>
+</ul>
+<pre><code class="language-javascript">watch:{
+      $route(to,from){
+        //根据目标不同动态修改transition的name属性
+      }
+    }
+</code></pre>
+<hr>
+<h3 id="编程式的导航">编程式的导航</h3>
+<blockquote>
+<p>使用router的实例方法，通过编写代码来实现导航之间的切换</p>
+</blockquote>
+<p><strong>$router实例</strong></p>
+<p><strong>back</strong> 回退一步</p>
+<p><strong>forward</strong> 前进一步</p>
+<p><strong>go</strong> 指定前进后退步数（整数），正负或者0（0为刷新当前页面）</p>
+<p><strong>push</strong> 导航到不同url，像history栈中添加一个新记录<br>
+<strong>语法和router-link中相同</strong></p>
+<pre><code class="language-javascript">// 字符串
+$router.push('/home')
+
+// 对象
+$router.push({ path: '/home' })
+
+// 命名的路由
+$router.push({ name: 'user', params: { userId: 123 }})
+
+// 带查询参数，变成 /home?id=123
+$router.push({ path: '/home', query: { id: 123 }})
+</code></pre>
+<p><strong>replace</strong> 导航到不同url，替换history栈中当前记录<br>
+<strong>语法同push</strong></p>
+<hr>
+<h3 id="导航钩子">导航钩子</h3>
+<blockquote>
+<p>导航发生改变时，导航钩子主要用来拦截导航，让它完成跳转或取消</p>
+</blockquote>
+<p><strong>执行钩子方式：</strong></p>
+<ul>
+<li>全局router</li>
+<li>单个路由</li>
+<li>组件</li>
+</ul>
+<h4 id="钩子函数参数">钩子函数参数</h4>
+<p><strong>to:</strong> 要进入的目标路由对象<br>
+<strong>from:</strong>  正要离开的路由对象<br>
+**next:**用来决定跳转或取消导航</p>
+<ul>
+<li>next(): 进入</li>
+<li>next(false): 中断当前的导航</li>
+<li>next({ path: '/' }): 重定向</li>
+</ul>
+<h4 id="全局router">全局router</h4>
+<ul>
+<li>beforeEach</li>
+<li>afterEach
+<ul>
+<li>没有next参数</li>
+</ul>
+</li>
+</ul>
+<h4 id="单个路由">单个路由</h4>
+<ul>
+<li>beforeEnter</li>
+</ul>
+<h4 id="组件">组件</h4>
+<ul>
+<li>beforeRouteEnter
+<ul>
+<li>进入触发</li>
+<li>此处无法获取组件实例 <code>this</code>，如果需要，可以使用回调函数</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-javascript">beforeRouteEnter:function (to,from,next) {
+      next(function (vm) {
+	    // 通过 `vm` 访问组件实例
+        vm.message='修改'
+      });
+    },
+</code></pre>
+<ul>
+<li>beforeRouteUpdate
+<ul>
+<li>内部组件更新触发</li>
+</ul>
+</li>
+<li>beforeRouteLeave
+<ul>
+<li>离开触发</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="懒加载">懒加载</h3>
+<h4 id="单组件懒加载">单组件懒加载</h4>
+<pre><code class="language-javascript">// 单个加载写法1
+let a = (resolve) =&gt;{
+  return require.ensure([],()=&gt;{
+    resolve(require('@/a'))
+  })
+}
+
+// 单个加载写法2
+let b = (resolve) =&gt;{
+  return import('@/views/b')
+}
+</code></pre>
+<h4 id="多组件合并加载">多组件合并加载</h4>
+<pre><code class="language-javascript">let c = (resolve) =&gt;{
+  return require.ensure([],()=&gt;{
+    resolve(require('@/views/c'))
+  },'team1')
+}
+let d = (resolve) =&gt;{
+  return require.ensure([],()=&gt;{
+    resolve(require('@/views/d'))
+  },'team1')
+}
+</code></pre>
+<hr>
+<h3 id="插件">插件</h3>
+<h4 id="使用">使用</h4>
+<blockquote>
+<p>在插件文件使用</p>
+</blockquote>
+<pre><code class="language-javascript">let method = {
+  a:function () {
+	// 方法
+  }
+}
+
+export default {
+  install: function (vm) {
+    vm.prototype.$method = method
+  }
+}
+</code></pre>
+<blockquote>
+<p>在入口文件注册使用</p>
+</blockquote>
+<pre><code class="language-javascript">import a from './lib/a'
+Vue.use(a)
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#vue%E8%BF%9B%E9%98%B6">vue进阶</a>
+<ul>
+<li><a href="#%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA">滚动行为</a>
+<ul>
+<li><a href="#%E8%AE%B0%E5%BD%95%E6%BB%9A%E5%8A%A8%E4%BD%8D%E7%BD%AE">记录滚动位置</a></li>
+<li><a href="#%E6%BB%9A%E5%8A%A8%E5%88%B0%E9%94%9A%E7%82%B9">滚动到锚点</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E5%BE%84">动态路径</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AE">配置</a></li>
+<li><a href="#%E7%9B%91%E6%B5%8B%E8%B7%AF%E7%94%B1%E5%8F%82%E6%95%B0%E7%9A%84%E5%8F%98%E5%8C%96">监测路由参数的变化</a></li>
+<li><a href="#query%E4%BC%A0%E5%8F%82">query传参</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1">路由信息对象</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E5%85%83%E4%BF%A1%E6%81%AF">路由元信息</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%87%E6%B8%A1%E5%8A%A8%E6%95%88">过渡动效</a></li>
+<li><a href="#css%E8%BF%87%E6%B8%A1%E5%86%99%E6%B3%95">css过渡写法</a>
+<ul>
+<li><a href="#%E8%AF%AD%E6%B3%95">语法</a></li>
+<li><a href="#%E8%BF%87%E6%B8%A1%E7%9A%84class">过渡的class</a>
+<ul>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89class">自定义class</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8A%A8%E6%80%81%E8%BF%87%E6%B8%A1">基于路由的动态过渡</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BC%96%E7%A8%8B%E5%BC%8F%E7%9A%84%E5%AF%BC%E8%88%AA">编程式的导航</a></li>
+<li><a href="#%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90">导航钩子</a>
+<ul>
+<li><a href="#%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0">钩子函数参数</a></li>
+<li><a href="#%E5%85%A8%E5%B1%80router">全局router</a></li>
+<li><a href="#%E5%8D%95%E4%B8%AA%E8%B7%AF%E7%94%B1">单个路由</a></li>
+<li><a href="#%E7%BB%84%E4%BB%B6">组件</a></li>
+</ul>
+</li>
+<li><a href="#%E6%87%92%E5%8A%A0%E8%BD%BD">懒加载</a>
+<ul>
+<li><a href="#%E5%8D%95%E7%BB%84%E4%BB%B6%E6%87%92%E5%8A%A0%E8%BD%BD">单组件懒加载</a></li>
+<li><a href="#%E5%A4%9A%E7%BB%84%E4%BB%B6%E5%90%88%E5%B9%B6%E5%8A%A0%E8%BD%BD">多组件合并加载</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8F%92%E4%BB%B6">插件</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/vue-cli/">
+              <h3 class="post-title">
+                vue-cli
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

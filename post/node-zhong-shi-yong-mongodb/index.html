@@ -1,0 +1,429 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title> node中使用MongoDB | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title=" node中使用MongoDB | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="@(js学习笔记)
+node中使用MongoDB
+
+Node.js 连接 MongoDB，封装简易的增删改查的模块
+
+
+[toc]
+使用
+本机环境：
+系统：MAC OS 10.12.4
+node：6.2.0
+npm：3.8.9
+Mongod..." />
+    <meta name="keywords" content="node" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+               node中使用MongoDB
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/node/" class="post-tag">
+                  # node
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>@(js学习笔记)</p>
+<h2 id="node中使用mongodb">node中使用MongoDB</h2>
+<blockquote>
+<p>Node.js 连接 MongoDB，封装简易的增删改查的模块</p>
+</blockquote>
+<hr>
+<p>[toc]</p>
+<h3 id="使用">使用</h3>
+<p>本机环境：<br>
+系统：MAC OS 10.12.4<br>
+node：6.2.0<br>
+npm：3.8.9<br>
+Mongodb：3.4.6</p>
+<h3 id="创建-nodejs-应用">创建 Node.js 应用</h3>
+<h4 id="引入模块">引入模块</h4>
+<p>引入模块：<code>express</code> ， <code>mongodb</code></p>
+<pre><code class="language-javascript">//引入模块
+var express = require('express');
+var app = express();
+
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://localhost:27017/test';
+</code></pre>
+<h4 id="创建服务器">创建服务器</h4>
+<p>创建一个服务器，监听本地的8080端口</p>
+<pre><code class="language-javascript">app.get('/', function (req, res) {
+    res.send('hello node')
+});
+
+app.listen(8080, 'localhost');
+</code></pre>
+<h3 id="数据库操作">数据库操作</h3>
+<p>注：还有些其他的方法（删除一个，替换等），可以见官方文档<br>
+<a href="https://docs.mongodb.com/getting-started/node/client/">文档</a></p>
+<h5 id="创建文件">创建文件</h5>
+<blockquote>
+<p>因为需要将常用的操作封装，所以单独新建了一个<code>module/db.js</code>引入</p>
+</blockquote>
+<h5 id="配置路径">配置路径</h5>
+<pre><code class="language-javascript">exports.Url = 'mongodb://localhost:27017/test';
+</code></pre>
+<h5 id="连接数据库">连接数据库</h5>
+<pre><code class="language-javascript">//连接数据库
+function connectDB(callback) {
+    var url = dataUrl.Url;
+    MongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        callback(db);
+    });
+}
+</code></pre>
+<h4 id="增">增</h4>
+<p><strong>模块</strong><br>
+函数接受3个参数，集合名，新增的数据，回调函数</p>
+<pre><code class="language-javascript">// ######新增数据
+exports.insertOne = function (collectionName, json, callback) {
+    connectDB(function (db) {
+        // 接受外部传入的数据 集合名字 ，数据json ，回调函数
+        db.collection(collectionName).insertOne(json, function (err, result) {
+            callback(err, result);
+            db.close();
+        });
+    });
+}
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">app.get('/', function (req, res) {
+    db.insertOne('cs',{'name': 'yue2','age': 12}, function (err, result) {
+        if(err){
+            res.send('插入数据失败');
+            return;
+        }
+        res.send('成功');
+    })
+});
+app.listen(8888, 'localhost');
+</code></pre>
+<p>当我们在浏览器打开<code>localhost:8080</code>就会像数据库(test下的cs)插入一条<code>{'name': 'yue2','age': 12}</code>数据</p>
+<h4 id="删">删</h4>
+<p><strong>模块</strong></p>
+<pre><code class="language-javascript">// ######删除数据
+exports.deleteMany = function (collectionName, json, callback) {
+    connectDB(function (db) {
+        db.collection(collectionName).deleteMany(
+            json,
+            function (err, results) {
+                callback(err, results);
+                db.close();
+            }
+        );
+    });
+}
+
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">app.get('/', function (req, res) {
+    db.deleteMany('cs',{'name': 'yue2'}, function (err, result) {
+        if(err){
+            res.send('删除数据失败');
+            return;
+        }
+        res.send(result);
+    })
+});
+app.listen(8888, 'localhost');
+</code></pre>
+<p>删除所有<code>name:yue2</code>的数据</p>
+<h4 id="改">改</h4>
+<p>修改数据，接受4个参数<br>
+集合名，需要被修改的数据，修改的数据，回调函数<br>
+<strong>模块</strong></p>
+<pre><code class="language-javascript">// ######修改数据
+exports.updateMany = function (collectionName, oldJson, newJson, callback) {
+    connectDB(function (db) {
+        db.collection(collectionName).updateMany(
+            oldJson,
+            newJson,
+            function (err, results) {
+                callback(err, results);
+                db.close();
+            });
+    });
+}
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">app.get('/', function (req, res) {
+    db.updateMany('cs',{'name':'yue'},{$set:{'name':123}}, function (err, result) {
+        if(err){
+            res.send('数据修改失败');
+            return;
+        }
+
+        res.send(result);
+
+    })
+});
+</code></pre>
+<p>将所有name:yue的数据修改为name:123</p>
+<h4 id="查">查</h4>
+<p><strong>查询数据</strong><br>
+因为会涉及到有些参数非必填项</p>
+<blockquote>
+<p>参数为：集合名字，查询的条件，limit和skip，回调函数，排序方式<br>
+查询条件可以为空，默认为查询全部<br>
+limit和skip可以为空，默认为全部</p>
+<ul>
+<li>limit和skip配合可以用来做分页效果<br>
+排序方式可以为空，默认正序</li>
+</ul>
+</blockquote>
+<p><strong>模块</strong></p>
+<pre><code class="language-javascript">// ######查找数据
+exports.find = function (collectionName, json, pageJson, callback, sortJson) {
+    connectDB(function (db) {
+        if (pageJson.pageNum || pageJson.pageNum == 0) {
+            var limitNum = pageJson.pageSize;
+            var skipNum = pageJson.pageSize * pageJson.pageNum;
+        } else {
+            var limitNum = 0;
+            var skipNum = 0;
+        }
+
+        var resultData = [];
+        var cursor = db.collection(collectionName).find(json).limit(limitNum).skip(skipNum).sort(sortJson);
+        cursor.each(function (err, doc) {
+            if (err) {
+                db.close();
+                callback(err, null);
+                return;
+            }
+            if (doc != null) {
+                resultData.push(doc);
+            } else {
+                callback(null, resultData);
+                db.close();
+            }
+        });
+
+    });
+}
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">// 函数默认值
+app.get('/', function (req, res) {
+    db.find('mess', {}, {'pageSize': 4, 'pageNum': 0}, function (err, result) {
+        if (err) {
+            res.end(-1);
+            return;
+        }
+        console.log(result)
+        res.render('message', {
+            dataJson: result
+        });
+    }, {'dataTime': -1})
+});
+</code></pre>
+<p>这里使用<code>req.query.page</code>获取查询字符串，做分页<br>
+浏览器<code>localhost/read?page=0</code> 可以获取不同的数据</p>
+<p><strong>查询数据数量</strong><br>
+<strong>模块</strong><br>
+参数为：集合名，需要查询的数据（可以为空），回调函数</p>
+<pre><code class="language-javascript">// 获取数据的条数
+exports.findDataNum = function (collectionName, json, callback) {
+    connectDB(function (db) {
+        var collection = db.collection(collectionName);
+        collection.count(json).then(function (count) {
+            callback(count);
+            db.close();
+        })
+    });
+}
+</code></pre>
+<p><strong>调用</strong></p>
+<pre><code class="language-javascript">db.findDataNum('mess',{}, function (result) {
+    console.log(result)
+})
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#node%E4%B8%AD%E4%BD%BF%E7%94%A8mongodb">node中使用MongoDB</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA-nodejs-%E5%BA%94%E7%94%A8">创建 Node.js 应用</a>
+<ul>
+<li><a href="#%E5%BC%95%E5%85%A5%E6%A8%A1%E5%9D%97">引入模块</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8">创建服务器</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C">数据库操作</a><br>
+*
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6">创建文件</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E8%B7%AF%E5%BE%84">配置路径</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93">连接数据库</a></li>
+<li><a href="#%E5%A2%9E">增</a></li>
+<li><a href="#%E5%88%A0">删</a></li>
+<li><a href="#%E6%94%B9">改</a></li>
+<li><a href="#%E6%9F%A5">查</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/es6/">
+              <h3 class="post-title">
+                es6
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

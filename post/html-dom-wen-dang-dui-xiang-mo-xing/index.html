@@ -1,0 +1,413 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HTML DOM （文档对象模型） | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="HTML DOM （文档对象模型） | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="1.获取节点
+document
+
+
+getElementById('ID')
+getElementsByName(name)   **注：**通过元素name属性获取节点    **返回值：**数组
+getElementsByTagName..." />
+    <meta name="keywords" content="html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              HTML DOM （文档对象模型）
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/html/" class="post-tag">
+                  # html
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="1获取节点">1.获取节点</h3>
+<h4 id="document">document</h4>
+<blockquote>
+<ul>
+<li>getElementById('ID')</li>
+<li>getElementsByName(name)   **注：**通过元素name属性获取节点    **返回值：**数组</li>
+<li>getElementsByTagName(&quot;元素标签&quot;);     **注：**IE9以下 不支持   **返回值：**数组</li>
+</ul>
+</blockquote>
+<h4 id="节点">节点</h4>
+<p><strong>节点可以分为元素节点，属性节点和文本节点</strong><br>
+<strong>如果获取的节点为元素节点：可使用<code>innerHTML</code>，如果是文本节点可使用<code>nodeValue</code></strong><br>
+| 节点类型|    nodeName <strong>只读</strong>| nodeType <strong>只读</strong>|nodeValue <strong>可读写</strong>|<br>
+| :-------- | :--------😐 :--: |<br>
+|元素|  元素节点|  1   |null|<br>
+| 属性|属性节点  |  2  |属性值  |<br>
+| 文本|<strong>#Text</strong>|  3   |文本内容（不包含html标签）  |</p>
+<h5 id="childnodes">childNodes</h5>
+<blockquote>
+<p>childNodes 获取当前元素的所有子节点  <strong>返回值为一个数组</strong> <strong>注：这些字节点包括元素字节点和文本子节点</strong></p>
+<ul>
+<li>a：文本子节点无法使用innerHTML这个属性，可以使用nodeValue进行赋值</li>
+<li>b： <strong>IE9以下不包含空节点</strong></li>
+<li>c：非W3C标准的children属性 <strong>只有效子节点，即忽略空文本节点</strong></li>
+</ul>
+</blockquote>
+<pre><code>    &lt;div id=&quot;a&quot;&gt;
+        &lt;p&gt;1&lt;/p&gt;
+        &lt;p&gt;2&lt;/p&gt;
+        &lt;p&gt;3&lt;/p&gt;
+    &lt;/div&gt;
+</code></pre>
+<pre><code class="language-javascript">    &lt;script&gt;
+        var oa = document.getElementById('a');
+       var op=oa.childNodes;
+
+       op[0].nodeValue='nodeValue测试'  //第一位为空文本节点
+       op[1].innerHTML='元素节点测试'  //第二位为空文本节点
+
+       alert(op.length)  //7  3个p元素节点，4个空的文本节点
+
+    &lt;/script&gt;
+</code></pre>
+<h5 id="childnodes移除空白文本节点">childNodes移除空白文本节点</h5>
+<pre><code>        var oa = document.getElementById('a');
+        var op2=oa.childNodes;
+        alert(op2.length) //7 包含空文本节点
+        
+       var op=removeSpace(oa.childNodes);
+       alert(op.length) //3 移除了空的文本节点
+</code></pre>
+<pre><code class="language-javascript">function removeSpace(node) {  
+       for(var i=0;i&lt;node.length;i++){  
+      if(node[i].nodeType===3&amp;&amp;/^\s+$/.test(node[i].nodeValue)){  
+          node[i].parentNode.removeChild(node[i]);  
+      }   
+       }  
+       return node;  
+    }
+</code></pre>
+<p>=================</p>
+<h5 id="firstchild方法和lastchild方法">firstChild()方法和lastChild()方法</h5>
+<blockquote>
+<ul>
+<li><code>firstChild()</code>方法用于获取当前元素节点的第一个字节点对象，相当于<code>childNodes[0]</code></li>
+<li><code>lastChild()</code>方法用于获取当前元素节点的最后一个字节点对象，相当于<code>childNodes[childNodes.length-1]</code></li>
+</ul>
+</blockquote>
+<h5 id="1-parentnode-返回父节点-2previoussibling前一个同级节点-3nextsibling后一个同级节点">1. <code>parentNode</code> 返回父节点  2.<code>previousSibling</code>前一个同级节点 3.<code>nextSibling</code>后一个同级节点</h5>
+<pre><code class="language-javascript">	   var oa = document.getElementById('a');
+       var op=oa.childNodes;
+
+       alert(oa.parentNode.nodeName)  //返回值body
+       alert(oa.previousSibling.nodeName)  //#Text   一个空文本节点
+       alert(oa.nextSibling.nodeName)  //#Text   一个空文本节点
+</code></pre>
+<h5 id="firstchild等方法移除-空文本节点">firstChild()等方法移除 空文本节点</h5>
+<pre><code>    &lt;div id=&quot;a&quot;&gt;
+        &lt;p&gt;1&lt;/p&gt;
+        &lt;p&gt;2&lt;/p&gt;
+        &lt;p&gt;3&lt;/p&gt;
+    &lt;/div&gt;
+</code></pre>
+<pre><code class="language-javascript">	   var oa = document.getElementById('a');
+       alert(oa.firstChild.nodeName)  //#text
+       alert(removeSpace2(oa).firstChild.nodeName)  //p节点
+       
+    function removeSpace2(node) {  
+         for(var i=0;i&lt;node.childNodes.length;i++){  
+            if(node.childNodes[i].nodeType===3&amp;&amp;/^\s+$/.test(node.childNodes[i].nodeValue)){  
+                 node.childNodes[i].parentNode.removeChild(node.childNodes[i]);  
+            }   
+          }  
+     return node;  
+}
+</code></pre>
+<h3 id="创建插入删除替换和复制节点">创建，插入，删除，替换和复制节点</h3>
+<h5 id="创建一个元素插入文档">创建一个元素插入文档</h5>
+<blockquote>
+<ul>
+<li>createElement()创建</li>
+<li>appendChild()方法可以将一个新创建的元素节点添加到某个节点的子节点的列表的末尾上</li>
+<li>createTextNode()方法可以创建一个包含着指定文本的新文本节点 , nodeType属性值将为3</li>
+</ul>
+</blockquote>
+<pre><code>&lt;body&gt;
+    &lt;div id=&quot;a&quot;&gt;
+        &lt;p&gt;1&lt;/p&gt;
+        &lt;p&gt;2&lt;/p&gt;
+        &lt;p&gt;3&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+    var oa = document.getElementById('a');
+
+    //新创建一个li元素节点，添加到指定元素节点的子节点  
+    var liNode=document.createElement(&quot;p&quot;);  
+    //创建一个有指定文本的文本节点  
+    var textNode=document.createTextNode(&quot;4&quot;);  
+    //添加到新建li元素节点的子节点(文本节点)中  
+    liNode.appendChild(textNode);  
+     
+    //添加到指定元素节点的末尾  
+    oa.appendChild(liNode); 
+
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<p><strong>运行结果</strong><br>
+<img src="./QQ%E6%88%AA%E5%9B%BE20160822173140.jpg" alt="Alt text" loading="lazy"></p>
+<h5 id="insertbefore方法">insertBefore()方法</h5>
+<blockquote>
+<p>共同的父级.insertBefore(要添加的新节点,已知节点)</p>
+</blockquote>
+<h5 id="replacechild-替换">replaceChild() 替换</h5>
+<blockquote>
+<p>父级.replaceChild(新节点，被替换节点)</p>
+</blockquote>
+<pre><code>&lt;script&gt;
+window.onload = function() {
+	
+	var oDiv = document.getElementById('div1');
+	var oBtn = document.getElementById('btn');
+	var oP = document.getElementById('p1');
+	
+	oBtn.onclick = function() {
+		
+		document.body.replaceChild( oDiv, oP );
+		//用div1替换了p
+	
+	}
+	
+}
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;div id=&quot;div1&quot;&gt;div1&lt;/div&gt;
+    &lt;input type=&quot;button&quot; value=&quot;按钮&quot; id=&quot;btn&quot; /&gt;
+    &lt;hr /&gt;
+    &lt;p id=&quot;p1&quot;&gt;ppppp&lt;/p&gt;
+&lt;/body&gt;
+</code></pre>
+<p><strong>效果</strong><br>
+<img src="./QQ%E6%88%AA%E5%9B%BE20160822201306.png" alt="Alt text" loading="lazy"></p>
+<h5 id="clonenode-复制元素节点">cloneNode() 复制元素节点</h5>
+<blockquote>
+<p>语法 var 新存储的变量 = 需要复制的节点 <strong>cloneNode()</strong></p>
+<ul>
+<li>参数可选。默认是 <strong>false</strong>。<br>
+设置为 <strong>true</strong>，如果您需要克隆节点及其属性，以及后代<br>
+设置为 <strong>false</strong>，如果您只需要克隆节点及其后代</li>
+</ul>
+</blockquote>
+<h5 id="removechild-删除元素节点">removeChild() 删除元素节点</h5>
+<blockquote>
+<p>语法需要删除的元素的父节点（parentNode）. removeChild(需要删除的元素);</p>
+</blockquote>
+<h3 id="获取非行间样式">获取非行间样式</h3>
+<p>**特别注意一点：如果要获取当前对象的颜色信息，IE返回的是16进制的'#ffffff'，而FF返回的是rgb(255,255,255) **</p>
+<h5 id="参考文章链接"><a href="http://www.jb51.net/article/34863.htm">参考文章链接</a></h5>
+<h5 id="参考文档"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/currentStyle">参考文档</a></h5>
+<pre><code class="language-javascript">function getStyle(obj,attr){
+		if(obj.currentStyle){
+			//兼容IE
+			return obj.currentStyle[attr];
+		}
+		else{
+			return getComputedStyle(obj,false)[attr];
+		}
+	}
+//参数obj为需要获取样式的对象，attr为需要获取的属性
+
+//示例：
+//假设这个div有一个left为250px的样式
+var aDiv = document.getElementsByTagName('div');
+console.log(getStyle(aDiv[1],'left')) //返回250px
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1%E8%8E%B7%E5%8F%96%E8%8A%82%E7%82%B9">1.获取节点</a>
+<ul>
+<li><a href="#document">document</a></li>
+<li><a href="#%E8%8A%82%E7%82%B9">节点</a>
+<ul>
+<li><a href="#childnodes">childNodes</a></li>
+<li><a href="#childnodes%E7%A7%BB%E9%99%A4%E7%A9%BA%E7%99%BD%E6%96%87%E6%9C%AC%E8%8A%82%E7%82%B9">childNodes移除空白文本节点</a></li>
+<li><a href="#firstchild%E6%96%B9%E6%B3%95%E5%92%8Clastchild%E6%96%B9%E6%B3%95">firstChild()方法和lastChild()方法</a></li>
+<li><a href="#1-parentnode-%E8%BF%94%E5%9B%9E%E7%88%B6%E8%8A%82%E7%82%B9-2previoussibling%E5%89%8D%E4%B8%80%E4%B8%AA%E5%90%8C%E7%BA%A7%E8%8A%82%E7%82%B9-3nextsibling%E5%90%8E%E4%B8%80%E4%B8%AA%E5%90%8C%E7%BA%A7%E8%8A%82%E7%82%B9">1. <code>parentNode</code> 返回父节点  2.<code>previousSibling</code>前一个同级节点 3.<code>nextSibling</code>后一个同级节点</a></li>
+<li><a href="#firstchild%E7%AD%89%E6%96%B9%E6%B3%95%E7%A7%BB%E9%99%A4-%E7%A9%BA%E6%96%87%E6%9C%AC%E8%8A%82%E7%82%B9">firstChild()等方法移除 空文本节点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%8F%92%E5%85%A5%E5%88%A0%E9%99%A4%E6%9B%BF%E6%8D%A2%E5%92%8C%E5%A4%8D%E5%88%B6%E8%8A%82%E7%82%B9">创建，插入，删除，替换和复制节点</a><br>
+*
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E6%8F%92%E5%85%A5%E6%96%87%E6%A1%A3">创建一个元素插入文档</a></li>
+<li><a href="#insertbefore%E6%96%B9%E6%B3%95">insertBefore()方法</a></li>
+<li><a href="#replacechild-%E6%9B%BF%E6%8D%A2">replaceChild() 替换</a></li>
+<li><a href="#clonenode-%E5%A4%8D%E5%88%B6%E5%85%83%E7%B4%A0%E8%8A%82%E7%82%B9">cloneNode() 复制元素节点</a></li>
+<li><a href="#removechild-%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0%E8%8A%82%E7%82%B9">removeChild() 删除元素节点</a></li>
+</ul>
+</li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E9%9D%9E%E8%A1%8C%E9%97%B4%E6%A0%B7%E5%BC%8F">获取非行间样式</a><br>
+*
+<ul>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5">参考文章链接</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3">参考文档</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/js-zhong-thiscallapplybind/">
+              <h3 class="post-title">
+                Js中this,call,apply,bind
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

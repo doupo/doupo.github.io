@@ -1,0 +1,577 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>js数据类型 | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="js数据类型 | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+通用知识：
+HTML 标签类型：block、inline、inline-block、table……
+JS中的数据类型：数字、字符串、布尔、函数、对象(obj、[]、{}、null)、未定义
+方法：  typeof 判断数据类型
+
+例：
+ ..." />
+    <meta name="keywords" content="js" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              js数据类型
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/js/" class="post-tag">
+                  # js
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>通用知识：<br>
+HTML 标签类型：block、inline、inline-block、table……<br>
+JS中的数据类型：数字、字符串、布尔、函数、对象(obj、[]、{}、null)、未定义<br>
+方法：  typeof 判断数据类型</p>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">    var i = 100;
+	alert( typeof i );			// number
+</code></pre>
+<p>###<a href="http://www.w3school.com.cn/jsref/jsref_undefined.asp">数据类型—Undefined</a></p>
+<ul>
+<li>使用var申明但是未初始化</li>
+<li>typeof 返回Undefined</li>
+<li>Undefined == null  为true</li>
+<li>undefined 既不等于true也不等于false</li>
+</ul>
+<h3 id="数据类型null">数据类型—null</h3>
+<ul>
+<li>申明变量应该赋值为  null</li>
+<li>typeof 返回Object</li>
+<li>null为0</li>
+</ul>
+<h3 id="数据类型boolean">数据类型—Boolean</h3>
+<ul>
+<li>值为 true 和 false</li>
+<li>在<code>Number()</code>检测下  true =1； false=0；</li>
+</ul>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">alert( Number(true) )   //1
+</code></pre>
+<h3 id="数据类型number">数据类型—Number</h3>
+<h5 id="1转换方式">1.转换方式</h5>
+<blockquote>
+<p><strong>显式类型转换（强制类型转换）：</strong><br>
+Number()<br>
+parseInt(对象 , 基数)   a:整数不包含小数点    b:含有两个参数<br>
+W3C链接： http://www.w3school.com.cn/jsref/jsref_parseInt.asp<br>
+parseFloat(对象)	a:浮点数，含小数点<br>
+W3C链接：http://www.w3school.com.cn/jsref/jsref_parseFloat.asp</p>
+</blockquote>
+<blockquote>
+<p><strong>隐式类型转换：</strong><br>
++							200 + '3'		变成字符串<br>
+- * / %				    '200' - 3     变成数字<br>
+++ --						变成数字<br>
+&lt;						数字的比较 、字符串的比较<br>
+!	取反					把右边的数据类型转成布尔值<br>
+==</p>
+</blockquote>
+<h5 id="2number-超出范围">2.Number 超出范围</h5>
+<blockquote>
+<p>Infinity        -Infinity 		检测方式 isFinite( 对象 )</p>
+</blockquote>
+<h5 id="nan">NAN</h5>
+<blockquote>
+<ul>
+<li>A:  not a number</li>
+<li>B:	非数值， NAN 不等于 NAN , 不等于任何数值</li>
+<li>C：isNaN 函数用于检查其参数是否是非数字值<br>
+含义： 是-不是一个数字<br>
+用法： 可以转换为数值 返回 false。  反之 true</li>
+</ul>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code>var i = 9;       //数字
+var b = 'ni';	  //字符
+
+alert(isNaN(i))   // false
+alert(isNaN(b))   // true
+</code></pre>
+<h4 id="math-对象方法-返回">Math 对象方法 返回</h4>
+<h5 id="absx绝对值">abs(x)	绝对值</h5>
+<h5 id="ceilx上舍入">ceil(x)	上舍入</h5>
+<h5 id="floorx下舍入">floor(x)	下舍入</h5>
+<h5 id="maxxy最高值">max(x,y)	最高值</h5>
+<h5 id="minxy最低值">min(x,y)	最低值</h5>
+<h5 id="random0-~-1-之间随机数">random()	0 ~ 1 之间随机数</h5>
+<h5 id="roundx四舍五入为接近的整数">round(x)	四舍五入为接近的整数</h5>
+<h5 id="valueofmath对象的原始值">valueOf()	Math对象的原始值</h5>
+<h3 id="数据类型string">数据类型—String</h3>
+<h5 id="1stringlength方法返回-字符长度-从1-计数">1.<code>String.length</code>方法，返回 字符长度。 从1 计数</h5>
+<h5 id="2stringcharat-索引值-从-0-计数">2.<code>String.charAt( 索引值 )</code>   从 0 计数</h5>
+<p><strong>例：</strong></p>
+<pre><code>var str = '字符测试';
+alert( str.length );		//4
+alert( str.charAt(2) );   //测
+</code></pre>
+<h5 id="3stringcharcodeat-参数值-返回字符的-unicode-编码">3.<code>String.charCodeAt( 参数值 )</code>   返回字符的  Unicode 编码</h5>
+<blockquote>
+<ul>
+<li>参数为空 — 返回 首字符Unicode</li>
+<li>0~9  48~57			<br>
+a~z	97~122	<br>
+A~Z   65~90</li>
+<li><code>String.fromCharCode(22937, 21619)</code> 根据 Unicode 编码返回对应字符</li>
+</ul>
+</blockquote>
+<h5 id="4stringindexof-对象">4.<code>String.indexOf( 对象 )</code></h5>
+<blockquote>
+<ul>
+<li>查找字符的位置， 找到：返回索引值   未找到：返回 -1；</li>
+<li>String.indexOf(对象 ， 查找位置：数字)  默认从0，第二个参数可设置查找位置</li>
+</ul>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var str = 'm01iwniwwm';
+for ( var i=0; i&lt;str.length; i++ ) {
+	if ( str.charAt(i) === 'i' ) {
+		alert(i);
+	}
+}
+// 返回 i 的位置  3 6
+
+alert( str.indexOf('m') );                  //返回 0
+alert( str.indexOf('m', 1) );               // 9
+alert( str.indexOf('X') );					// -1 表示没找到
+</code></pre>
+<blockquote>
+<ul>
+<li><code>String.lastIndexOf(对象 ， 查找位置：数字)</code>默认从最后一位，第二个参	数可设置查找位置， 如果第2个值为负数，当成0来处理</li>
+<li><code>substring()</code> 方法用于提取字符串中介于两个指定下标之间的字符。<br>
+1.	出现负数 ， 当成 0 处理<br>
+2.	可以自动检测 两个参数的大小 。 然后排序</li>
+</ul>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var str = '你是谁啊';
+alert( str.substring(1,3) );	// 是谁
+alert( str.substring(3,1) );	// 是谁
+</code></pre>
+<h5 id="5slice-对象">5.<code>slice( 对象 )</code></h5>
+<blockquote>
+<ul>
+<li><code>slice()</code>支持负数检测，  不会识别大小</li>
+<li>alert( str.slice( 2, 0 ) );	返回 空<br>
+负数从后面倒着往前数~<br>
+<strong>注：</strong>  倒数最后一位是-1</li>
+</ul>
+</blockquote>
+<pre><code class="language-javascript">var str='abcdefg';
+str.slice( 1, 2 ) //&quot;b&quot;
+str.slice( 1, 3 ) //&quot;bc&quot;
+str.slice( 1 ) //&quot;bcdefg&quot;
+str.slice( 2, 0 ) //&quot;&quot;
+str.slice( -2 ) //&quot;fg&quot;
+str.slice( -2,  str.lenght) //&quot;fg&quot;
+</code></pre>
+<h5 id="6转换大小写">6.转换大小写</h5>
+<blockquote>
+<ul>
+<li>alert( str.toUpperCase() );			// 转成大写</li>
+<li>alert( str.toLowerCase() );			// 转成小写</li>
+</ul>
+</blockquote>
+<h5 id="7split字符-数值-限定数组长度方法用于把一个字符串分割成字符串数组">7.<code>split(字符 ， 数值-限定数组长度)</code>方法用于把一个字符串分割成字符串数组。</h5>
+<blockquote>
+<ul>
+<li>分割    返回数组</li>
+</ul>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var str = 'www.baidu.com';
+alert( str.split('.') );				// [ 'www', 'baidu', 'com' ]
+alert( str.split('.',2) );				// [ 'www', 'baidu' ]
+alert( str.split('') );					// 每个字符都分割
+
+var arr = str.split( '.' );
+alert( arr[1] );                        // baidu
+</code></pre>
+<h5 id="8join把数组转换为字符串-参数可以为空-空为">8.<code>join()</code>把数组转换为字符串   参数可以为空  空为		','</h5>
+<blockquote>
+<ul>
+<li>分割    返回数组</li>
+</ul>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr = [ 'aa', 'bb', 'cc' ];
+
+alert( arr.join() );			//'aa'+','+'bb'+','+'cc'
+alert( arr.join().length );     //8
+
+alert( arr.join('') );          //aabbcc
+
+alert( arr.join('-') );         // aa-bb-cc
+</code></pre>
+<h3 id="数据类型object">数据类型—Object</h3>
+<h4 id="数组">数组</h4>
+<h5 id="1格式">1.格式</h5>
+<blockquote>
+<ul>
+<li>格式<code>var arr = [ 'c', 'd', 'a', 'e' ];</code></li>
+<li>自带属性   arr.length 从1 计数</li>
+</ul>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">for( var i=0; i&lt;arr.length; i++ ){
+    alert(arr[i])
+}
+// c	d	a	e
+修改 arr[2]='ni'
+// c	d	ni	e
+
+</code></pre>
+<h5 id="2数组排序">2.数组排序</h5>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr2 = [ 4,3,2,11 ];
+alert(arr2.sort());       //2 3 4 11
+console.log( arr2 );       // 11 2 3 4
+
+arr2.sort(function ( a, b ) {
+	return a - b;
+});
+
+</code></pre>
+<h5 id="3ivrandom方法可返回介于-0-~-1-之间的一个随机数">3.<code>iv.	random()</code>方法可返回介于 0 ~ 1 之间的一个随机数。</h5>
+<h5 id="4数组合并">4.	数组合并</h5>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr1 = [ 1,2,3 ];
+var arr2 = [ 4,5,6 ];
+
+alert( arr1.concat( arr2, arr3 ) );     //[1,2,3,4,5,6]
+</code></pre>
+<h5 id="5reverse方法用于颠倒数组中元素的顺序">5.<code>reverse()</code>方法用于颠倒数组中元素的顺序</h5>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr1 = [ 'a',2,3,4,5,6 ];
+console.log(arr1.reverse());
+//[6, 5, 4, 3, 2, &quot;a&quot;]
+
+颠倒一个字符串
+var str = 1234;
+alert(str.split('').reverse().join(''));   //4321
+</code></pre>
+<h5 id="6遍历-for-in">6.遍历  for in</h5>
+<ul>
+<li>遍历数组<br>
+<strong>例：</strong></li>
+</ul>
+<pre><code class="language-javascript">var arr = [ 'a', 'b', 'c' ];
+
+for ( var i in arr ) {
+	alert( arr[i] );
+}
+//  a b c d
+</code></pre>
+<h5 id="7像数组添加元素方法-apush-bunshift">7.像数组添加元素方法   a.	Push()   b.	Unshift()</h5>
+<blockquote>
+<p><code>Push()</code>   数组尾部新增，返回值为数组长度</p>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr = [ 1,2,3 ];
+
+alert( arr.push( 'a' ) ); // 在数组尾部添加 a 返回新的数组长度 4
+
+alert( arr ); // 1 2 3 a
+</code></pre>
+<blockquote>
+<p><code>unshift()</code>数组头部新增，返回值为数组长度</p>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr = [ 1,2,3 ];
+alert( arr.unshift( 0 ) );		
+
+// 在数组头部添加 a 返回新的数组长度 4	IE 6  7 不支持 unshift 返回值
+
+alert( arr );       //0 1 2 3
+</code></pre>
+<h5 id="8数组删除元素-a-pop-bshift">8.数组删除元素  a. pop()    b.shift()</h5>
+<blockquote>
+<p>移除尾部  pop()  返回移除的对象</p>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr = [ '1', '2', '3', '4' ];
+alert( arr.pop() );   //返回 4
+alert( arr );          //  1 2 3
+</code></pre>
+<blockquote>
+<p>移除头部  shift()  返回移除对象</p>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr = [ '1', '2', '3', '4' ];
+alert( arr.shift() );  // 返回 1
+alert( arr );          // 返回 2 3 4
+</code></pre>
+<h5 id="9splice方法向从数组中添加删除项目然后返回被删除的项目">9.<code>splice()</code>方法向/从数组中添加/删除项目，然后返回被删除的项目</h5>
+<blockquote>
+<ol>
+<li>删除</li>
+</ol>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr = [ '1', '2', '3', '4' ];
+        alert( arr.splice(0,1) );   
+//返回 1  删除从0开始的第一个对象
+        alert(arr)                  //  2 3 4
+</code></pre>
+<blockquote>
+<p>2.替换</p>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr = [ '1', '2', '3', '4' ];
+        alert( arr.splice(0,2,'abc','345') );   
+//返回 1 2 ,删除了0~2，新增了 abc 和 345
+        alert(arr)                  //  abc 345 3 4
+</code></pre>
+<blockquote>
+<p>3.添加</p>
+</blockquote>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var arr = [ '1', '2', '3', '4' ];
+        alert( arr.splice(1,0,'abc') );   
+//返回空 , 索引1的位置新增了 abc
+        alert(arr)                  //  1 abc 2 3 4
+</code></pre>
+<h4 id="json">Json</h4>
+<h5 id="1格式-2">1.格式</h5>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var json = { name : '姓名', age : 32 };
+alert( json.name );    ==  alert( json['name'] );
+
+修改—   json2.name = '2';    json2['name'] = 1;
+
+var json5 = {
+	'url' : [ '1', '2', '3', '4' ],
+	'text' : [ '5', '6', '7', '8' ]
+};
+</code></pre>
+<h5 id="2json-for-in">2.Json for in</h5>
+<p><strong>例：</strong></p>
+<pre><code class="language-javascript">var json5 = {
+	'url' : [ '1', '2', '3', '4' ],
+	'text' : [ '5', '6', '7', '8' ]
+};
+
+
+for ( var attr in json5 ) {
+	for ( var i=0; i &lt; json5[attr].length; i++ ) {
+		alert( json5[attr][i] );
+	}
+}
+
+// 1 2 3 4 5 6 7 8
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bnull">数据类型—null</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bboolean">数据类型—Boolean</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bnumber">数据类型—Number</a><br>
+*
+<ul>
+<li><a href="#1%E8%BD%AC%E6%8D%A2%E6%96%B9%E5%BC%8F">1.转换方式</a></li>
+<li><a href="#2number-%E8%B6%85%E5%87%BA%E8%8C%83%E5%9B%B4">2.Number 超出范围</a></li>
+<li><a href="#nan">NAN</a></li>
+<li><a href="#math-%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95-%E8%BF%94%E5%9B%9E">Math 对象方法 返回</a>
+<ul>
+<li><a href="#absx%E7%BB%9D%E5%AF%B9%E5%80%BC">abs(x)	绝对值</a></li>
+<li><a href="#ceilx%E4%B8%8A%E8%88%8D%E5%85%A5">ceil(x)	上舍入</a></li>
+<li><a href="#floorx%E4%B8%8B%E8%88%8D%E5%85%A5">floor(x)	下舍入</a></li>
+<li><a href="#maxxy%E6%9C%80%E9%AB%98%E5%80%BC">max(x,y)	最高值</a></li>
+<li><a href="#minxy%E6%9C%80%E4%BD%8E%E5%80%BC">min(x,y)	最低值</a></li>
+<li><a href="#random0-~-1-%E4%B9%8B%E9%97%B4%E9%9A%8F%E6%9C%BA%E6%95%B0">random()	0 ~ 1 之间随机数</a></li>
+<li><a href="#roundx%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5%E4%B8%BA%E6%8E%A5%E8%BF%91%E7%9A%84%E6%95%B4%E6%95%B0">round(x)	四舍五入为接近的整数</a></li>
+<li><a href="#valueofmath%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%80%BC">valueOf()	Math对象的原始值</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bstring">数据类型—String</a><br>
+*
+<ul>
+<li><a href="#1stringlength%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E-%E5%AD%97%E7%AC%A6%E9%95%BF%E5%BA%A6-%E4%BB%8E1-%E8%AE%A1%E6%95%B0">1.<code>String.length</code>方法，返回 字符长度。 从1 计数</a></li>
+<li><a href="#2stringcharat-%E7%B4%A2%E5%BC%95%E5%80%BC-%E4%BB%8E-0-%E8%AE%A1%E6%95%B0">2.<code>String.charAt( 索引值 )</code>   从 0 计数</a></li>
+<li><a href="#3stringcharcodeat-%E5%8F%82%E6%95%B0%E5%80%BC-%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6%E7%9A%84-unicode-%E7%BC%96%E7%A0%81">3.<code>String.charCodeAt( 参数值 )</code>   返回字符的  Unicode 编码</a></li>
+<li><a href="#4stringindexof-%E5%AF%B9%E8%B1%A1">4.<code>String.indexOf( 对象 )</code></a></li>
+<li><a href="#5slice-%E5%AF%B9%E8%B1%A1">5.<code>slice( 对象 )</code></a></li>
+<li><a href="#6%E8%BD%AC%E6%8D%A2%E5%A4%A7%E5%B0%8F%E5%86%99">6.转换大小写</a></li>
+<li><a href="#7split%E5%AD%97%E7%AC%A6-%E6%95%B0%E5%80%BC-%E9%99%90%E5%AE%9A%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6%E6%96%B9%E6%B3%95%E7%94%A8%E4%BA%8E%E6%8A%8A%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E5%89%B2%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E7%BB%84">7.<code>split(字符 ， 数值-限定数组长度)</code>方法用于把一个字符串分割成字符串数组。</a></li>
+<li><a href="#8join%E6%8A%8A%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%82%E6%95%B0%E5%8F%AF%E4%BB%A5%E4%B8%BA%E7%A9%BA-%E7%A9%BA%E4%B8%BA">8.<code>join()</code>把数组转换为字符串   参数可以为空  空为		','</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bobject">数据类型—Object</a>
+<ul>
+<li><a href="#%E6%95%B0%E7%BB%84">数组</a>
+<ul>
+<li><a href="#1%E6%A0%BC%E5%BC%8F">1.格式</a></li>
+<li><a href="#2%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F">2.数组排序</a></li>
+<li><a href="#3ivrandom%E6%96%B9%E6%B3%95%E5%8F%AF%E8%BF%94%E5%9B%9E%E4%BB%8B%E4%BA%8E-0-~-1-%E4%B9%8B%E9%97%B4%E7%9A%84%E4%B8%80%E4%B8%AA%E9%9A%8F%E6%9C%BA%E6%95%B0">3.<code>iv.	random()</code>方法可返回介于 0 ~ 1 之间的一个随机数。</a></li>
+<li><a href="#4%E6%95%B0%E7%BB%84%E5%90%88%E5%B9%B6">4.	数组合并</a></li>
+<li><a href="#5reverse%E6%96%B9%E6%B3%95%E7%94%A8%E4%BA%8E%E9%A2%A0%E5%80%92%E6%95%B0%E7%BB%84%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E9%A1%BA%E5%BA%8F">5.<code>reverse()</code>方法用于颠倒数组中元素的顺序</a></li>
+<li><a href="#6%E9%81%8D%E5%8E%86-for-in">6.遍历  for in</a></li>
+<li><a href="#7%E5%83%8F%E6%95%B0%E7%BB%84%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0%E6%96%B9%E6%B3%95-apush-bunshift">7.像数组添加元素方法   a.	Push()   b.	Unshift()</a></li>
+<li><a href="#8%E6%95%B0%E7%BB%84%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0-a-pop-bshift">8.数组删除元素  a. pop()    b.shift()</a></li>
+<li><a href="#9splice%E6%96%B9%E6%B3%95%E5%90%91%E4%BB%8E%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4%E9%A1%B9%E7%9B%AE%E7%84%B6%E5%90%8E%E8%BF%94%E5%9B%9E%E8%A2%AB%E5%88%A0%E9%99%A4%E7%9A%84%E9%A1%B9%E7%9B%AE">9.<code>splice()</code>方法向/从数组中添加/删除项目，然后返回被删除的项目</a></li>
+</ul>
+</li>
+<li><a href="#json">Json</a>
+<ul>
+<li><a href="#1%E6%A0%BC%E5%BC%8F-2">1.格式</a></li>
+<li><a href="#2json-for-in">2.Json for in</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

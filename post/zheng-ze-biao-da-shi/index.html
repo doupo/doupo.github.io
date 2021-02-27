@@ -1,0 +1,608 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>正则表达式 | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="正则表达式 | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="正则的写法 Regular Expression
+var re = /a/;
+var re = new RegExp('a');
+正则表达式常用方法
+转义字符
+
+
+
+代码
+含义
+
+
+
+
+\s
+空格
+
+
+\S
+非空格
+
+
+\d
+数字
+
+
+\D..." />
+    <meta name="keywords" content="js" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              正则表达式
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/js/" class="post-tag">
+                  # js
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h4 id="正则的写法-regular-expression">正则的写法 Regular Expression</h4>
+<p>var re = /a/;<br>
+var re = new RegExp('a');</p>
+<h3 id="正则表达式常用方法">正则表达式常用方法</h3>
+<h4 id="转义字符">转义字符</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\s</td>
+<td style="text-align:center">空格</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td style="text-align:center">非空格</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:center">数字</td>
+</tr>
+<tr>
+<td style="text-align:center">\D</td>
+<td style="text-align:center">非数字</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:center">字符   ( 字母 ，数字，下划线_ )</td>
+</tr>
+<tr>
+<td style="text-align:center">\W</td>
+<td style="text-align:center">匹配任何非单词字符。等价于[^A-Za-z0-9_]</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">独立的部分   （ 起始，结束，空格 ）</td>
+</tr>
+<tr>
+<td style="text-align:center">\B</td>
+<td style="text-align:center">非独立的部分</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车符</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">制表符</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1test-字符串判断匹配">1.test 字符串判断(匹配)</h4>
+<p><strong>test的写法 : <code>正则.test(字符串)</code></strong></p>
+<h5 id="判断手机号码">判断手机号码</h5>
+<p><strong>!(/^1[3|4|5|7|8]\d{9}$/.test(phone))</strong></p>
+<blockquote>
+<p>返回真假<br>
+正则.test(字符串)</p>
+</blockquote>
+<h5 id="指定字符匹配">指定字符匹配</h5>
+<pre><code class="language-javascript">//test : 正则去匹配字符串，如果匹配成功就返回真，如果匹配失败就返回假
+var str = 'abcdef';
+var re = /b/;	//b可以匹配到，‘ab’也可以，如果有间隔‘ce’不连续则返回false
+alert( re.test(str) );  //返回true
+</code></pre>
+<h5 id="例子判断字符是否全是数字">例子：判断字符是否全是数字</h5>
+<pre><code class="language-javascript">var str = '374829348791';
+
+//str = '374829348791'; =&gt; else
+//str = 'l37h482r9348791'; =&gt; if
+
+var re = /\D/;
+if( re.test(str) ){
+	alert('不全是数字');
+}
+else{
+	alert('全是数字');
+}
+</code></pre>
+<h4 id="2search字符串搜索">2.search字符串搜索</h4>
+<p><strong>search的写法 : <code>字符串.search(正则)</code></strong></p>
+<blockquote>
+<p>返回出现的位置(成功返回位置，失败就返回 -1)<br>
+字符串.search(正则)<br>
+忽略大小写：i——ignore<br>
+<em>*<code>var re=/I/i;</code> ==== <code>var re = new RegExp('B','i');</code></em>*</p>
+</blockquote>
+<h5 id="例子字符串搜索">例子：字符串搜索</h5>
+<pre><code class="language-javascript">//正则中的默认 : 是区分大小写的 , 寻找第一个
+var str='nishiyige';
+var re=/I/;				//I =&gt; -1;  i=&gt; 1;
+alert(str.search(re));
+
+//如果不区分大小写的话，在正则的最后加标识
+var str='nishiyige';
+var re=/I/i;				
+alert(str.search(re));	// 1
+</code></pre>
+<h4 id="3match正则去匹配字符串">3.match正则去匹配字符串</h4>
+<p>如果匹配成功，就返回匹配成功的数组，如果匹配不成功，就返回null<br>
+<strong>match的写法 : <code>字符串.match(正则)</code></strong></p>
+<blockquote>
+<p>获取匹配的项目,<br>
+返回数组<br>
+量词：+  至少出现一次<br>
+全局匹配：g——global</p>
+</blockquote>
+<h5 id="例子找出所有数字">例子：找出所有数字</h5>
+<pre><code class="language-javascript">	var str = 'haj123sdk54hask33dkhalsd879';
+
+var re = /\d+/g;    
+//re = /\d\d/g; =&gt; [12,54,33,87]   
+//re = /\d\d\d/g; =&gt; [123,879]  
+//re = /\d\d\d\d/g; =&gt; null
+
+alert( str.match(re) );   //[123,54,33,879]
+</code></pre>
+<h5 id="例子match匹配子项">例子：match匹配子项</h5>
+<pre><code class="language-javascript">var str = 'dacdef';
+var re = /(a)(c)/;
+alert( str.match(re) );  //[ac,a,c](当match不加g的时候才可以获取到子项的集合)
+</code></pre>
+<h4 id="4-replace匹配替换">4. replace匹配替换</h4>
+<p><strong>replace的写法 : <code>字符串.replace(正则,新的字符串)</code></strong></p>
+<blockquote>
+<p>替换所有匹配<br>
+返回替换后的字符串<br>
+字符串.replace(正则,想替换的)<br>
+<code>|</code> : 或的意思<br>
+<code>replace : 第二个参数：</code>可以是<code>字符串</code>，也可以是一个<code>回调函数</code></p>
+</blockquote>
+<h5 id="例子敏感词过滤">例子：敏感词过滤</h5>
+<pre><code class="language-javascript">	var str='菲称仁爱礁附近17艘中国船均在菲军监视之下';
+	var re = /菲称|中国船|监视之下/g;
+	var newstr='';
+		 newstr = str.replace(re,function(str){
+			//函数的第一个参数：就是匹配成功的字符	 
+			 alert( str );  //菲称 中国船 监视之下 
+			 var result = '';
+			 for(var i=0;i&lt;str.length;i++){
+				 result += '*';
+			 }
+			 return result;
+		 });
+		 alert(newstr);		//**仁爱礁附近17艘***均在菲军****
+</code></pre>
+<h5 id="匹配子项">匹配子项</h5>
+<h5 id="匹配子项注意点">匹配子项注意点！</h5>
+<blockquote>
+<p>拿到子项的前提是匹配到母项,rt,/\d+-/g只能匹配到 '2017-' '3-',最后一个'2'匹配不到<br>
+<img src="./%E5%AD%90%E9%A1%B9%E5%8C%B9%E9%85%8D%E6%B3%A8%E6%84%8F%E7%82%B9.png" alt="Alt text" loading="lazy"></p>
+</blockquote>
+<h5 id="例子日期格式化">例子：日期格式化</h5>
+<h5 id="正则表达式中小括号">正则表达式中小括号</h5>
+<p><strong>小括号<code>()</code> (还有另外一个意思，分组操作)</strong></p>
+<pre><code class="language-javascript">//把正则的整体叫做（母亲）
+//然后把左边第一个小括号里面的正则，叫做这个第一个子项(母亲的第一个孩子)
+//第二个小括号就是第二个孩子
+
+var str = '2017-3-2';
+
+var re = /(\d+)(-)/g;
+
+str = str.replace(re,function($0,$1,$2){
+	//第一个参数：$0（母亲）,第二个参数 : $1(第一个孩子)
+	//,第二个参数 : $1(第二个孩子)
+	
+	alert( $0 ); //2017-  3-
+	alert( $1 ); //2017  3     //子项内容来源于母项==&gt;所以没有匹配到最后一个2
+	alert( $2 ); //-  -
+	return $1 + '.';		//2017+'.'  3+'.'
+	
+	// return $0.substring(0,$0.length-1) + '.';
+	
+});
+
+alert( str );   //2017.3.2
+</code></pre>
+<h4 id="正则表达式字符类">正则表达式字符类</h4>
+<h5 id="任意字符">任意字符</h5>
+<blockquote>
+<p>字符类 : 一组相似的元素   [] 中括号的整体代表一个字符，或的关系<br>
+例:</p>
+</blockquote>
+<pre><code class="language-javascript">	var str = 'abdc';
+	var re = /a[bde]+c/;
+	alert( re.test(str) );  //返回 true
+</code></pre>
+<h5 id="范围">范围</h5>
+<blockquote>
+<p>[a-z]、[0-9]、[A-Z]</p>
+</blockquote>
+<h5 id="例a-z0-9a-z">例：[a-z0-9A-Z]</h5>
+<pre><code class="language-javascript">var str = 'abc';	//str = 'a*c'; 返回 false
+var re = /a[a-z0-9A-Z]c/;
+alert( re.test(str) );  //返回 true
+</code></pre>
+<h5 id="排除">排除</h5>
+<blockquote>
+<p><code>[^a]</code>^ 如果^写在<code>[]</code>里面的话，就代表排除的意思</p>
+</blockquote>
+<h5 id="例子a">例子：[^a]</h5>
+<pre><code class="language-javascript">var str = 'a2c';
+var re = /a[^bde]c/;
+alert( re.test(str) );  //不能拥有和[^bde]相匹配的字符
+</code></pre>
+<h5 id="例子综合去掉html中的标签">例子综合：去掉html中的标签</h5>
+<pre><code class="language-javascript">	window.onload=function(){
+    var htmltxt=document.getElementById('htmltxt').innerHTML;
+    console.log(htmltxt);
+    var re=/&lt;[^&gt;]+&gt;/g;
+    htmltxt=htmltxt.replace(re,'');
+    console.log(htmltxt);
+	}
+
+//执行返回	多语言
+            
+                //中 文
+                //English
+                //日本語
+                //Русский
+                //한국어
+  
+//html
+&lt;div id=&quot;htmltxt&quot;&gt;
+    &lt;li class=&quot;nav-dropdown-container language&quot;&gt;
+    &lt;a class=&quot;nav-link&quot;&gt;多语言&lt;/a&gt;&lt;span class=&quot;arrow&quot;&gt;&lt;/span&gt;
+        &lt;ul class=&quot;nav-dropdown&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;https://cn.vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;中文&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;https://vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;English&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;https://jp.vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;日本語&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;https://ru.vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;Русский&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;https://kr.vuejs.org/&quot; class=&quot;nav-link&quot; target=&quot;_blank&quot;&gt;한국어&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/div&gt;
+</code></pre>
+<h5 id="转义字符1~n的用法">转义字符\1~n的用法</h5>
+<p><code>\1</code> : 重复的第一个子项<br>
+<code>\2</code> : 重复的第二个子项<br>
+<code>\n</code> : 重复的第n个子项</p>
+<pre><code class="language-javascript">var str = 'abcb';
+var re = /(a)(b)(c)\2/;
+alert( re.test(str) );  
+//返回true var re = /(a)(b)(c)\2/;  ==&gt; var re = /(a)(b)(c)(b)/; 
+
+if var str = 'abcc';  ==&gt; 返回 false
+
+var re = /\w\w/;   		//可以匹配 ab a1 等等
+var re = /(\w)\1/; 		//只能匹配 aa 11 等等
+</code></pre>
+<h5 id="转义字符b和的用法">转义字符\b和.的用法</h5>
+<h4 id="正则需要传参的写法">正则需要传参的写法</h4>
+<p><strong>当正则需要传参的时候，一定要用全称的写法；且需要转义</strong></p>
+<h5 id="获取class元素">获取class元素</h5>
+<pre><code class="language-javascript">	function getByClass(oParent,sClass){
+		var arr = [];
+		var aEle = oParent.getElementsByTagName('*');
+		
+		//var re = /sClass/;  //当正则需要传参的时候，一定要用全称的写法
+		var re = new RegExp('\\b'+sClass+'\\b');
+		
+		for(var i=0;i&lt;aEle.length;i++){
+			if( re.test(aEle[i].className) ){
+				arr.push( aEle[i] );
+			}
+		}
+		return arr;
+	}
+</code></pre>
+<h4 id="量词">量词 : {}，+，？，*</h4>
+<pre><code class="language-javascript">{4,7}  : 最少出现4次，最多出现7次
+{4,} : 最少出现4次,没有上限
+{4} : 正好出现4次
+
++ : {1,}
+? : {0,1}  : 出现0次或者1次
+* : {0,}  : 至少出现0次
+
+
+var str = 'ac';
+var re = /ab*c/;
+
+alert(re.test(str));  //返回true
+//var re = /ab*c/; b后缀*表示可以不用出现，匹配成功，所以var str = 'ac'; 也可以是 var str = 'abc';
+</code></pre>
+<h4 id="正则中和">正则中^和$</h4>
+<p><code>[^a]</code>^ 如果^写在<code>[]</code>里面的话，就代表排除的意思<br>
+<code>^</code>: 正则的最开始位置，就代笔起始的意思<br>
+<code>$</code> : 正则的最后位置 , 就代笔结束的意思</p>
+<h5 id="例和">例：^和$</h5>
+<pre><code class="language-javascript">var str='1s2345a';
+var re=/^\d\w+a$/g;
+alert(re.test(str)); //true
+
+var re=/^\d\w+a$/g; 起始为数字，中间为字符,结尾为'a'
+</code></pre>
+<h5 id="例去前后空格">例：去前后空格</h5>
+<pre><code class="language-javascript">var str = ' hello ';
+alert( '('+trim(str)+')' );
+function trim(str){
+	var re = /^\s+|\s+$/g;
+	return str.replace(re,'');
+}
+</code></pre>
+<h5 id="例解释">例：解释</h5>
+<pre><code class="language-javascript">var re = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/;
+起始为字符且多位 + @ + a-z和0-9+ 转义后的 . + a-z + 量词，可以多位
+</code></pre>
+<h4 id="创建正则方法集合">创建正则方法集合</h4>
+<pre><code class="language-javascript">var str = '你是134你';
+
+var re = {
+	email : /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/,	//验证邮箱
+	tel:/^1[3|4|5|7|8]\d{9}$/,					//验证手机号
+	Dupp:/[A-Z]/g,					//去掉大写字母
+	Dnum:/[0-9]/g,					//去掉数字
+	UDUD:/-(\w)/g,					//转驼峰
+	china:/^[\u4e00-\u9fa5]+$/g,	//只允许中文
+};
+
+//转驼峰
+str=str.replace(re.UDUD,function(a1,a2){
+	return a2.toUpperCase();
+});	 
+
+
+alert(re.china.test(str));	
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%AD%A3%E5%88%99%E7%9A%84%E5%86%99%E6%B3%95-regular-expression">正则的写法 Regular Expression</a></li>
+</ul>
+</li>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">正则表达式常用方法</a>
+<ul>
+<li><a href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6">转义字符</a></li>
+<li><a href="#1test-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%A4%E6%96%AD%E5%8C%B9%E9%85%8D">1.test 字符串判断(匹配)</a>
+<ul>
+<li><a href="#%E5%88%A4%E6%96%AD%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81">判断手机号码</a></li>
+<li><a href="#%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E5%8C%B9%E9%85%8D">指定字符匹配</a></li>
+<li><a href="#%E4%BE%8B%E5%AD%90%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E6%98%AF%E5%90%A6%E5%85%A8%E6%98%AF%E6%95%B0%E5%AD%97">例子：判断字符是否全是数字</a></li>
+</ul>
+</li>
+<li><a href="#2search%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%90%9C%E7%B4%A2">2.search字符串搜索</a>
+<ul>
+<li><a href="#%E4%BE%8B%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%90%9C%E7%B4%A2">例子：字符串搜索</a></li>
+</ul>
+</li>
+<li><a href="#3match%E6%AD%A3%E5%88%99%E5%8E%BB%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E4%B8%B2">3.match正则去匹配字符串</a>
+<ul>
+<li><a href="#%E4%BE%8B%E5%AD%90%E6%89%BE%E5%87%BA%E6%89%80%E6%9C%89%E6%95%B0%E5%AD%97">例子：找出所有数字</a></li>
+<li><a href="#%E4%BE%8B%E5%AD%90match%E5%8C%B9%E9%85%8D%E5%AD%90%E9%A1%B9">例子：match匹配子项</a></li>
+</ul>
+</li>
+<li><a href="#4-replace%E5%8C%B9%E9%85%8D%E6%9B%BF%E6%8D%A2">4. replace匹配替换</a>
+<ul>
+<li><a href="#%E4%BE%8B%E5%AD%90%E6%95%8F%E6%84%9F%E8%AF%8D%E8%BF%87%E6%BB%A4">例子：敏感词过滤</a></li>
+<li><a href="#%E5%8C%B9%E9%85%8D%E5%AD%90%E9%A1%B9">匹配子项</a></li>
+<li><a href="#%E5%8C%B9%E9%85%8D%E5%AD%90%E9%A1%B9%E6%B3%A8%E6%84%8F%E7%82%B9">匹配子项注意点！</a></li>
+<li><a href="#%E4%BE%8B%E5%AD%90%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96">例子：日期格式化</a></li>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E5%B0%8F%E6%8B%AC%E5%8F%B7">正则表达式中小括号</a></li>
+</ul>
+</li>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%97%E7%AC%A6%E7%B1%BB">正则表达式字符类</a>
+<ul>
+<li><a href="#%E4%BB%BB%E6%84%8F%E5%AD%97%E7%AC%A6">任意字符</a></li>
+<li><a href="#%E8%8C%83%E5%9B%B4">范围</a></li>
+<li><a href="#%E4%BE%8Ba-z0-9a-z">例：[a-z0-9A-Z]</a></li>
+<li><a href="#%E6%8E%92%E9%99%A4">排除</a></li>
+<li><a href="#%E4%BE%8B%E5%AD%90a">例子：[^a]</a></li>
+<li><a href="#%E4%BE%8B%E5%AD%90%E7%BB%BC%E5%90%88%E5%8E%BB%E6%8E%89html%E4%B8%AD%E7%9A%84%E6%A0%87%E7%AD%BE">例子综合：去掉html中的标签</a></li>
+<li><a href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A61~n%E7%9A%84%E7%94%A8%E6%B3%95">转义字符\1~n的用法</a></li>
+<li><a href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6b%E5%92%8C%E7%9A%84%E7%94%A8%E6%B3%95">转义字符\b和.的用法</a></li>
+</ul>
+</li>
+<li><a href="#%E6%AD%A3%E5%88%99%E9%9C%80%E8%A6%81%E4%BC%A0%E5%8F%82%E7%9A%84%E5%86%99%E6%B3%95">正则需要传参的写法</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96class%E5%85%83%E7%B4%A0">获取class元素</a></li>
+</ul>
+</li>
+<li><a href="#%E9%87%8F%E8%AF%8D">量词 : {}，+，？，*</a></li>
+<li><a href="#%E6%AD%A3%E5%88%99%E4%B8%AD%E5%92%8C">正则中^和$</a>
+<ul>
+<li><a href="#%E4%BE%8B%E5%92%8C">例：^和$</a></li>
+<li><a href="#%E4%BE%8B%E5%8E%BB%E5%89%8D%E5%90%8E%E7%A9%BA%E6%A0%BC">例：去前后空格</a></li>
+<li><a href="#%E4%BE%8B%E8%A7%A3%E9%87%8A">例：解释</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%AD%A3%E5%88%99%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88">创建正则方法集合</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/vuex-he-axios/">
+              <h3 class="post-title">
+                 vuex 和 axios
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

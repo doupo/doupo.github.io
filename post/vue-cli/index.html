@@ -1,0 +1,442 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>vue-cli | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="vue-cli | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="@(js学习笔记)
+vue+
+[toc]
+
+vue脚手架和vue路由的简单配置
+
+vue-cli
+
+生成目录结构
+本地开发调试
+代码部署
+热加载
+单元测试
+
+搭建环境
+需要有node和npm
+
+$ npm install -g vue-cl..." />
+    <meta name="keywords" content="vue,framework" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              vue-cli
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/vue/" class="post-tag">
+                  # vue
+                </a>
+              
+                <a href="https://doupo.github.io/tag/framework/" class="post-tag">
+                  # framework
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>@(js学习笔记)</p>
+<h1 id="vue">vue+</h1>
+<p>[toc]</p>
+<blockquote>
+<p>vue脚手架和vue路由的简单配置</p>
+</blockquote>
+<h3 id="vue-cli">vue-cli</h3>
+<blockquote>
+<p>生成目录结构<br>
+本地开发调试<br>
+代码部署<br>
+热加载<br>
+单元测试</p>
+</blockquote>
+<h4 id="搭建环境">搭建环境</h4>
+<p>需要有node和npm</p>
+<blockquote>
+<p>$ npm install -g vue-cli</p>
+</blockquote>
+<p>初始化项目==&gt; 可以选择选择模板</p>
+<blockquote>
+<p>$ vue init webpack vue+</p>
+</blockquote>
+<p>运行项目</p>
+<blockquote>
+<p>cd vue+<br>
+npm install<br>
+npm run dev</p>
+</blockquote>
+<h4 id="项目结构">项目结构</h4>
+<figure data-type="image" tabindex="1"><img src="http://doupo.me/images/noteimg/vue-cli_img1.png" alt="enter image description here" loading="lazy"></figure>
+<h4 id="入口js文件mainjs">入口js文件main.js</h4>
+<pre><code class="language-javascript">import Vue from 'vue'
+import App from './App'/*引入App这个组件*/
+import router from './router'/*引入路由配置*/
+
+Vue.config.productionTip = false
+
+//使用 eslint-disable + 规则名 的作用是不检测这条规则，注意要使用 eslint-enable 结束哟
+//直接 eslint-disable 的作用是完全禁用ESLint进行检测
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',/*最后效果将会替换页面中id为app的div元素*/
+  router,/*使用路由*/
+  template: '&lt;App/&gt;',/*告知页面这个组件用这样的标签来包裹着,并且使用它*/
+  components: { App }/*告知当前页面想使用App这个组件*/
+})
+</code></pre>
+<hr>
+<h3 id="路由">路由</h3>
+<p><a href="http://router.vuejs.org/zh-cn/">vue-router文档 </a><br>
+<img src="http://doupo.me/images/noteimg/vue_view.png" alt="enter image description here" loading="lazy"></p>
+<blockquote>
+<p><strong>前端路由</strong>：根据url分配对应的处理程序<br>
+<strong>vue-router</strong>：管理url，实现url和组件的对应，通过url进行组件的切换</p>
+</blockquote>
+<h4 id="结构">结构</h4>
+<figure data-type="image" tabindex="2"><img src="http://doupo.me/images/noteimg/vue_view2.png" alt="enter image description here" loading="lazy"></figure>
+<p><strong>安装模块</strong></p>
+<blockquote>
+<p>npm install vue-router</p>
+</blockquote>
+<p><strong>引入模块</strong></p>
+<blockquote>
+<p>import VueRouter from 'vue-router'</p>
+</blockquote>
+<p><strong>作为插件</strong></p>
+<blockquote>
+<p>Vue.use(VueRouter)</p>
+</blockquote>
+<h4 id="路由配置">路由配置</h4>
+<pre><code class="language-javascript">import vue from 'vue'
+import vueRouter from 'vue-router'
+
+vue.use(vueRouter)
+
+import hello from '@/components/hello'
+//引入需要使用模块
+
+var router = new vueRouter({
+  mode: 'history', //默认为hash模式，history，hash
+  linkActiveClass: 'isCheck',  
+  //链接点击被触发后的class;默认为：router-link-active
+  routes: [
+    {
+      path: '*',
+      //###页面不存在时跳转到404页面###
+      component: page404,
+      
+      // ###重定向###
+      /*访问页面不存在时定向到hello 
+      redirect:'/hello'          //写法1
+      redirect:{path:'/hello'}   //写法2
+      redirect:{name:'hello'}   //写法3 ==&gt;  name属性
+      redirect(linkMess){
+        // linkMess目标路由对象，访问的路径信息
+        console.log(linkMess)
+        return '/hello'
+      }
+      */
+    },
+    {
+      path: '/hello',
+      name: 'hello',
+      component: hello,
+      alias:'/index'  //设置别名，访问index路径同样显示hello页面
+    },
+    {
+      path: '/about',
+      component: about,
+      children: [
+        {
+          path: '',  //空为默认打开的子路由
+          name: 'about', //如果有默认子路由的情况下，那么父路由不需要name属性
+          component: me
+        }
+      ]
+    }
+    
+  ]
+})
+
+export default router
+//导出
+
+</code></pre>
+<blockquote>
+<p>{<br>
+path: 路径<br>
+name: 路由名<br>
+component: 对应组件<br>
+children:子路由<br>
+}</p>
+</blockquote>
+<p><strong>创建 router 实例</strong></p>
+<pre><code>import vue from 'vue'
+import App from './App.vue'
+//引入App组件
+
+import router from '@/router/index'
+//引入上面导出的router路由
+
+new vue({
+  el: '#app',
+  router,
+  template: '&lt;App/&gt;',
+  components: {
+    App
+  }
+})
+</code></pre>
+<h4 id="vue组件">vue组件</h4>
+<pre><code class="language-javascript">&lt;template&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {}
+&lt;/script&gt;
+
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<h4 id="router-link">router-link</h4>
+<pre><code>        &lt;li&gt;
+          &lt;!--&lt;a href=&quot;/home&quot;&gt;home&lt;/a&gt;--&gt;
+          &lt;router-link :to=&quot;index&quot; exact tag=&quot;div&quot; event=&quot;mouseover&quot;&gt;home&lt;/router-link&gt;
+          &lt;!--1绑定动态添加地址--&gt;
+          &lt;!--1-1.tag更改标签为div--&gt;
+          &lt;!--1-2.鼠标移入切换--&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;router-link :to=&quot;{path:'/about'}&quot;&gt;about&lt;/router-link&gt;
+          &lt;!--2.对象--&gt;
+        &lt;/li&gt;
+          &lt;router-link to=&quot;/document&quot; tag=&quot;li&quot;&gt;
+            &lt;i class=&quot;fa fa-book&quot;&gt;&lt;/i&gt;
+            &lt;span&gt;document&lt;/span&gt;
+          &lt;/router-link&gt;
+          &lt;!--3.静态添加路径--&gt;
+          &lt;!--3-1.生成li点击--&gt;
+</code></pre>
+<p><strong>渲染位置</strong></p>
+<blockquote>
+<p><code>&lt;router-view&gt;&lt;/router-view&gt;</code></p>
+</blockquote>
+<h4 id="嵌套路由">嵌套路由</h4>
+<p>组件</p>
+<pre><code>&lt;router-link tag=&quot;li&quot; to=&quot;/about/work&quot;&gt;&lt;a&gt;work&lt;/a&gt;&lt;/router-link&gt;
+&lt;!--1直接写路径--&gt;
+&lt;router-link tag=&quot;li&quot; :to=&quot;{name:'hobby'}&quot;&gt;&lt;a&gt;hobby&lt;/a&gt;&lt;/router-link&gt;
+&lt;!--2绑定路径--&gt;
+</code></pre>
+<p>配置</p>
+<pre><code class="language-javascript">{
+      path: '/about',
+      component: about,
+      children: [
+        {
+          path:'',  //空为默认打开的子路由
+          name:'about', //如果有默认子路由的情况下，那么父路由不需要name属性
+          component:me
+        },
+        {
+          path:'work',
+          name:'work',
+          component:work
+        }
+      ]
+    }
+</code></pre>
+<h4 id="命名视图">命名视图</h4>
+<blockquote>
+<p>同级展示多个视图</p>
+</blockquote>
+<p>组件</p>
+<pre><code>&lt;router-view name=&quot;slide&quot;&gt;&lt;/router-view&gt;
+&lt;router-view class=&quot;modStyle&quot;&gt;&lt;/router-view&gt;
+</code></pre>
+<p>配置</p>
+<pre><code class="language-javascript">	{
+      path: '/document',
+      name:'document',
+      components: {
+        default:document, //渲染到默认视图document
+        slide:slide   //name=&quot;slide&quot;视图
+      }
+    }
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#vue">vue+</a><br>
+*
+<ul>
+<li><a href="#vue-cli">vue-cli</a>
+<ul>
+<li><a href="#%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83">搭建环境</a></li>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a></li>
+<li><a href="#%E5%85%A5%E5%8F%A3js%E6%96%87%E4%BB%B6mainjs">入口js文件main.js</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B7%AF%E7%94%B1">路由</a>
+<ul>
+<li><a href="#%E7%BB%93%E6%9E%84">结构</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE">路由配置</a></li>
+<li><a href="#vue%E7%BB%84%E4%BB%B6">vue组件</a></li>
+<li><a href="#router-link">router-link</a></li>
+<li><a href="#%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1">嵌套路由</a></li>
+<li><a href="#%E5%91%BD%E5%90%8D%E8%A7%86%E5%9B%BE">命名视图</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/vue-ji-chu/">
+              <h3 class="post-title">
+                vue基础
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

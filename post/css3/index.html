@@ -1,0 +1,930 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>css3 | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="css3 | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="选择器
+属性选择器
+p[miaov]{background:red;}格式
+
+
+E[attr]只使用属性名，但没有确定任何属性值
+E[attr=&quot;value&quot;]指定属性名，并指定了该属性的属性值
+E[attr~=&quo..." />
+    <meta name="keywords" content="css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              css3
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                19 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/css/" class="post-tag">
+                  # css
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="选择器">选择器</h3>
+<h4 id="属性选择器">属性选择器</h4>
+<p><strong><code>p[miaov]{background:red;}</code>格式</strong></p>
+<blockquote>
+<ul>
+<li>E[attr]只使用属性名，但没有确定任何属性值</li>
+<li>E[attr=&quot;value&quot;]指定属性名，并指定了该属性的属性值</li>
+<li>E[attr~=&quot;value&quot;]指定属性名，并且具有属性值，此属性值是一个词列表，并且以空格隔开，其中词列表中包含了一个value词，而且等号前面的“〜”不能不写</li>
+<li>E[attr^=&quot;value&quot;]指定了属性名，并且有属性值，属性值是以value开头的</li>
+</ul>
+</blockquote>
+<h4 id="结构性伪类">结构性伪类</h4>
+<blockquote>
+<ul>
+<li>E:nth-child(n)  表示E父元素中的第n个字节点</li>
+<li>p:nth-child(odd){background:red}/<em>匹配奇数行</em>/</li>
+<li>p:nth-child(even){background:red}/<em>匹配偶数行</em>/</li>
+<li>p:nth-child(2n){background:red}</li>
+<li>E:nth-last-child(n) 表示E父元素中的第n个字节点，从后向前计算</li>
+<li>E:nth-of-type(n)  表示E父元素中的第n个字节点，且类型为E</li>
+<li>E:nth-last-of-type(n)表示E父元素中的第n个字节点，且类型为E,从后向前计算</li>
+<li>E:empty 表示E元素中没有子节点。注意：子节点包含文本节点</li>
+<li>E:first-child 表示E元素中的第一个子节点</li>
+<li>E:last-child 表示E元素中的最后一个子节点</li>
+<li>E:first-of-type 表示E父元素中的第一个子节点且节点类型是E的</li>
+<li>E:last-of-type 表示E父元素中的最后一个子节点且节点类型是E的</li>
+<li>E:only-child表示E元素中只有一个子节点。注意：子节点不包含文本节点</li>
+<li>E:only-of-type 表示E的父元素中只有一个子节点，且这个唯一的子节点的类型必须是E。注意：子节点不包含文本节点</li>
+</ul>
+</blockquote>
+<h4 id="伪类">伪类</h4>
+<blockquote>
+<ul>
+<li>E:target 表示当前的URL片段的元素类型，这个元素必须是E</li>
+<li>E:disabled 表示不可点击的表单控件</li>
+<li>E:enabled 表示可点击的表单控件</li>
+<li>E:checked 表示已选中的checkbox或radio</li>
+<li>E:first-line 表示E元素中的第一行</li>
+<li>E:first-letter 表示E元素中的第一个字符</li>
+<li>E::selection表示E元素在用户选中文字时</li>
+<li>E::before 生成内容在E元素前</li>
+<li>E::after 生成内容在E元素后</li>
+<li>E:not(s) 表示E元素不被匹配</li>
+<li>E~F表示E元素毗邻的F元素</li>
+<li>Content 属性</li>
+</ul>
+</blockquote>
+<h4 id="文字">文字</h4>
+<h4 id="文字阴影">文字阴影</h4>
+<blockquote>
+<p>文字阴影<br>
+text-shadow：x y blur color, …<br>
+参数<br>
+x		横向偏移<br>
+y		纵向偏移<br>
+blur		模糊距离<br>
+color		阴影颜色<br>
+文本阴影如果加很多层，会很卡很卡很卡</p>
+</blockquote>
+<h4 id="文字阴影应用">文字阴影应用</h4>
+<blockquote>
+<p>文字阴影应用<br>
+最简单用法<br>
+<code>text-shadow:2px 2px 4px black</code><br>
+阴影叠加<br>
+<code>text-shadow:2px 2px 0px red, 2px 2px 4px green;</code><br>
+先渲染后面的，再渲染前面的<br>
+几个好玩的例子<br>
+层叠：<code>color:red; font-size:100px; font-weight:bold; text-shadow:2px 2px 0px white, 4px 4px 0px red;</code><br>
+光晕：<code>color:white; font-size:100px; text-shadow:0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;</code></p>
+</blockquote>
+<h4 id="文本功能-排列等">文本功能 排列等</h4>
+<p>Direction  定义文字排列方式(全兼容)<br>
+Rtl 从右向左排列<br>
+Ltr 从右向左排列<br>
+注意要配合unicode-bidi 一块使用</p>
+<p>Text-overflow 定义省略文本的处理方式<br>
+clip  无省略号<br>
+Ellipsis 省略号 (注意配合overflow:hidden和white-space:nowrap一块使用)</p>
+<h4 id="引入外部字体">引入外部字体</h4>
+<p>转换字体格式生成兼容代码<br>
+http://www.fontsquirrel.com/fontface/generator</p>
+<pre><code class="language-css">@font-face {
+    font-family: ‘miaov';
+    src: url('111-webfont.eot');
+    src: url('111-webfont.eot?#iefix') format('embedded-opentype'),
+         url('111-webfont.woff') format('woff'),
+         url('111-webfont.ttf') format('truetype'),
+         url('111-webfont.svg#untitledregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+</code></pre>
+<h3 id="盒模型">盒模型</h3>
+<h4 id="弹性盒模型">弹性盒模型</h4>
+<p>注意在使用弹性盒模型的时候<br>
+<strong>父元素必加</strong></p>
+<ul>
+<li>必须要加display:box 或 display:inline-box</li>
+</ul>
+<p><strong>父元素可选择添加</strong></p>
+<ul>
+<li>
+<p>Box-orient 定义盒模型的布局方向</p>
+</li>
+<li>
+<p>Horizontal 水平显示</p>
+</li>
+<li>
+<p>vertical 垂直方向</p>
+</li>
+<li>
+<p>box-direction 元素排列顺序</p>
+</li>
+<li>
+<p>Normal 正序</p>
+</li>
+<li>
+<p>Reverse 反序</p>
+<h5 id="富裕的空间">富裕的空间</h5>
+</li>
+<li>
+<p>box-pack 对盒子富裕的空间进行管理</p>
+</li>
+<li>
+<p>Start 所有子元素在盒子左侧显示，富裕空间在右侧</p>
+</li>
+<li>
+<p>End 所有子元素在盒子右侧显示，富裕空间在左侧</p>
+</li>
+<li>
+<p>Center 所有子元素居中</p>
+</li>
+<li>
+<p>Justify 富余空间在子元素之间平均分布</p>
+<h5 id="垂直方向上元素位置">垂直方向上元素位置</h5>
+</li>
+<li>
+<p>box-align 在垂直方向上对元素的位置进行管理</p>
+</li>
+<li>
+<p>Star 所有子元素在据顶</p>
+</li>
+<li>
+<p>End 所有子元素在据底</p>
+</li>
+<li>
+<p>Center 所有子元素居中</p>
+</li>
+</ul>
+<p><strong>子元素</strong></p>
+<ul>
+<li>
+<p>box-ordinal-group 设置元素的具体位置</p>
+<h5 id="弹性空间">弹性空间</h5>
+</li>
+<li>
+<p>Box-flex 定义盒子的弹性空间<br>
+子元素的尺寸=盒子的尺寸*子元素的box-flex属性值 / 所有子元素的box-flex属性值的和 -webkit-box-flex 需要添加浏览器私有属性</p>
+</li>
+</ul>
+<h3 id="盒阴影">盒阴影</h3>
+<h5 id="投影">投影</h5>
+<p>用法<br>
+box-shadow:[inset] x y blur [spread] color<br>
+参数</p>
+<ul>
+<li>inset：投影方式</li>
+<li>inset：内投影</li>
+<li>不给：外投影</li>
+<li>x、y：阴影偏移</li>
+<li>blur：模糊半径</li>
+<li>spread：扩展阴影半径<br>
+先扩展原有形状，再开始画阴影</li>
+<li>color</li>
+</ul>
+<h5 id="倒影">倒影</h5>
+<p><code>-webkit-box-reflect:right 10px -webkit-linear-gradient(right,rgba(0,0,0,1) 0,rgba(0,0,0,0) 50%);</code><br>
+box-reflect 倒影<br>
+direction  方向     above|below|left|right;<br>
+距离<br>
+渐变（可选）</p>
+<h5 id="自由缩放">自由缩放</h5>
+<p>resize 自由缩放<br>
+Both 水平垂直都可以缩放<br>
+Horizontal 只有水平方向可以缩放<br>
+Vertical 只有垂直方向可以缩放<br>
+注意：一定要配合overflow:auto 一块使用只有水平方向可以缩放</p>
+<h5 id="正常盒模型和怪异盒模型">正常盒模型和怪异盒模型</h5>
+<p><strong>box-sizing 盒模型解析模式</strong></p>
+<ul>
+<li>Content-box  标准盒模型 width/height=border+padding+content</li>
+<li>Border-box 怪异盒模型 width/height=content</li>
+</ul>
+<h3 id="css3分栏布局">Css3分栏布局</h3>
+<ul>
+<li>column-width 栏目宽度</li>
+<li>column-count 栏目列数</li>
+<li>column-gap   栏目距离</li>
+<li>column-rule  栏目间隔线</li>
+</ul>
+<p><strong>注：栏目列数和宽度二选一</strong></p>
+<pre><code class="language-css"> { -webkit-column-width:250px; -webkit-column-count:4; -webkit-column-gap:30px; -webkit-column-rule:1px solid #000;}
+</code></pre>
+<h3 id="响应式布局">响应式布局</h3>
+<h5 id="媒体类型">媒体类型</h5>
+<p>all 所有媒体<br>
+braille 盲文触觉设备<br>
+embossed 盲文打印机<br>
+print 手持设备<br>
+projection 打印预览<br>
+screen 彩屏设备<br>
+speech '听觉'类似的媒体类型<br>
+tty 不适用像素的设备<br>
+tv  电视</p>
+<h5 id="关键字">关键字</h5>
+<p>and<br>
+not      not关键字是用来排除某种制定的媒体类型<br>
+only     only用来定某种特定的媒体类型</p>
+<h5 id="媒体特性">媒体特性</h5>
+<p>(max-width:600px)<br>
+(max-device-width: 480px)  设备输出宽度<br>
+(orientation:portrait)  竖屏<br>
+(orientation:landscape)	横屏<br>
+(-webkit-min-device-pixel-ratio: 2) 像素比<br>
+devicePixelRatio 设备像素比 window.devicePixelRatio = 物理像素 / dips</p>
+<h5 id="样式引入">样式引入</h5>
+<p><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/print.css&quot; media=&quot;print&quot; /&gt;</code><br>
+@import url(&quot;css/reset.css&quot;) screen;<br>
+@media screen{<br>
+选择器{<br>
+属性：属性值；<br>
+}<br>
+}<br>
+<code>@media screen and (min-width:400px) and (max-width:500px) {.box {margin: 0 auto;}}</code></p>
+<link rel=”stylesheet” media=”all and (orientation:portrait)” href=”portrait.css”>
+<link rel=”stylesheet” media=”all and (orientation:landscape)”href=”landscape.css”>
+<p>`<link rel="stylesheet" type="text/css" href="styleA.css"  media="screen and (min-width: 800px)"></p>
+<link rel="stylesheet" type="text/css" href="styleB.css" media="screen and (min-width: 600px) and (max-width: 800px)">
+<link rel="stylesheet" type="text/css" href="styleC.css"    media="screen and (max-width: 600px)">`
+<h5 id="移动端meta">移动端meta</h5>
+<p><code>&lt;meta name=&quot;viewport&quot; content=&quot;&quot; /&gt;</code></p>
+<ul>
+<li>width [pixel_value | device-height]</li>
+<li>height [pixel_value | device-height]</li>
+<li>user-scalable 是否允许缩放 （no||yes）</li>
+<li>initial-scale 初始比例</li>
+<li>minimum-scale 允许缩放的最小比例</li>
+<li>maximum-scale 允许缩放的最大比例</li>
+<li>target-densitydpi [dpi_value | device-dpi | high-dpi | medium-dpi | low-dpi]</li>
+</ul>
+<h3 id="新效果圆角渐变等">新效果圆角渐变等</h3>
+<h5 id="圆角">圆角</h5>
+<p>border-radius: 1-4个数字 / 1-4个数字<br>
+前面是水平，后面是垂直<br>
+不给“/”则水平和垂直一样<br>
+border-radius: 10px/5px;<br>
+参数<br>
+各种长度单位都可以：px，%，…<br>
+%有时很方便<br>
+但宽高不一致时不太好</p>
+<p><strong>用法</strong><br>
+1个：都一样<br>
+border-radius: 一样<br>
+2个：对角<br>
+border-radius: 左上&amp;右下    右上&amp;左下<br>
+3个：斜对角<br>
+border-radius: 左上    右上&amp;左下    右下<br>
+4个：全部，顺时针<br>
+border-radius: 左上    右上    右下    左下</p>
+<h5 id="边框">边框</h5>
+<p>边框图片 border-image</p>
+<ul>
+<li>border-image-sourceg 引入图片</li>
+<li>border-image-slice 切割图片</li>
+<li>border-image-width 边框宽度</li>
+<li>border-image-repeat 图片的排列方式</li>
+<li>round 平铺,repeat 重复,stretch拉伸</li>
+</ul>
+<p>边框颜色 border-colors</p>
+<h5 id="线性渐变">线性渐变</h5>
+<p><strong>线性渐变格式</strong><br>
+<code>background-image:-webkit-linear-gradient(60deg,red 10%,blue 50%,green 100%);</code></p>
+<ul>
+<li>
+<p>linear-gradient([&lt;起点&gt; || &lt;角度&gt;,]? &lt;点&gt;, &lt;点&gt;…)</p>
+</li>
+<li>
+<p>只能用在背景上</p>
+</li>
+<li>
+<p>IE filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#ff0000',GradientType='1');</p>
+</li>
+<li>
+<p>参数</p>
+</li>
+<li>
+<p>起点：从什么方向开始渐变		默认：top<br>
+left、top、left top</p>
+</li>
+<li>
+<p>角度：从什么角度开始渐变<br>
+xxx deg的形式</p>
+</li>
+<li>
+<p>点：渐变点的颜色和位置<br>
+black 50%，位置可选</p>
+</li>
+<li>
+<p>加入背景图片<br>
+background: -webkit-linear-gradient (top, rgba(255,255,255,1) 30%, rgba(255,255,255,0)), url(a.gif)</p>
+</li>
+</ul>
+<h5 id="径向渐变">径向渐变</h5>
+<p><strong>格式：<code>radial-gradient([&lt;起点&gt;]? [&lt;形状&gt; || &lt;大小&gt;,]? &lt;点&gt;, &lt;点&gt;…);</code></strong></p>
+<ul>
+<li>起点：可以是关键字（left,top,right,bottom），具体数值或百分比</li>
+<li>形状： ellipse、circle</li>
+<li>大小 :具体数值或百分比，也可以是关键字（最近端，最近角，最远端，最远角，包含或覆盖 (closest-side, closest-corner, farthest-side, farthest-corner, contain or cover)）;</li>
+<li>注意firefox目前只支持关键字</li>
+</ul>
+<p><code>-webkit-radial-gradient(100px 50px,100px 20px,red,blue)</code><br>
+<strong>形状大小二选一</strong></p>
+<p>####背景</p>
+<h5 id="多背景">多背景</h5>
+<p>逗号分开<br>
+background: url(a.jpg) 0 0, url(b.jpg) 0 100%;</p>
+<h5 id="背景尺寸">背景尺寸</h5>
+<p>background-size:x y<br>
+background-size:100% 100%<br>
+Cover 放大<br>
+Contain 缩小</p>
+<h5 id="显示方式background-origin">显示方式background-origin</h5>
+<p>background-origin ： border | padding | content<br>
+border-box： 从border区域开始显示背景。<br>
+padding-box： 从padding区域开始显示背景。<br>
+content-box： 从content区域开始显示背景。</p>
+<h5 id="背景裁剪background-clip">背景裁剪background-clip</h5>
+<p>border： 从border区域向外裁剪背景。<br>
+padding： 从padding区域向外裁剪背景。<br>
+content： 从content区域向外裁剪背景。<br>
+no-clip： 从border区域向外裁剪背景。</p>
+<h4 id="遮罩">遮罩</h4>
+<p>Mask-image<br>
+Mask-position<br>
+Mask-repeat<br>
+实例：特殊形状的幻灯片效果</p>
+<pre><code class="language-css">.box{width:800px;height:600px; background:url(miaov.jpg) no-repeat;background-size:100% 100%;border:10px solid #000; -webkit-mask:url(mask.png) no-repeat; transition:1s;}
+.box:hover{-webkit-mask-position:100% 100%;}
+</code></pre>
+<h3 id="过渡和2d变换">过渡和2d变换</h3>
+<p><strong>Transform 执行顺序问题 — 后写先执行</strong></p>
+<h5 id="transition">transition</h5>
+<ul>
+<li>transition-property  要运动的样式  （all || [attr] || none）</li>
+<li>transition-duration 运动时间</li>
+<li>transition-delay 延迟时间</li>
+<li>transition-timing-function 运动形式
+<ul>
+<li>ease：（逐渐变慢）默认值</li>
+<li>linear：（匀速）</li>
+</ul>
+</li>
+<li>ease-in：(加速)</li>
+<li>ease-out：（减速）</li>
+<li>ease-in-out：（先加速后减速）</li>
+<li>cubic-bezier 贝塞尔曲线（ x1, y1, x2, y2 ） http://matthewlein.com/ceaser/</li>
+</ul>
+<pre><code class="language-css">.box{width:100px;height:100px;background:red; transition:5s width 2s cubic-bezier(0.145,1.295,0.000,1.610);}
+.box:hover{width:500px;};
+</code></pre>
+<p><strong>触发宽度属性更改为500px 5s内完成，延迟2s执行</strong></p>
+<pre><code class="language-css">.box{width:100px;height:100px;background:red; transition:3s width,10s height,3s background;}
+.box:hover{width:500px;height:300px;background:blue;};
+</code></pre>
+<p><strong>触发同时进行3个属性更改，完成时间不同</strong></p>
+<pre><code class="language-css">.box{width:100px;height:100px;background:red; transition:1s width,2s 1s height,3s 3s background;}
+.box:hover{width:500px;height:300px;background:blue;}
+</code></pre>
+<p><strong>延迟执行</strong></p>
+<h4 id="2d变换">2D变换</h4>
+<p>transform</p>
+<ul>
+<li>rotate()  旋转函数 取值度数</li>
+<li>deg  度数</li>
+<li>Transform-origin 旋转的基点</li>
+<li>skew() 倾斜函数 取值度数</li>
+<li>skewX()</li>
+<li>skewY()</li>
+<li>scale() 缩放函数 取值 正数、负数和小数</li>
+<li>scaleX()</li>
+<li>scaleY()</li>
+<li>translate() 位移函数</li>
+<li>translateX()</li>
+<li>translateY()</li>
+</ul>
+<h4 id="矩阵">矩阵</h4>
+<p>matrix(a,b,c,d,e,f) 矩阵函数</p>
+<h5 id="通过矩阵实现缩放">通过矩阵实现缩放</h5>
+<p>x轴缩放 a=x<em>a    c=x</em>c     e=x<em>e;<br>
+y轴缩放 b=y</em>b   d=y<em>d     f=y</em>f;</p>
+<h5 id="通过矩阵实现位移">通过矩阵实现位移</h5>
+<p>x轴位移: e=e+x<br>
+y轴位移: f=f+y</p>
+<h5 id="通过矩阵实现倾斜">通过矩阵实现倾斜</h5>
+<p>x轴倾斜: c=Math.tan(xDeg/180<em>Math.PI)<br>
+y轴倾斜: b=Math.tan(yDeg/180</em>Math.PI)</p>
+<h5 id="通过矩阵实现旋转">通过矩阵实现旋转</h5>
+<p>a=Math.cos(deg/180<em>Math.PI);<br>
+b=Math.sin(deg/180</em>Math.PI);<br>
+c=-Math.sin(deg/180<em>Math.PI);<br>
+d=Math.cos(deg/180</em>Math.PI);</p>
+<p><strong>变换兼容IE9以下IE版本只能通过矩阵来实现</strong><br>
+filter: progid:DXImageTransform.Microsoft.Matrix( M11= 1, M12= 0, M21= 0 , M22=1,SizingMethod='auto expand');<br>
+<strong>IE下的矩阵没有E和F两个参数 M11<mark>a; M12</mark>c; M21<mark>b; M22</mark>d</strong><br>
+注：b和c颠倒</p>
+<h4 id="矩阵缩放案例">矩阵缩放案例</h4>
+<pre><code class="language-javascript">&lt;script&gt;
+var oBox=document.getElementById(&quot;box&quot;);
+oBox.onclick=function()
+{
+	oBox.style.WebkitTransform=&quot;matrix(0.5,0,0,0.5,0,0)&quot;;
+	oBox.style.MozTransform=&quot;matrix(0.5,0,0,0.5,0,0)&quot;;
+	oBox.style.transform=&quot;matrix(0.5,0,0,0.5,0,0)&quot;;
+	oBox.style.filter=&quot;progid:DXImageTransform.Microsoft.Matrix( M11= 0.5, M12= 0, M21= 0 , M22=0.5,SizingMethod='auto expand')&quot;;
+
+	// oBox.style.WebkitTransform=&quot;scale(0.5)&quot;;
+	缩放:
+	x轴缩放 a=x*a   c=x*c;
+    y轴缩放 b=y*b   d=y*d;
+	
+	matrix(1,0,0,1,0,0)
+	matrix(a,b,c,d,e,f);
+
+}
+&lt;/script&gt;
+</code></pre>
+<h4 id="过渡完成事件">过渡完成事件</h4>
+<pre><code class="language-javascript">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;无标题文档&lt;/title&gt;
+&lt;style&gt;
+.box{width:100px;height:100px;background:red; transition:1s width;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;box&quot; id=&quot;box&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+var oBox=document.getElementById(&quot;box&quot;);
+oBox.onclick=function()
+{
+	this.style.width=this.offsetWidth+100+&quot;px&quot;;
+	addEnd(oBox,end);
+};
+function end()
+{
+	removeEnd(this,end);
+	this.style.width=this.offsetWidth+100+&quot;px&quot;;
+	
+}
+
+function addEnd(obj,fn)
+{
+	obj.addEventListener('WebkitTransitionEnd',fn,false);
+	obj.addEventListener('transitionend',fn,false);
+}
+function removeEnd(obj,fn)
+{
+	obj.removeEventListener('WebkitTransitionEnd',fn,false);
+	obj.removeEventListener('transitionend',fn,false);
+}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="3d变换和动画">3d变换和动画</h3>
+<h4 id="3d变换">3d变换</h4>
+<ul>
+<li>transform-style（preserve-3d） 建立3D空间</li>
+<li><code>-webkit-transform-style:preserve-3d;</code></li>
+<li>Perspective 景深</li>
+<li><code>webkit-perspective:100px;</code></li>
+<li>3D模型的观察点的距离100px</li>
+<li>Perspective- origin 景深基点
+<ul>
+<li>观察点的位置<code>bottom/right/top/left</code></li>
+</ul>
+</li>
+<li>Transform 新增函数</li>
+<li>rotateX() X轴旋转</li>
+<li>rotateY() Y轴旋转</li>
+<li>rotateZ() Z轴旋转
+<ul>
+<li>Z轴为垂直于屏幕的轴</li>
+</ul>
+</li>
+<li>translateZ() Z轴位移</li>
+<li>scaleZ()</li>
+</ul>
+<h4 id="3d构建正方体">3d构建正方体</h4>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;无标题文档&lt;/title&gt;
+&lt;style&gt;
+.wrap{width:100px;height:100px;padding:100px; border:5px solid #000; margin:100px auto; -webkit-perspective:200px; -webkit-transform:scale(2);}
+.box{width:100px;height:100px;background:red; position:relative; -webkit-transform-style:preserve-3d; transition:2s; -webkit-transform-origin:center center -50px;}
+.box div{width:100px;height:100px; position:absolute; color:#fff;font-size:50px; text-align:center;line-height:100px;}
+.box div:nth-of-type(1){left:0;top:-100px;background:#9C0; -webkit-transform-origin:bottom; -webkit-transform:rotateX(90deg);}
+.box div:nth-of-type(2){left:-100px;top:0px;background:#CF3; -webkit-transform-origin:right; -webkit-transform:rotateY(-90deg);}
+.box div:nth-of-type(3){left:0px;top:0px;background:#CCF;}
+.box div:nth-of-type(4){left:100px;top:0;background:#0C9;-webkit-transform-origin:left;-webkit-transform:rotateY(90deg);}
+.box div:nth-of-type(5){left:0px;top:100px;background:#69C;-webkit-transform-origin:top;-webkit-transform:rotateX(-90deg);}
+.box div:nth-of-type(6){left:0;top:0;background:#F0C;-webkit-transform:translateZ(-100px) rotateX(180deg);}
+.wrap:hover .box{ -webkit-transform:rotateX(180deg);}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;wrap&quot;&gt;
+    &lt;div class=&quot;box&quot;&gt;
+        &lt;div&gt;1&lt;/div&gt;
+        &lt;div&gt;2&lt;/div&gt;
+        &lt;div&gt;3&lt;/div&gt;
+        &lt;div&gt;4&lt;/div&gt;
+        &lt;div&gt;5&lt;/div&gt;
+        &lt;div&gt;6&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h4 id="animation">animation</h4>
+<p>关键帧——keyFrames<br>
+类似于flash<br>
+只需指明两个状态，之间的过程由计算机自动计算<br>
+<strong>关键帧的时间单位</strong><br>
+数字：0%、25%、100%等<br>
+字符：from(0%)、to(100%)<br>
+<strong>格式</strong><br>
+@keyframes 动画名称<br>
+{<br>
+动画状态<br>
+}</p>
+<pre><code>@-webkit-keyframes move
+{
+	0%{
+		width:100px;
+	}
+	100%
+	{
+		width:500px;
+	}	
+}
+.box{width:100px;height:100px;background:red; -webkit-animation:2s move;}
+</code></pre>
+<p><strong>动画结束回到初始状态</strong></p>
+<h4 id="animate调用动画">animate—调用动画</h4>
+<p>animation-name		动画名称（关键帧名称）<br>
+animation-duration		动画持续时间</p>
+<p><strong>可选属性</strong></p>
+<h5 id="动画运动形式">动画运动形式</h5>
+<p>animation-timing-function	<br>
+linear	匀速。<br>
+ease		缓冲。<br>
+ease-in	由慢到快。<br>
+ease-out	由快到慢。<br>
+ease-in-out	由慢到快再到慢。<br>
+cubic-bezier(number, number, number, number)：	特定的贝塞尔曲线类型，4个数值需在[0, 1]区间内</p>
+<h5 id="动画延迟">动画延迟</h5>
+<p>animation-delay			<br>
+只是第一次</p>
+<h5 id="重复次数">重复次数</h5>
+<p>animation-iteration-count		<br>
+infinite为无限次</p>
+<h5 id="播放前重置">播放前重置</h5>
+<p>animation-direction			<br>
+动画是否重置后再开始播放<br>
+alternate	动画直接从上一次停止的位置开始执行<br>
+normal	动画第二次直接跳到0%的状态开始执行</p>
+<h5 id="示例">示例</h5>
+<p><code>-webkit-animation:3s 2s move ease-in infinite;</code><br>
+3s执行完毕 延迟2s执行 运动形式ease-in 次数无限</p>
+<h5 id="播放状态">播放状态</h5>
+<p>animation-play-state 播放状态（ running 播放 和paused 暂停 ）</p>
+<h5 id="animation完成事件示例animationend">animation完成事件示例animationend</h5>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;无标题文档&lt;/title&gt;
+&lt;style&gt;
+@-webkit-keyframes move
+{
+	0%{
+		width:100px;
+	}
+	100%
+	{
+		width:500px;
+	}	
+}
+@-moz-keyframes move
+{
+	0%{
+		width:100px;
+	}
+	100%
+	{
+		width:500px;
+	}	
+}
+@keyframes move
+{
+	0%{
+		width:100px;
+	}
+	100%
+	{
+		width:500px;
+	}	
+}
+.box{height:100px;background:red;width:200px;}
+.move{ -webkit-animation:2s move;-moz-animation:2s move;animation:2s move;width:200px;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;box&quot; id=&quot;box&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+document.getElementById(&quot;box&quot;).onclick=function()
+{
+	this.className=&quot;box move&quot;;
+	addEnd(this,fn);
+};
+function fn()
+{
+	alert(&quot;end&quot;);
+}
+function addEnd(obj,fn)
+{
+	obj.addEventListener('webkitAnimationEnd',fn, false);
+	obj.addEventListener('animationend',fn, false);
+}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%80%89%E6%8B%A9%E5%99%A8">选择器</a>
+<ul>
+<li><a href="#%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8">属性选择器</a></li>
+<li><a href="#%E7%BB%93%E6%9E%84%E6%80%A7%E4%BC%AA%E7%B1%BB">结构性伪类</a></li>
+<li><a href="#%E4%BC%AA%E7%B1%BB">伪类</a></li>
+<li><a href="#%E6%96%87%E5%AD%97">文字</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E9%98%B4%E5%BD%B1">文字阴影</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E9%98%B4%E5%BD%B1%E5%BA%94%E7%94%A8">文字阴影应用</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E5%8A%9F%E8%83%BD-%E6%8E%92%E5%88%97%E7%AD%89">文本功能 排列等</a></li>
+<li><a href="#%E5%BC%95%E5%85%A5%E5%A4%96%E9%83%A8%E5%AD%97%E4%BD%93">引入外部字体</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9B%92%E6%A8%A1%E5%9E%8B">盒模型</a>
+<ul>
+<li><a href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B">弹性盒模型</a>
+<ul>
+<li><a href="#%E5%AF%8C%E8%A3%95%E7%9A%84%E7%A9%BA%E9%97%B4">富裕的空间</a></li>
+<li><a href="#%E5%9E%82%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E5%85%83%E7%B4%A0%E4%BD%8D%E7%BD%AE">垂直方向上元素位置</a></li>
+<li><a href="#%E5%BC%B9%E6%80%A7%E7%A9%BA%E9%97%B4">弹性空间</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%9B%92%E9%98%B4%E5%BD%B1">盒阴影</a><br>
+*
+<ul>
+<li><a href="#%E6%8A%95%E5%BD%B1">投影</a></li>
+<li><a href="#%E5%80%92%E5%BD%B1">倒影</a></li>
+<li><a href="#%E8%87%AA%E7%94%B1%E7%BC%A9%E6%94%BE">自由缩放</a></li>
+<li><a href="#%E6%AD%A3%E5%B8%B8%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%80%AA%E5%BC%82%E7%9B%92%E6%A8%A1%E5%9E%8B">正常盒模型和怪异盒模型</a></li>
+</ul>
+</li>
+<li><a href="#css3%E5%88%86%E6%A0%8F%E5%B8%83%E5%B1%80">Css3分栏布局</a></li>
+<li><a href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80">响应式布局</a><br>
+*
+<ul>
+<li><a href="#%E5%AA%92%E4%BD%93%E7%B1%BB%E5%9E%8B">媒体类型</a></li>
+<li><a href="#%E5%85%B3%E9%94%AE%E5%AD%97">关键字</a></li>
+<li><a href="#%E5%AA%92%E4%BD%93%E7%89%B9%E6%80%A7">媒体特性</a></li>
+<li><a href="#%E6%A0%B7%E5%BC%8F%E5%BC%95%E5%85%A5">样式引入</a></li>
+<li><a href="#%E7%A7%BB%E5%8A%A8%E7%AB%AFmeta">移动端meta</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%B0%E6%95%88%E6%9E%9C%E5%9C%86%E8%A7%92%E6%B8%90%E5%8F%98%E7%AD%89">新效果圆角渐变等</a><br>
+*
+<ul>
+<li><a href="#%E5%9C%86%E8%A7%92">圆角</a></li>
+<li><a href="#%E8%BE%B9%E6%A1%86">边框</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98">线性渐变</a></li>
+<li><a href="#%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98">径向渐变</a></li>
+<li><a href="#%E5%A4%9A%E8%83%8C%E6%99%AF">多背景</a></li>
+<li><a href="#%E8%83%8C%E6%99%AF%E5%B0%BA%E5%AF%B8">背景尺寸</a></li>
+<li><a href="#%E6%98%BE%E7%A4%BA%E6%96%B9%E5%BC%8Fbackground-origin">显示方式background-origin</a></li>
+<li><a href="#%E8%83%8C%E6%99%AF%E8%A3%81%E5%89%AAbackground-clip">背景裁剪background-clip</a></li>
+<li><a href="#%E9%81%AE%E7%BD%A9">遮罩</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%87%E6%B8%A1%E5%92%8C2d%E5%8F%98%E6%8D%A2">过渡和2d变换</a><br>
+*
+<ul>
+<li><a href="#transition">transition</a></li>
+<li><a href="#2d%E5%8F%98%E6%8D%A2">2D变换</a></li>
+<li><a href="#%E7%9F%A9%E9%98%B5">矩阵</a>
+<ul>
+<li><a href="#%E9%80%9A%E8%BF%87%E7%9F%A9%E9%98%B5%E5%AE%9E%E7%8E%B0%E7%BC%A9%E6%94%BE">通过矩阵实现缩放</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E7%9F%A9%E9%98%B5%E5%AE%9E%E7%8E%B0%E4%BD%8D%E7%A7%BB">通过矩阵实现位移</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E7%9F%A9%E9%98%B5%E5%AE%9E%E7%8E%B0%E5%80%BE%E6%96%9C">通过矩阵实现倾斜</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E7%9F%A9%E9%98%B5%E5%AE%9E%E7%8E%B0%E6%97%8B%E8%BD%AC">通过矩阵实现旋转</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9F%A9%E9%98%B5%E7%BC%A9%E6%94%BE%E6%A1%88%E4%BE%8B">矩阵缩放案例</a></li>
+<li><a href="#%E8%BF%87%E6%B8%A1%E5%AE%8C%E6%88%90%E4%BA%8B%E4%BB%B6">过渡完成事件</a></li>
+</ul>
+</li>
+<li><a href="#3d%E5%8F%98%E6%8D%A2%E5%92%8C%E5%8A%A8%E7%94%BB">3d变换和动画</a>
+<ul>
+<li><a href="#3d%E5%8F%98%E6%8D%A2">3d变换</a></li>
+<li><a href="#3d%E6%9E%84%E5%BB%BA%E6%AD%A3%E6%96%B9%E4%BD%93">3d构建正方体</a></li>
+<li><a href="#animation">animation</a></li>
+<li><a href="#animate%E8%B0%83%E7%94%A8%E5%8A%A8%E7%94%BB">animate—调用动画</a>
+<ul>
+<li><a href="#%E5%8A%A8%E7%94%BB%E8%BF%90%E5%8A%A8%E5%BD%A2%E5%BC%8F">动画运动形式</a></li>
+<li><a href="#%E5%8A%A8%E7%94%BB%E5%BB%B6%E8%BF%9F">动画延迟</a></li>
+<li><a href="#%E9%87%8D%E5%A4%8D%E6%AC%A1%E6%95%B0">重复次数</a></li>
+<li><a href="#%E6%92%AD%E6%94%BE%E5%89%8D%E9%87%8D%E7%BD%AE">播放前重置</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+<li><a href="#%E6%92%AD%E6%94%BE%E7%8A%B6%E6%80%81">播放状态</a></li>
+<li><a href="#animation%E5%AE%8C%E6%88%90%E4%BA%8B%E4%BB%B6%E7%A4%BA%E4%BE%8Banimationend">animation完成事件示例animationend</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/html5/">
+              <h3 class="post-title">
+                html5
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

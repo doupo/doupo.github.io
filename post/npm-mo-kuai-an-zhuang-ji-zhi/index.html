@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>npm模块安装机制 | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="npm模块安装机制 | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="nmp i 执行
+npm install 执行之后，会检查项目中是否有 package-lock.json 文件。
+如果有，使用 package-lock.json 中的信息，从缓存或网络资源中加载依赖；
+如果没有，
+如果声明的包依赖版本规..." />
+    <meta name="keywords" content="node" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              npm模块安装机制
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-25
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/node/" class="post-tag">
+                  # node
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="nmp-i-执行">nmp i 执行</h3>
+<p>npm install 执行之后，会检查项目中是否有 package-lock.json 文件。</p>
+<p>如果有，使用 package-lock.json 中的信息，从缓存或网络资源中加载依赖；<br>
+如果没有，</p>
+<p>如果声明的包依赖版本规范不一致，按照 npm 版本进行处理（不同 npm 版本处理会有不同）。</p>
+<p>如果没有，则根据 package.json 递归构建依赖树。然后按照构建好的依赖树下载完整的依赖资源，最后生成 package-lock.json</p>
+<h3 id="npm-缓存机制">npm 缓存机制</h3>
+<p>安装之前，会检查是否存在相关资源缓存：</p>
+<p>存在，则将缓存内容解压到 node_modules 中；</p>
+<p>否则就先从 npm 远程仓库下载包，校验包的完整性，并添加到缓存，同时解压到 node_modules。</p>
+<p><code>npm config get cache</code></p>
+<p>可以查看缓存的目录</p>
+<h3 id="npm-install-s-d-g">npm install -S -D -g</h3>
+<p>-D 写入dependencies<br>
+-S 写入devDependencies</p>
+<blockquote>
+<p>需要特别说明的是：并不是只有在 dependencies 中的模块才会打包，而devDependencies 中的依赖不会被打包。实际上，是否被打包，完全取决于项目里是否被引入了该模块。dependencies 和 devDependencies 在业务中更多的只是一个规范作用</p>
+</blockquote>
+<p>-g  全局安装</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#nmp-i-%E6%89%A7%E8%A1%8C">nmp i 执行</a></li>
+<li><a href="#npm-%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6">npm 缓存机制</a></li>
+<li><a href="#npm-install-s-d-g">npm install -S -D -g</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://doupo.github.io/post/html-dom-wen-dang-dui-xiang-mo-xing/">
+              <h3 class="post-title">
+                HTML DOM （文档对象模型）
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

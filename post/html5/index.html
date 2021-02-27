@@ -1,0 +1,552 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>html5 | 豆</title>
+<link rel="shortcut icon" href="https://doupo.github.io/favicon.ico?v=1614434275839">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://doupo.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="html5 | 豆 - Atom Feed" href="https://doupo.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="js部分
+新的选择器
+h5新特性支持查看
+querySelector
+获取方式
+
+$('#div1') , $('.box') , $('ul li')
+- 注：如果页面有多个相同的对象，默认选中第一个
+
+&lt;p id=&quot;de..." />
+    <meta name="keywords" content="html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://doupo.github.io">
+  <img class="avatar" src="https://doupo.github.io/images/avatar.png?v=1614434275839" alt="">
+  </a>
+  <h1 class="site-title">
+    豆
+  </h1>
+  <p class="site-description">
+    For what it is worth ,it is never too late.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              html5
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-02-23
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+                <a href="https://doupo.github.io/tag/html/" class="post-tag">
+                  # html
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="js部分">js部分</h3>
+<h4 id="新的选择器">新的选择器</h4>
+<p><a href="http://www.caniuse.com/#index">h5新特性支持查看</a></p>
+<h5 id="queryselector">querySelector</h5>
+<p>获取方式</p>
+<blockquote>
+<p><strong><code>$('#div1') , $('.box') , $('ul li')</code></strong><br>
+- 注：如果页面有多个相同的对象，默认选中第一个</p>
+</blockquote>
+<pre><code class="language-javascript">&lt;p id=&quot;demo&quot;&gt;id=&quot;demo&quot; 的 p 元素&lt;/p&gt;
+&lt;p id=&quot;demo&quot;&gt;id=&quot;demo&quot; 的 p 元素&lt;/p&gt;
+&lt;p&gt; 点击按钮修改过第一个 id=&quot;demo&quot; 的 p元素内容&lt;/p&gt;
+&lt;button onclick=&quot;myFunction()&quot;&gt;点我&lt;/button&gt;
+&lt;script&gt;
+function myFunction() {
+    document.querySelector(&quot;body p&quot;).innerHTML = &quot;Hello World!&quot;;
+}
+	//运行后 第一个p标签改成Hello World! 其他不变
+	//Hello World!
+	//id=&quot;demo&quot; 的 p 元素
+&lt;/script&gt;
+</code></pre>
+<h5 id="queryselectorall">querySelectorAll</h5>
+<blockquote>
+<p>获取一组元素</p>
+</blockquote>
+<pre><code class="language-javascript">//$('#div1')   $('.box')   $('ul li') 都可以
+window.onload = function(){
+	var aDiv = document.querySelectorAll('#div1');   //获取一组元素
+	for(var i in aDiv){
+		aDiv[i].style.fontSize='100px';
+	}
+};
+</code></pre>
+<h5 id="getelementsbyclassname">getElementsByClassName</h5>
+<blockquote>
+<p>只能用来获取class，获取对象为一个集合</p>
+</blockquote>
+<pre><code class="language-javascript">var aDiv = document.getElementsByClassName('box');
+	for(var x =0;x&lt;aDiv.length;x++){
+		aDiv[x].onclick=function(){
+			alert('1')
+		}
+	}
+
+html:
+&lt;div class=&quot;box&quot;&gt;div&lt;/div&gt;
+&lt;div class=&quot;box&quot;&gt;div2&lt;/div&gt;
+</code></pre>
+<h5 id="获取class列表属性classlist">获取class列表属性classList</h5>
+<ul>
+<li>length :  class的长度</li>
+<li>add()  :  添加class方法</li>
+<li>remove()  :  删除class方法</li>
+<li>toggle() :  切换class方法</li>
+</ul>
+<pre><code class="language-javascript">	var oDiv = document.getElementById('div1');
+	
+	alert( oDiv.classList );  //类似与数组的对象
+	
+	alert( oDiv.classList.length );  //3
+	
+	oDiv.classList.add('box4');	//添加一个box4的样式
+	
+	oDiv.classList.remove('box2'); //移除box2
+	
+	oDiv.classList.toggle('box2'); //切换 有box2就移除，没有box2就添加
+</code></pre>
+<h4 id="json的新方法">JSON的新方法</h4>
+<h5 id="parse-把字符串转成json">parse() : 把字符串转成json</h5>
+<p>字符串中的属性要严格的加上引号</p>
+<pre><code class="language-javascript">var str = '{&quot;name&quot;:&quot;hello&quot;}';   //一定是严格的JSON形式
+var json = JSON.parse(str);
+alert( json.name );
+//hello
+</code></pre>
+<h5 id="stringify-把json转化成字符串">stringify() : 把json转化成字符串</h5>
+<p>会自动的把双引号加上</p>
+<pre><code class="language-javascript">var json = {name : &quot;hello&quot;};
+var str = JSON.stringify(json);
+alert( str );
+//{&quot;name&quot;:&quot;hello&quot;}
+</code></pre>
+<h5 id="新方法与eval的区别">新方法与eval的区别</h5>
+<ul>
+<li>支持所有字符转换</li>
+</ul>
+<pre><code class="language-javascript">var str = 'function show(){alert(123)}';
+eval(str);
+show();
+//123
+</code></pre>
+<h5 id="json引用and深拷贝">json引用and深拷贝</h5>
+<pre><code class="language-javascript">//引用
+var a = {
+	name : 'hello'
+};
+var b = a;
+b.name = 'hi';
+alert( a.name ); //hi
+
+//拷贝
+var a = {
+	name : { age : 100 }
+};
+var str = JSON.stringify(a);
+var b = JSON.parse(str);
+b.name.age = 200;
+alert( a.name.age ); //100
+</code></pre>
+<h5 id="兼容低版本浏览器">兼容低版本浏览器</h5>
+<p>http://www.json.org/去下载json2.js</p>
+<h4 id="自定义属性">自定义属性</h4>
+<pre><code>	&lt;div id=&quot;div1&quot; data-cs=&quot;测试1&quot; data-cs-a1=&quot;测试2&quot;&gt;div&lt;/div&gt;
+	
+	var oDiv = document.getElementById('div1');
+	alert( oDiv.dataset.cs ); //测试1
+	alert( oDiv.dataset.csA1 );	//测试2 -可以叠加
+</code></pre>
+<h4 id="延迟加载js">延迟加载JS</h4>
+<blockquote>
+<p>JS的加载会影响后面的内容加载<br>
+很多浏览器都采用了并行加载JS，但还是会影响其他内容</p>
+</blockquote>
+<h5 id="html5的defer和async">Html5的defer和async</h5>
+<blockquote>
+<p>defer : 延迟加载，会按顺序执行，在onload执行前被触发<br>
+async : 异步加载，加载完就触发，有顺序问题<br>
+<strong>Labjs库</strong></p>
+</blockquote>
+<pre><code class="language-javascript">&lt;script src=&quot;c.js&quot; defer=&quot;defer&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;a.js&quot; async =&quot;async&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h4 id="历史管理history">历史管理history</h4>
+<h5 id="onhashchange">onhashchange</h5>
+<blockquote>
+<p>改变hash值来管理</p>
+</blockquote>
+<h5 id="history">history</h5>
+<blockquote>
+<p>服务器下运行<br>
+pushState :  三个参数 ：数据  标题(都没实现)  地址(可选)<br>
+popstate事件 :  读取数据   event.state<br>
+注意：网址是虚假的，需在服务器指定对应页面，不然刷新找不到页面</p>
+</blockquote>
+<pre><code class="language-javascript">window.location.hash = num;
+</code></pre>
+<hr>
+<h3 id="地理信息">地理信息</h3>
+<blockquote>
+<p>地理位置<br>
+经度  :   南北极的连接线<br>
+纬度  :   东西连接的线</p>
+</blockquote>
+<h4 id="navigatorgeolocation-单次定位">navigator.geolocation 单次定位</h4>
+<blockquote>
+<p>getCurrentPosition(请求成功，请求失败，数据收集方式)三个参数</p>
+</blockquote>
+<h5 id="请求成功函数">请求成功函数</h5>
+<p>经度 :  coords.longitude<br>
+纬度 :  coords.latitude<br>
+准确度 :  coords.accuracy<br>
+海拔 :  coords.altitude<br>
+海拔准确度 :  coords.altitudeAcuracy<br>
+行进方向 :  coords.heading<br>
+地面速度 :  coords.speed<br>
+时间戳 : new Date(position.timestamp)</p>
+<h5 id="请求失败">请求失败</h5>
+<p>失败编号  ：code<br>
+0  :  不包括其他错误编号中的错误<br>
+1  :  用户拒绝浏览器获取位置信息<br>
+2  :  尝试获取用户信息，但失败了<br>
+3  :   设置了timeout值，获取位置超时了</p>
+<h5 id="数据收集">数据收集</h5>
+<p>enableHighAcuracy  :  更精确的查找，默认false<br>
+timeout  :  获取位置允许最长时间，默认infinity<br>
+maximumAge :  位置可以缓存的最大时间，默认0</p>
+<ul>
+<li>在一段时间内不会重复请求位置，点击会获取缓存信息</li>
+</ul>
+<pre><code class="language-javascript">var oInput = document.getElementById('input1'); //点击按钮
+	var oT = document.getElementById('t1');     //文本框
+	oInput.onclick = function(){
+		navigator.geolocation.getCurrentPosition(function(position){
+			oT.value += '经度:' + position.coords.longitude+'\n';
+			oT.value += '纬度 :' + position.coords.latitude+'\n';
+			oT.value += '准确度 :' + position.coords.accuracy+'\n';
+			oT.value += '海拔 :' + position.coords.altitude+'\n';
+			oT.value += '海拔准确度 :' + position.coords.altitudeAcuracy+'\n';
+			oT.value += '行进方向 :' + position.coords.heading+'\n';
+			oT.value += '地面速度 :' + position.coords.speed+'\n';
+			oT.value += '时间戳:' + new Date(position.timestamp)+'\n';
+			
+		},function(err){
+			//err.code // 失败所对应的编号
+			alert( err.code );
+			
+		},{
+			enableHighAcuracy : true,
+			timeout : 5000,
+			maximumAge : 5000
+		});
+	};
+</code></pre>
+<h4 id="多次定位请求-watchposition">多次定位请求  :  watchPosition</h4>
+<blockquote>
+<p>移动设备有用，位置改变才会触发<br>
+配置参数：frequency 更新的频率<br>
+关闭更新请求  :  clearWatch(像clearInterval)</p>
+</blockquote>
+<pre><code class="language-javascript">var timer = null;
+	oInput.onclick = function(){
+		timer = navigator.geolocation.watchPosition(function(position){
+			
+		},function(err){
+			//err.code // 失败所对应的编号
+			alert( err.code );
+			navigator.geolocation.clearWatch(timer);
+		},{
+			enableHighAcuracy : true,
+			timeout : 5000,
+			maximumAge : 5000,
+			frequency : 6000
+		});
+	};
+</code></pre>
+<hr>
+<h3 id="storage本地存储">Storage本地存储</h3>
+<h5 id="sessionstorage临时存储">sessionStorage临时存储</h5>
+<p>session临时回话，从页面打开到页面关闭的时间段<br>
+窗口的临时存储，页面关闭，本地存储消失</p>
+<h5 id="localstorage永久存储">localStorage永久存储</h5>
+<p>永久存储（可以手动删除数据）<br>
+Storage的特点<br>
+存储量限制 ( 5M )<br>
+客户端完成，不会请求服务器处理<br>
+sessionStorage数据是不共享、 localStorage共享</p>
+<blockquote>
+<p>两个参数<strong>key</strong>和<strong>value</strong></p>
+</blockquote>
+<pre><code class="language-javascript">window.onload = function(){
+	var aInput = document.getElementsByTagName('input');
+	aInput[0].onclick = function(){
+		//sessionStorage : 临时性存储
+		//localStorage : 永久性存储
+	//window.sessionStorage.setItem('name',aInput[3].value);
+		window.localStorage.setItem('name',aInput[3].value);
+	};
+	
+	aInput[1].onclick = function(){
+		//alert(window.sessionStorage.getItem('name'));
+		alert(window.localStorage.getItem('name'));
+	};
+	
+	aInput[2].onclick = function(){
+		window.localStorage.removeItem('name');
+		//window.localStorage.clear();  //删除全部数据
+	};
+};
+&lt;/script&gt;
+
+&lt;body&gt;
+&lt;input type=&quot;button&quot; value=&quot;设置&quot; /&gt;
+&lt;input type=&quot;button&quot; value=&quot;获取&quot; /&gt;
+&lt;input type=&quot;button&quot; value=&quot;删除&quot; /&gt;
+&lt;input type=&quot;text&quot; /&gt;
+&lt;/body&gt;
+</code></pre>
+<hr>
+<h4 id="storage-api">Storage API</h4>
+<h5 id="setitem">setItem():</h5>
+<p>设置数据，key\value类型，类型都是字符串<br>
+可以用获取属性的形式操作</p>
+<h5 id="getitem">getItem():</h5>
+<p>获取数据，通过key来获取到相应的value</p>
+<h5 id="removeitem">removeItem():</h5>
+<p>删除数据，通过key来删除相应的value</p>
+<h5 id="clear">clear():</h5>
+<p>删除全部存储的值</p>
+<hr>
+<h5 id="存储事件">存储事件:</h5>
+<p>当数据有修改或删除的情况下，就会触发storage事件<br>
+在对数据进行改变的窗口对象上是不会触发的</p>
+<h5 id="key">Key</h5>
+<p>修改或删除的key值，如果调用clear(),key为null</p>
+<h5 id="newvalue">newValue</h5>
+<p>新设置的值，如果调用removeStorage(),key为null</p>
+<h5 id="oldvalue">oldValue</h5>
+<p>调用改变前的value值</p>
+<h5 id="storagearea">storageArea</h5>
+<p>当前的storage对象</p>
+<h5 id="url">url</h5>
+<p>触发该脚本变化的文档的url</p>
+<pre><code class="language-javascript">function bind(obj, evname, fn) {
+        if (obj.addEventListener) { obj.addEventListener(evname, fn, false); } else {
+            obj.attachEvent('on'
+                + evname, function () { fn.call(obj); });
+        }
+    }; 
+    function fn1(ev) {
+        console.log(ev.key); 
+        console.log(ev.newValue);
+        console.log(ev.oldValue);   
+        console.log(ev.storageArea); 
+        console.log(ev.url);
+    }; 
+    bind(window, 'storage', fn1);
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#js%E9%83%A8%E5%88%86">js部分</a>
+<ul>
+<li><a href="#%E6%96%B0%E7%9A%84%E9%80%89%E6%8B%A9%E5%99%A8">新的选择器</a>
+<ul>
+<li><a href="#queryselector">querySelector</a></li>
+<li><a href="#queryselectorall">querySelectorAll</a></li>
+<li><a href="#getelementsbyclassname">getElementsByClassName</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96class%E5%88%97%E8%A1%A8%E5%B1%9E%E6%80%A7classlist">获取class列表属性classList</a></li>
+</ul>
+</li>
+<li><a href="#json%E7%9A%84%E6%96%B0%E6%96%B9%E6%B3%95">JSON的新方法</a>
+<ul>
+<li><a href="#parse-%E6%8A%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%88%90json">parse() : 把字符串转成json</a></li>
+<li><a href="#stringify-%E6%8A%8Ajson%E8%BD%AC%E5%8C%96%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2">stringify() : 把json转化成字符串</a></li>
+<li><a href="#%E6%96%B0%E6%96%B9%E6%B3%95%E4%B8%8Eeval%E7%9A%84%E5%8C%BA%E5%88%AB">新方法与eval的区别</a></li>
+<li><a href="#json%E5%BC%95%E7%94%A8and%E6%B7%B1%E6%8B%B7%E8%B4%9D">json引用and深拷贝</a></li>
+<li><a href="#%E5%85%BC%E5%AE%B9%E4%BD%8E%E7%89%88%E6%9C%AC%E6%B5%8F%E8%A7%88%E5%99%A8">兼容低版本浏览器</a></li>
+</ul>
+</li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7">自定义属性</a></li>
+<li><a href="#%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BDjs">延迟加载JS</a>
+<ul>
+<li><a href="#html5%E7%9A%84defer%E5%92%8Casync">Html5的defer和async</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8E%86%E5%8F%B2%E7%AE%A1%E7%90%86history">历史管理history</a>
+<ul>
+<li><a href="#onhashchange">onhashchange</a></li>
+<li><a href="#history">history</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF">地理信息</a>
+<ul>
+<li><a href="#navigatorgeolocation-%E5%8D%95%E6%AC%A1%E5%AE%9A%E4%BD%8D">navigator.geolocation 单次定位</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%B1%82%E6%88%90%E5%8A%9F%E5%87%BD%E6%95%B0">请求成功函数</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E5%A4%B1%E8%B4%A5">请求失败</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86">数据收集</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%9A%E6%AC%A1%E5%AE%9A%E4%BD%8D%E8%AF%B7%E6%B1%82-watchposition">多次定位请求  :  watchPosition</a></li>
+</ul>
+</li>
+<li><a href="#storage%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8">Storage本地存储</a><br>
+*
+<ul>
+<li><a href="#sessionstorage%E4%B8%B4%E6%97%B6%E5%AD%98%E5%82%A8">sessionStorage临时存储</a></li>
+<li><a href="#localstorage%E6%B0%B8%E4%B9%85%E5%AD%98%E5%82%A8">localStorage永久存储</a></li>
+<li><a href="#storage-api">Storage API</a>
+<ul>
+<li><a href="#setitem">setItem():</a></li>
+<li><a href="#getitem">getItem():</a></li>
+<li><a href="#removeitem">removeItem():</a></li>
+<li><a href="#clear">clear():</a></li>
+<li><a href="#%E5%AD%98%E5%82%A8%E4%BA%8B%E4%BB%B6">存储事件:</a></li>
+<li><a href="#key">Key</a></li>
+<li><a href="#newvalue">newValue</a></li>
+<li><a href="#oldvalue">oldValue</a></li>
+<li><a href="#storagearea">storageArea</a></li>
+<li><a href="#url">url</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by 土豆
+  <a class="rss" href="https://doupo.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
